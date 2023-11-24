@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
+import 'package:mpc/screens/event_information.dart';
+import 'package:mpc/widgets/animation_page_route.dart';
 
 class EventCard extends StatefulWidget {
   final EventData event;
@@ -13,8 +15,8 @@ class _EventCardState extends State<EventCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 368,
-      width: 174,
+      height: MediaQuery.of(context).size.height / 2.5163,
+      width: MediaQuery.of(context).size.width / 2.46,
       child: Card(
         elevation: 1,
         child: Column(
@@ -267,7 +269,14 @@ class _EventCardState extends State<EventCard> {
                           width: 80,
                           height: 22,
                           child: ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  FadePageRoute(
+                                    builder: (context) =>
+                                        EventInformationScreen(),
+                                  ));
+                            },
                             style: ButtonStyle(
                                 elevation: MaterialStatePropertyAll(0),
                                 backgroundColor: MaterialStatePropertyAll(
