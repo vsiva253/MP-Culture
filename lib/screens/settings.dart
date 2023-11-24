@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mpc/app_localixation.dart';
 import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/main.dart';
 import 'package:mpc/screens/profile.dart';
@@ -19,6 +21,26 @@ class Settings extends StatefulWidget {
 
 class _SettingsState extends State<Settings> {
   Map<String, bool> toggledStates = {};
+  // void _changeLanguage(bool isEnglish) {
+  //   final locale = isEnglish ? Locale('en', 'US') : Locale('hi', 'IN');
+  //   AppLocalizations.of(context)!.load(locale);
+  // }
+  late bool isEnglish;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Set isEnglish based on the current language
+    isEnglish = AppLocalizations.of(context)!.locale == Locale('en', 'US');
+  }
+
+  void _changeLanguage(bool isEnglish) {
+    final locale = isEnglish ? Locale('en', 'US') : Locale('hi', 'IN');
+    AppLocalizations.of(context)!.load(locale);
+    setState(() {
+      this.isEnglish = !isEnglish; // Corrected line
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -194,13 +216,16 @@ class _SettingsState extends State<Settings> {
                   },
                   initialValue: toggledStates['Dark Mode'] ?? false,
                 ),
-                CustomContainer(
+                CustomLanguageContainer(
                   text: 'English',
                   icon: Icons.language_rounded,
                   onToggleChanged: (value) {
-                    print('Toggle for Item 1 changed to $value');
+                    _changeLanguage(value);
+                    setState(() {
+                      toggledStates['English'] = value;
+                    });
                   },
-                  initialValue: toggledStates['English'] ?? false,
+                  initialValue: false,
                 ),
                 CustomContainer(
                   text: 'Password',
@@ -227,6 +252,98 @@ class _SettingsState extends State<Settings> {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+//ustomLanguageContainer
+
+class CustomLanguageContainer extends StatefulWidget {
+  final String text;
+  final IconData icon;
+  final ValueChanged<bool>? onToggleChanged;
+  final bool initialValue;
+
+  CustomLanguageContainer({
+    required this.text,
+    required this.icon,
+    this.onToggleChanged,
+    required this.initialValue,
+  });
+
+  @override
+  _CustomLanguageContainerState createState() =>
+      _CustomLanguageContainerState();
+}
+
+class _CustomLanguageContainerState extends State<CustomLanguageContainer> {
+  late bool isToggled;
+  @override
+  void initState() {
+    super.initState();
+    isToggled = widget.initialValue;
+  }
+
+  @override
+  void didUpdateWidget(CustomLanguageContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialValue != oldWidget.initialValue) {
+      setState(() {
+        isToggled = widget.initialValue;
+      });
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 16, right: 16, top: 14, bottom: 0),
+      child: Container(
+        height: 54,
+        padding: const EdgeInsets.only(bottom: 16),
+        decoration: BoxDecoration(
+          border: BorderDirectional(
+            bottom: BorderSide(color: Colors.grey.withOpacity(0.1)),
+          ),
+        ),
+        child: Row(
+          children: [
+            Container(
+              width: 54,
+              height: 54,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.grey,
+                gradient: LinearGradient(
+                  colors: [Color(0xFF1D2671), Color(0xFFC33764)],
+                  stops: [0.0, 1.0],
+                  transform: GradientRotation(122.32 * 3.1415927 / 180),
+                ),
+              ),
+              child: Icon(widget.icon, color: Colors.white),
+            ),
+            const SizedBox(width: 16),
+            Text(widget.text, style: const TextStyle(fontSize: 16)),
+            Expanded(child: SizedBox()),
+            Transform.scale(
+              scale: 0.6,
+              child: CupertinoSwitch(
+                trackColor: Colors.grey,
+                thumbColor: Colors.white70,
+                activeColor: Color(0xFFC33764),
+                value: isToggled,
+                onChanged: (value) {
+                  if (widget.onToggleChanged != null) {
+                    widget.onToggleChanged!(value);
+                  }
+                  setState(() {
+                    isToggled = value;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

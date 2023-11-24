@@ -69,7 +69,8 @@ class EventListCard extends StatelessWidget {
             ? const Center(child: Text("Events are not availables"))
             : Container(
                 padding: const EdgeInsets.only(left: 16),
-                height: 375, // Set the height according to your needs
+                height: 368,
+                // Set the height according to your needs
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: eventList.length >= 5 ? 5 : eventList.length,

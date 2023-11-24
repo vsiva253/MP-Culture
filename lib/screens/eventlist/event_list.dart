@@ -16,7 +16,7 @@ class EventListView extends StatelessWidget {
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65),
-          child: CustomAppBar(),
+          child: CustomAppBarSecondary(),
         ),
         body: Stack(
           children: [
