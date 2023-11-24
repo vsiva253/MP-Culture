@@ -16,7 +16,7 @@ class _EventCardState extends State<EventCard> {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 368,
-      width: MediaQuery.of(context).size.width / 2.46,
+      width: 174,
       child: Card(
         elevation: 1,
         child: Column(
@@ -109,7 +109,7 @@ class _EventCardState extends State<EventCard> {
                 ),
                 child: Column(children: [
                   SizedBox(
-                      height: 18,
+                      height: 20,
                       width: double.infinity,
                       child: Center(
                           child: Padding(
@@ -213,14 +213,14 @@ class _EventCardState extends State<EventCard> {
                         ),
                         Text(
                           widget.event.departmentBy!,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                             color: const Color(0xFFFFFFFF).withOpacity(0.7),
                             fontFamily: 'HIND',
                             fontWeight: FontWeight.w500,
                             fontSize: 10,
                           ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(
                           height: 5,
