@@ -46,10 +46,10 @@ class _EventCardState extends State<EventCard> {
                       ),
                     ),
                     child: Padding(
-                      padding: EdgeInsets.only(left: 2),
+                      padding: const EdgeInsets.only(left: 2),
                       child: Text(
                         '${widget.event.startingDate} - ${widget.event.endDate}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontFamily: 'HIND',
                           fontWeight: FontWeight.w500,
@@ -106,15 +106,15 @@ class _EventCardState extends State<EventCard> {
                   ),
                 ),
                 child: Column(children: [
-                  Container(
+                  SizedBox(
                       height: 15.12,
                       width: double.infinity,
-                      child: const Center(
+                      child: Center(
                           child: Padding(
-                        padding: EdgeInsets.only(top: 2),
+                        padding: const EdgeInsets.only(top: 2),
                         child: Text(
-                          'उत्कर्ष',
-                          style: TextStyle(
+                          widget.event.programName!,
+                          style: const TextStyle(
                               color: Color(0xFFFFFFFF),
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
@@ -131,7 +131,7 @@ class _EventCardState extends State<EventCard> {
                     padding: const EdgeInsets.only(left: 8.5, right: 8.5),
                     child: Column(
                       children: [
-                        Container(
+                        SizedBox(
                           width: double.infinity,
                           child: Column(
                             children: [
@@ -173,9 +173,7 @@ class _EventCardState extends State<EventCard> {
                                         fontSize: 11),
                                   ),
                                   Text(
-                                    widget.event.entryType == "Free"
-                                        ? 'पहले आये पहले पाए'
-                                        : widget.event.entryType!,
+                                    widget.event.entryType!,
                                     style: TextStyle(
                                       color: const Color(0xFFFFFFFF)
                                           .withOpacity(0.8),
@@ -209,7 +207,7 @@ class _EventCardState extends State<EventCard> {
                           )),
                         ),
                         Text(
-                          widget.event.programName!,
+                          widget.event.departmentBy!,
                           style: TextStyle(
                             color: const Color(0xFFFFFFFF).withOpacity(0.7),
                             fontFamily: 'HIND',
@@ -222,7 +220,7 @@ class _EventCardState extends State<EventCard> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Container(
+                        SizedBox(
                           height: 22,
                           child: ElevatedButton(
                               onPressed: () {},
@@ -241,17 +239,17 @@ class _EventCardState extends State<EventCard> {
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    Icon(
+                                    const Icon(
                                       Icons.location_on_outlined,
                                       color: Color(0xFFFFFFFF),
                                       size: 6,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 3,
                                     ),
                                     Text(
-                                      widget.event.state!,
-                                      style: TextStyle(
+                                      widget.event.district!,
+                                      style: const TextStyle(
                                           color: Color(0xFFFFFFFF),
                                           fontWeight: FontWeight.w500,
                                           fontSize: 7),
@@ -263,13 +261,13 @@ class _EventCardState extends State<EventCard> {
                         const SizedBox(
                           height: 5,
                         ),
-                        Container(
+                        SizedBox(
                           width: 80,
                           height: 22,
                           child: ElevatedButton(
                             onPressed: () {},
                             style: ButtonStyle(
-                                elevation: MaterialStatePropertyAll(0),
+                                elevation: const MaterialStatePropertyAll(0),
                                 backgroundColor: MaterialStatePropertyAll(
                                     Colors.black.withOpacity(0.0)),
                                 shape: MaterialStateProperty.all<

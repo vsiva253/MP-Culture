@@ -7,7 +7,7 @@ void showCustomSnackbar(BuildContext context, String message) {
     SnackBar(
       content: Text(
         message,
-        style: TextStyle(fontSize: 16),
+        style: const TextStyle(fontSize: 16),
       ),
       backgroundColor: Colors.red,
       elevation: 10,
