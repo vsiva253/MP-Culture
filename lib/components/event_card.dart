@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mpc/data/models/event_model.dart';
 
 class EventCard extends StatefulWidget {
-  const EventCard({Key? key}) : super(key: key);
+  final EventData event;
+  const EventCard({Key? key, required this.event}) : super(key: key);
 
   @override
   State<EventCard> createState() => _EventCardState();
@@ -43,10 +45,10 @@ class _EventCardState extends State<EventCard> {
                         end: Alignment.bottomRight,
                       ),
                     ),
-                    child: const Padding(
+                    child: Padding(
                       padding: EdgeInsets.only(left: 2),
                       child: Text(
-                        '26 July 2023 - 28 July 2023',
+                        '${widget.event.startingDate} - ${widget.event.endDate}',
                         style: TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontFamily: 'HIND',
@@ -74,11 +76,11 @@ class _EventCardState extends State<EventCard> {
                         end: Alignment.bottomRight,
                       ),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.only(left: 2, top: 1),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 2, top: 1),
                       child: Text(
-                        '11:00PM  -  12:00PM',
-                        style: TextStyle(
+                        '${widget.event.startingTime} - ${widget.event.endTime}',
+                        style: const TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontFamily: 'HIND',
                           fontWeight: FontWeight.w500,
@@ -171,7 +173,9 @@ class _EventCardState extends State<EventCard> {
                                         fontSize: 11),
                                   ),
                                   Text(
-                                    'पहले आये पहले पाए',
+                                    widget.event.entryType == "Free"
+                                        ? 'पहले आये पहले पाए'
+                                        : widget.event.entryType!,
                                     style: TextStyle(
                                       color: const Color(0xFFFFFFFF)
                                           .withOpacity(0.8),
@@ -205,7 +209,7 @@ class _EventCardState extends State<EventCard> {
                           )),
                         ),
                         Text(
-                          'संस्कृति संचालनालय, भोपाल (म.प्र.)',
+                          widget.event.programName!,
                           style: TextStyle(
                             color: const Color(0xFFFFFFFF).withOpacity(0.7),
                             fontFamily: 'HIND',
@@ -220,7 +224,6 @@ class _EventCardState extends State<EventCard> {
                         ),
                         Container(
                           height: 22,
-                          width: 80,
                           child: ElevatedButton(
                               onPressed: () {},
                               style: ButtonStyle(
@@ -234,7 +237,7 @@ class _EventCardState extends State<EventCard> {
                                           side: BorderSide(
                                               color: const Color(0xFFFFFFFF)
                                                   .withOpacity(0.2))))),
-                              child: const Center(
+                              child: Center(
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -247,7 +250,7 @@ class _EventCardState extends State<EventCard> {
                                       width: 3,
                                     ),
                                     Text(
-                                      'Bhopal',
+                                      widget.event.state!,
                                       style: TextStyle(
                                           color: Color(0xFFFFFFFF),
                                           fontWeight: FontWeight.w500,

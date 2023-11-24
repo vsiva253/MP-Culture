@@ -51,7 +51,7 @@ class RowWithCards extends StatelessWidget {
     return Expanded(
       child: Container(
         width: 52,
-        height: 65,
+        height: 69,
         child: GestureDetector(
           onTap: onTap,
           child: Column(

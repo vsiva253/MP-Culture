@@ -21,6 +21,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool showOtpField = false;
   // ValueNotifier to track login status
   ValueNotifier<bool> isLoggedInNotifier = ValueNotifier<bool>(false);
+  FocusNode mobileFocusNode = FocusNode();
+  FocusNode otpFocusNode = FocusNode();
 
   // void setLoggedInFlag() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -43,6 +45,12 @@ class _LoginScreenState extends State<LoginScreen> {
   //     isLoggedInNotifier.value = true;
   //   }
   // }
+  @override
+  void dispose() {
+    mobileFocusNode.dispose();
+    otpFocusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 65, left: 82, right: 90),
+                          const EdgeInsets.only(top: 55, left: 82, right: 90),
                       child: Center(
                         child: Image.asset(
                           'assets/logo/mpc.png',
@@ -97,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     Padding(
                       padding: const EdgeInsets.only(left: 0, right: 0),
                       child: Container(
-                        height: MediaQuery.of(context).size.height / 2.5,
+                        height: MediaQuery.of(context).size.height / 2.2,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(
@@ -169,14 +177,15 @@ class _LoginScreenState extends State<LoginScreen> {
                                               String response =
                                                   await AuthService.sendOTP(
                                                       mobileController.text);
-                                              showCustomSnackbar(context,
+                                              CustomSnackbar.show(context,
                                                   "OTP Sent Successfully");
                                               print(
                                                   'OTP Sent Response: $response');
 
                                               // Show the OTP field after successfully sending OTP
                                             } catch (e) {
-                                              showCustomSnackbar(context,
+                                              // ignore: use_build_context_synchronously
+                                              CustomSnackbar.show(context,
                                                   "Error sending OTP: $e");
                                               print('Error sending OTP: $e');
                                             }
@@ -218,13 +227,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                                         print(
                                                             'OTP Sent Response: $response');
                                                       } catch (e) {
-                                                        SnackBar(
-                                                          behavior:
-                                                              SnackBarBehavior
-                                                                  .floating,
-                                                          content: Text(
-                                                              'Error sending OTP: $e'),
-                                                        );
+                                                        CustomSnackbar.show(
+                                                            context,
+                                                            "Error sending OTP: $e");
                                                         print(
                                                             'Error sending OTP: $e');
                                                       }
@@ -321,15 +326,19 @@ class _LoginScreenState extends State<LoginScreen> {
                                 GestureDetector(
                                   onTap: () async {
                                     if (mobileController.text.isEmpty) {
-                                      showCustomSnackbar(
+                                      CustomSnackbar.show(
                                           context, "Please enter mobile no.");
+                                      FocusScope.of(context).requestFocus(
+                                          mobileFocusNode); // Set focus to mobile field
                                       return;
                                     }
 
                                     if (showOtpField &&
                                         otpController.text.isEmpty) {
-                                      showCustomSnackbar(
+                                      CustomSnackbar.show(
                                           context, "Please enter OTP");
+                                      FocusScope.of(context).requestFocus(
+                                          otpFocusNode); // Set focus to OTP field
                                       return;
                                     }
 
@@ -337,20 +346,20 @@ class _LoginScreenState extends State<LoginScreen> {
                                       // Use the AuthProvider to verify OTP
                                       String response =
                                           await Provider.of<AuthProvider>(
-                                                  context,
-                                                  listen: false)
-                                              .verifyOTP(
+                                        context,
+                                        listen: false,
+                                      ).verifyOTP(
                                         mobileController.text,
                                         otpController.text,
                                       );
-                                      print(
-                                          'OTP Verification Response: $response');
 
-                                      showCustomSnackbar(context, response);
+                                      CustomSnackbar.show(context, response);
+
                                       // Set the login status
                                       Provider.of<AuthProvider>(context,
                                               listen: false)
                                           .setLoggedInStatus(true);
+
                                       Navigator.pushReplacement(
                                         context,
                                         FadePageRoute(
@@ -362,6 +371,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                       );
                                     } catch (e) {
                                       print('Error verifying OTP: $e');
+                                      CustomSnackbar.show(context,
+                                          "An error occurred. Please try again.");
                                     }
                                   },
                                   child: Container(
