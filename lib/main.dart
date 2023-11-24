@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:mpc/data/services/api_service.dart';
+import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        Provider<ApiService>(
+          create: (_) => ApiService(
+              baseUrl: 'https://service.codingbandar.com',
+              basicAuth: 'YWRtaW46YWRtaW4='),
+        ),
+        ChangeNotifierProvider(
+          create: (context) =>
+              HomeViewModel(apiService: context.read<ApiService>()),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
