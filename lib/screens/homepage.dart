@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mpc/components/event_card.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
@@ -18,6 +19,10 @@ class _HomePageState extends State<HomePage> {
   bool isExpanded = false;
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Set the color of the status bar
+      // Set the color of the navigation bar (if present)
+    ));
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(65),

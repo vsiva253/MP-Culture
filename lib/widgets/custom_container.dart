@@ -7,7 +7,8 @@ class CustomContainer extends StatefulWidget {
   final bool showForwardArrow;
   final ValueChanged<bool>? onToggleChanged;
   final VoidCallback? onArrowPressed;
-  final bool isDarkMode;
+
+  final bool initialValue;
 
   CustomContainer({
     required this.text,
@@ -15,7 +16,7 @@ class CustomContainer extends StatefulWidget {
     this.showForwardArrow = false,
     this.onToggleChanged,
     this.onArrowPressed,
-    required this.isDarkMode,
+    required this.initialValue,
   });
 
   @override
@@ -28,7 +29,7 @@ class _CustomContainerState extends State<CustomContainer> {
   @override
   void initState() {
     super.initState();
-    isToggled = widget.isDarkMode;
+    isToggled = widget.initialValue;
   }
 
   @override

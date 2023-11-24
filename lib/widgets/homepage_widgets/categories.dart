@@ -51,13 +51,13 @@ class RowWithCards extends StatelessWidget {
     return Expanded(
       child: Container(
         width: 52,
-        height: 69,
+        height: 65,
         child: GestureDetector(
           onTap: onTap,
           child: Column(
             children: [
               Container(
-                width: 52,
+                width: 50,
                 height: 48,
                 decoration: BoxDecoration(
                   color: Colors.white,

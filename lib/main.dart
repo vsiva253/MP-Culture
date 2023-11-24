@@ -1,77 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:mpc/components/theme_data.dart';
+
+import 'package:mpc/screens/user/auth_status.dart';
+import 'package:mpc/screens/user/user_preferences.dart';
+
+import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/widgets/bottombar.dart';
+
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-      child: const MyApp(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ThemeProvider(),
+        ),
+        ChangeNotifierProvider(create: (_) => UserPreferences()),
+        ChangeNotifierProvider(
+          create: (context) {
+            AuthProvider authProvider = AuthProvider();
+            authProvider
+                .checkLoggedInStatus(); // Check the login status from local storage
+            return authProvider;
+          },
+        ),
+      ],
+      child: MyApp(),
     ),
   );
-}
-
-const Color primaryColorl = Colors.white;
-const Color primaryColor = Color(0xFF1E1E1E);
-const Color secondaryColor = Color(0xFFC33764);
-
-ThemeData lightTheme = ThemeData(
-  brightness: Brightness.light,
-  useMaterial3: true,
-  primaryColor: primaryColorl,
-  appBarTheme: const AppBarTheme(
-    backgroundColor: primaryColorl,
-  ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: secondaryColor,
-    selectedItemColor: primaryColorl,
-    unselectedItemColor: Colors.grey,
-  ),
-  bottomAppBarTheme: const BottomAppBarTheme(
-    color: primaryColor,
-  ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: secondaryColor,
-  ),
-);
-
-ThemeData darkTheme = ThemeData(
-  brightness: Brightness.dark,
-  useMaterial3: false,
-  primaryColor: primaryColor,
-  appBarTheme: const AppBarTheme(
-    backgroundColor: primaryColor,
-  ),
-  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-    backgroundColor: secondaryColor,
-    selectedItemColor: primaryColor,
-    unselectedItemColor: Colors.grey,
-  ),
-  bottomAppBarTheme: const BottomAppBarTheme(
-    color: primaryColor,
-  ),
-  floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: secondaryColor,
-  ),
-);
-
-class ThemeProvider extends ChangeNotifier {
-  bool _isDarkMode = false;
-
-  bool get isDarkMode => _isDarkMode;
-
-  void toggleTheme() {
-    _isDarkMode = !_isDarkMode;
-    notifyListeners();
-  }
-
-  ThemeData getTheme() {
-    if (_isDarkMode) {
-      return darkTheme;
-    } else {
-      return lightTheme;
-    }
-  }
 }
 
 class MyApp extends StatefulWidget {
@@ -82,23 +40,60 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  int _selectedIndex = 0;
+  bool _showSplash = true;
 
-  void _onTabTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
+  @override
+  void initState() {
+    super.initState();
+
+    // Add a delay of 3 seconds before hiding the splash screen
+    Future.delayed(Duration(seconds: 3), () {
+      setState(() {
+        _showSplash = false;
+      });
     });
   }
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final isLoggedInNotifier =
+        Provider.of<AuthProvider>(context).isLoggedInNotifier;
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent, // Set the color of the status bar
+      // Set the color of the navigation bar (if present)
+    ));
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'My App',
       theme: themeProvider.getTheme(),
-      home: CustomBottomBar(
-        selectedIndex: _selectedIndex,
+      home: _showSplash
+          ? SplashScreen()
+          : ValueListenableBuilder<bool>(
+              valueListenable: isLoggedInNotifier,
+              builder: (context, isLoggedIn, child) {
+                if (isLoggedIn) {
+                  // User is logged in, navigate to the home screen
+                  return CustomBottomBar(selectedIndex: 0);
+                } else {
+                  // User is not logged in, show user preferences screen
+                  return UserPreferencesScreen();
+                }
+              },
+            ),
+    );
+  }
+}
+
+class SplashScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Image.asset(
+          'assets/logo/mpc.png',
+          height: 100,
+        ), // Replace with your splash image
       ),
     );
   }
