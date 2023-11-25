@@ -15,10 +15,8 @@ class _EventCardState extends State<EventCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-
       height: 368,
       width: 174,
-
       child: Card(
         elevation: 1,
         child: Column(
@@ -277,9 +275,7 @@ class _EventCardState extends State<EventCard> {
                                   context,
                                   FadePageRoute(
                                     builder: (context) =>
-                                        EventInformationScreen(
-                                      eventData: widget.event,
-                                    ),
+                                        EventInformationScreen(),
                                   ));
                             },
                             style: ButtonStyle(

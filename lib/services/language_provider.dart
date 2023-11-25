@@ -1,16 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LanguageProvider extends ChangeNotifier {
   static const _LOCALE_KEY = 'preferredLocale';
 
-
   Locale _currentLocale = Locale('en', 'US');
 
   Locale get currentLocale => _currentLocale;
-
 
   Future<void> updateLanguage(Locale newLocale) async {
     if (_currentLocale != newLocale) {
@@ -36,5 +33,4 @@ class LanguageProvider extends ChangeNotifier {
       _currentLocale = preferredLocale;
     }
   }
-
 }
