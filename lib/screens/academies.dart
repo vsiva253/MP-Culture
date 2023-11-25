@@ -1,6 +1,8 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:mpc/screens/academies_information_screen.dart';
+import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -83,6 +85,11 @@ class _AcademiesPageState extends State<AcademiesPage> {
                         children: [
                           GestureDetector(
                             onTap: () {
+                              Navigator.push(
+                                  context,
+                                  FadePageRoute(
+                                      builder: (context) =>
+                                          AcademiesInformationScreen()));
                               print("tapped on container");
                             },
                             child: Container(

@@ -12,7 +12,6 @@ import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/bottombar.dart';
 
 import 'package:provider/provider.dart';
-//import flutter localization
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mpc/data/services/api_service.dart';
 

@@ -35,7 +35,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
           children: [
             Container(
               width: MediaQuery.of(context).size.width,
-              height: 164,
+              height: 228,
               child: Image.asset(
                 'assets/EventHeader.jpg',
                 fit: BoxFit.cover,
