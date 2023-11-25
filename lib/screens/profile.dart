@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
@@ -142,7 +143,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             controller: nameController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Full Name',
+                              labelText: 'full_name'.tr(),
                               fillColor: Colors.grey[400],
                               hintText: 'Enter your full name here',
                               hintStyle: const TextStyle(
@@ -168,13 +169,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 7,
                           ),
                           TextFormField(
                             controller: phoneNumberController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Mobile Number',
+                              labelText: 'mobile_number'.tr(),
                               hintText: 'Enter your mobile number',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -199,13 +200,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 7,
                           ),
                           TextFormField(
                             controller: emailController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Email',
+                              labelText: 'email'.tr(),
                               hintText: 'Enter your email',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -230,13 +231,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 7,
                           ),
                           TextFormField(
                             controller: addressController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Address',
+                              labelText: 'address'.tr(),
                               hintText: 'Enter your address',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -261,7 +262,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 7,
                           ),
                           TextFormField(
                             controller: statusController,
@@ -292,13 +293,13 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 7,
                           ),
                           TextFormField(
                             controller: genderController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Gender',
+                              labelText: 'gender'.tr(),
                               hintText: 'Enter your gender',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -323,7 +324,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 7,
                           ),
                           TextFormField(
                             controller: dobController,
@@ -338,7 +339,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                   _selectDate();
                                 },
                               ),
-                              labelText: 'DOB',
+                              labelText: 'date_of_birth'.tr(),
                               hintText: '12/05/1990',
                               hintStyle: const TextStyle(
                                 fontSize: 18,

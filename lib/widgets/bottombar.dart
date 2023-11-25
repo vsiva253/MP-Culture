@@ -47,10 +47,10 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
 
     return Scaffold(
       body: _getPage(widget.selectedIndex),
+      key: key,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         elevation: 0.1,
-
         showSelectedLabels: false, // Show labels for selected items
         showUnselectedLabels: true, // Show labels for unselected items
         items: [
@@ -169,3 +169,5 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
     );
   }
 }
+
+UniqueKey key = UniqueKey();

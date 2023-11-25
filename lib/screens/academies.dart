@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/screens/academies_information_screen.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
@@ -46,7 +47,7 @@ class _AcademiesPageState extends State<AcademiesPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   GradientText(
-                    'अकादमी',
+                    'academy'.tr(),
                     style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 24,

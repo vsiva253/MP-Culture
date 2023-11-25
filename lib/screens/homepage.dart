@@ -1,5 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mpc/app_localixation.dart';
+import 'package:mpc/app_localization.dart';
 import 'package:mpc/components/event_card.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
@@ -82,14 +83,13 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     GradientText(
-                                      AppLocalizations.of(context)!
-                                              .translate('about_us') ??
-                                          '',
+                                      "about_us".tr(),
                                       style: const TextStyle(
-                                          fontFamily: 'Hind',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w600,
-                                          height: 1),
+                                        fontFamily: 'Hind',
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.w600,
+                                        height: 1,
+                                      ),
                                       colors: const [
                                         Color(0xFFC33764),
                                         Color(0xFF1D2671),
