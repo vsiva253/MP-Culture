@@ -7,6 +7,7 @@ import 'package:mpc/screens/user/user_preferences.dart';
 
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
+import 'package:mpc/viewmodels/userviewmodel/user_view_model.dart';
 import 'package:mpc/widgets/bottombar.dart';
 
 import 'package:provider/provider.dart';
@@ -14,6 +15,10 @@ import 'package:provider/provider.dart';
 import 'package:mpc/data/services/api_service.dart';
 
 void main() {
+  var api = ApiService(
+    baseUrl: 'https://service.codingbandar.com',
+    basicAuth: 'YWRtaW46YWRtaW4=',
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -30,10 +35,10 @@ void main() {
           },
         ),
         ChangeNotifierProvider(
-          create: (context) => HomeViewModel(
-              apiService: ApiService(
-                  baseUrl: 'https://service.codingbandar.com',
-                  basicAuth: 'YWRtaW46YWRtaW4=')),
+          create: (context) => HomeViewModel(apiService: api),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserViewModel(apiService: api),
         ),
       ],
       child: MyApp(),

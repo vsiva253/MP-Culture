@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/components/theme_data.dart';
-import 'package:mpc/main.dart';
-import 'package:mpc/screens/profile.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
