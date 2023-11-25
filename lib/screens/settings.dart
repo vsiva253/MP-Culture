@@ -1,10 +1,10 @@
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/app_localization.dart';
+
 import 'package:mpc/components/theme_data.dart';
-import 'package:mpc/main.dart';
-import 'package:mpc/screens/profile.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
@@ -28,6 +28,9 @@ class _SettingsState extends State<Settings> {
   // }
   late bool isEnglish;
 
+
+
+
   void _changeLanguage(bool value) {
     // final locale = isEnglish ? Locale('en', 'US') : Locale('hi', 'IN');
     // AppLocalizations.of(context)!.load(locale);
@@ -41,6 +44,7 @@ class _SettingsState extends State<Settings> {
     }
     setState(() {
       key = UniqueKey();
+
     });
   }
 
@@ -219,16 +223,20 @@ class _SettingsState extends State<Settings> {
                   initialValue: themeProvider.isDarkMode,
                 ),
                 CustomLanguageContainer(
+
                   text: 'english'.tr(),
+
                   icon: Icons.language_rounded,
                   onToggleChanged: (value) {
                     _changeLanguage(value);
                     setState(() {
                       toggledStates['English'] = value;
                     });
+
                     themeProvider.toggleLanguage();
                   },
                   initialValue: themeProvider.isEnglish,
+
                 ),
                 CustomContainer(
                   text: 'password'.tr(),

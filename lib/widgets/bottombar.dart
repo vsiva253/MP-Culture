@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/components/theme_data.dart';
-import 'package:mpc/main.dart';
 import 'package:mpc/screens/academies.dart';
 import 'package:mpc/screens/calendar.dart';
 import 'package:mpc/screens/homepage.dart';
@@ -15,6 +14,7 @@ class CustomBottomBar extends StatefulWidget {
   int selectedIndex;
 
   CustomBottomBar({
+    super.key,
     required this.selectedIndex,
   });
 
