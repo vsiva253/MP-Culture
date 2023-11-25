@@ -70,6 +70,7 @@ class HomeViewModel with ChangeNotifier {
         final about = await apiService.getAboutUsContent();
         _about = about;
       } catch (e) {
+        _isLoading = false;
         CustomSnackbar.show(context, 'Error fetching aboutUS: $e');
       } finally {}
       _isLoading = false;
@@ -86,6 +87,7 @@ class HomeViewModel with ChangeNotifier {
             await apiService.getTodayPrograms("/Api/today_programs");
         _todayPrograms = programs;
       } catch (e) {
+        _isLoading = false;
         CustomSnackbar.show(context, 'Error fetching today\'s programs: $e');
       } finally {
         _isLoading = false;
@@ -104,6 +106,7 @@ class HomeViewModel with ChangeNotifier {
         _onGoingPrograms = programs;
       } catch (e) {
         // Handle error
+        _isLoading = false;
         CustomSnackbar.show(context, 'Error fetching OnGoing\'s programs: $e');
       } finally {
         _isLoading = false;
@@ -122,6 +125,7 @@ class HomeViewModel with ChangeNotifier {
         _upCominPrograms = programs;
       } catch (e) {
         // Handle error
+        _isLoading = false;
         CustomSnackbar.show(context, 'Error fetching UpComing\'s programs: $e');
       } finally {
         _isLoading = false;
@@ -140,6 +144,7 @@ class HomeViewModel with ChangeNotifier {
         _archivedPrograms = programs;
       } catch (e) {
         // Handle error
+        _isLoading = false;
         CustomSnackbar.show(context, 'Error fetching Archived\'s programs: $e');
       } finally {
         _isLoading = false;
@@ -156,6 +161,7 @@ class HomeViewModel with ChangeNotifier {
         final programs = await apiService.getSliderImages();
         _imageUrls = programs;
       } catch (e) {
+        _isLoading = false;
         // Handle error
         CustomSnackbar.show(context, 'Error fetching Slider images: $e');
       } finally {
@@ -174,6 +180,7 @@ class HomeViewModel with ChangeNotifier {
         _catrgory = programs;
       } catch (e) {
         // Handle error
+        _isLoading = false;
         CustomSnackbar.show(context, 'Error fetching Categories: $e');
       } finally {
         _isLoading = false;
@@ -191,6 +198,7 @@ class HomeViewModel with ChangeNotifier {
         _academies = programs;
       } catch (e) {
         // Handle error
+        _isLoading = false;
         CustomSnackbar.show(context, 'Error fetching academies: $e');
       } finally {
         _isLoading = false;
@@ -203,10 +211,12 @@ class HomeViewModel with ChangeNotifier {
   Future<void> fetchSingleAcademiec(BuildContext context, String id) async {
     try {
       _isLoading = true;
+      _singleAcademic = SingleAacademies();
       final programs = await apiService.getSingleAcademice(id);
       _singleAcademic = programs;
     } catch (e) {
       // Handle error
+      _isLoading = false;
       CustomSnackbar.show(context, 'Error fetching academies: $e');
     } finally {
       _isLoading = false;
@@ -222,6 +232,7 @@ class HomeViewModel with ChangeNotifier {
       _singleProgram = programs;
     } catch (e) {
       // Handle error
+      _isLoading = false;
       CustomSnackbar.show(context, 'Error fetching academies: $e');
     } finally {
       _isLoading = false;
@@ -239,6 +250,7 @@ class HomeViewModel with ChangeNotifier {
           "/Api/programs_by_category?program_category=$categoreyName");
       _byCategoryPrograms = programs;
     } catch (e) {
+      _isLoading = false;
       CustomSnackbar.show(context, 'Error fetching programs: $e');
     } finally {
       _isLoading = false;
@@ -256,6 +268,7 @@ class HomeViewModel with ChangeNotifier {
             "/Api/programs_by_academies?program_category=$academiecName");
         _byAcademiecPrograms = programs;
       } catch (e) {
+        _isLoading = false;
         CustomSnackbar.show(context, 'Error fetching programs: $e');
       } finally {
         _isLoading = false;

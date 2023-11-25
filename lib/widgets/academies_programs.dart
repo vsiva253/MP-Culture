@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:mpc/data/models/event_model.dart';
-import 'package:mpc/screens/event_information.dart';
-import 'package:mpc/widgets/animation_page_route.dart';
 
-class EventCard extends StatefulWidget {
-  final EventData event;
-  const EventCard({Key? key, required this.event}) : super(key: key);
+class AccademiesProgramsCards extends StatefulWidget {
+  const AccademiesProgramsCards({super.key});
 
   @override
-  State<EventCard> createState() => _EventCardState();
+  State<AccademiesProgramsCards> createState() =>
+      _AccademiesProgramsCardsState();
 }
 
-class _EventCardState extends State<EventCard> {
+class _AccademiesProgramsCardsState extends State<AccademiesProgramsCards> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.5163,
-      width: MediaQuery.of(context).size.width / 2.10,
+      height: 206,
+      width: 174,
       child: Card(
         elevation: 1,
         child: Column(
@@ -24,8 +21,8 @@ class _EventCardState extends State<EventCard> {
             Stack(
               children: [
                 Image.asset(
-                  'assets/Event.jpg',
-                  height: 182.86,
+                  'assets/aca_galary.jpg',
+                  height: 111,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
@@ -50,7 +47,7 @@ class _EventCardState extends State<EventCard> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 2),
                       child: Text(
-                        '${widget.event.startingDate} - ${widget.event.endDate}',
+                        'Event Date',
                         style: const TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontFamily: 'HIND',
@@ -81,7 +78,7 @@ class _EventCardState extends State<EventCard> {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 2, top: 1),
                       child: Text(
-                        '${widget.event.startingTime} - ${widget.event.endTime}',
+                        'start time - end time',
                         style: const TextStyle(
                           color: Color(0xFFFFFFFF),
                           fontFamily: 'HIND',
@@ -109,14 +106,12 @@ class _EventCardState extends State<EventCard> {
                 ),
                 child: Column(children: [
                   SizedBox(
-                      height: 20,
                       width: double.infinity,
                       child: Center(
-                          child: Padding(
-                        padding:
-                            const EdgeInsets.only(top: 2, left: 8, right: 8),
+                          child: Transform.scale(
+                        scale: 0.9,
                         child: Text(
-                          widget.event.programName!,
+                          "Progra Name",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
@@ -130,6 +125,7 @@ class _EventCardState extends State<EventCard> {
                   const Divider(
                     color: Colors.grey,
                     thickness: 0.4,
+                    height: 1,
                   ),
                   Container(
                     width: double.infinity,
@@ -140,6 +136,9 @@ class _EventCardState extends State<EventCard> {
                           width: double.infinity,
                           child: Column(
                             children: [
+                              SizedBox(
+                                height: 7,
+                              ),
                               Row(
                                 children: [
                                   const Text(
@@ -164,66 +163,11 @@ class _EventCardState extends State<EventCard> {
                                   ),
                                 ],
                               ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    'प्रवेश: ',
-                                    style: TextStyle(
-                                        color: Color(0xFFFFFFFF),
-                                        fontFamily: 'HIND',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 11),
-                                  ),
-                                  Text(
-                                    widget.event.entryType!,
-                                    style: TextStyle(
-                                      color: const Color(0xFFFFFFFF)
-                                          .withOpacity(0.8),
-                                      fontFamily: 'HIND',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 10,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
-                              )
                             ],
                           ),
                         ),
                         const SizedBox(
-                          height: 5,
-                        ),
-                        Container(
-                          padding:
-                              const EdgeInsets.only(left: 17.5, right: 17.5),
-                          width: double.infinity,
-                          child: const Center(
-                              child: Text(
-                            'आयोजक ',
-                            style: TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontFamily: 'HIND',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 13),
-                          )),
-                        ),
-                        Text(
-                          widget.event.departmentBy!,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            color: const Color(0xFFFFFFFF).withOpacity(0.7),
-                            fontFamily: 'HIND',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 10,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
+                          height: 10,
                         ),
                         SizedBox(
                           height: 22,
@@ -253,7 +197,7 @@ class _EventCardState extends State<EventCard> {
                                       width: 3,
                                     ),
                                     Text(
-                                      widget.event.district!,
+                                      "Event Location",
                                       style: const TextStyle(
                                           color: Color(0xFFFFFFFF),
                                           fontWeight: FontWeight.w500,
@@ -265,46 +209,6 @@ class _EventCardState extends State<EventCard> {
                         ),
                         const SizedBox(
                           height: 5,
-                        ),
-                        SizedBox(
-                          width: 80,
-                          height: 22,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  FadePageRoute(
-                                    builder: (context) =>
-                                        EventInformationScreen(
-                                      eventData: widget.event,
-                                    ),
-                                  ));
-                            },
-                            style: ButtonStyle(
-                                elevation: const MaterialStatePropertyAll(0),
-                                backgroundColor: MaterialStatePropertyAll(
-                                    Colors.black.withOpacity(0.0)),
-                                shape: MaterialStateProperty.all<
-                                        RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4),
-                                        side: BorderSide(
-                                            color: const Color(0xFFFFFFFF)
-                                                .withOpacity(0.2))))),
-                            child: const Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Show More',
-                                  style: TextStyle(
-                                      color: Color(0xFFFFFFFF),
-                                      fontSize: 5,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ],
-                            ),
-                          ),
                         ),
                       ],
                     ),

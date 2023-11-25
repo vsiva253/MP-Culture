@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:mpc/app_localixation.dart';
 
 class CustomContainer extends StatefulWidget {
   final String text;
@@ -91,6 +92,51 @@ class _CustomContainerState extends State<CustomContainer> {
               ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class CustomLanguageContainer extends StatefulWidget {
+  final String text;
+  final IconData icon;
+  final ValueChanged<bool>? onToggleChanged;
+  final bool initialValue;
+
+  const CustomLanguageContainer({
+    required this.text,
+    required this.icon,
+    this.onToggleChanged,
+    this.initialValue = false,
+  });
+
+  @override
+  State createState() => _CustomLanguageContainerState();
+}
+
+class _CustomLanguageContainerState extends State<CustomLanguageContainer> {
+  void changeLanguage(bool isEnglish) {
+    final locale = isEnglish ? Locale('en', 'US') : Locale('hi', 'IN');
+    AppLocalizations.of(context)!.load(locale);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // Your container styling here
+      child: Row(
+        children: [
+          // Your existing container content
+          Text(widget.text),
+          Switch(
+            value: widget.initialValue,
+            onChanged: (value) {
+              widget.onToggleChanged?.call(value);
+              // Add language change logic here
+              changeLanguage(value);
+            },
+          ),
+        ],
       ),
     );
   }
