@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const Color primaryColorl = Colors.white;
 const Color primaryColor = Color(0xFF1E1E1E);
@@ -45,12 +46,41 @@ ThemeData darkTheme = ThemeData(
 );
 
 class ThemeProvider extends ChangeNotifier {
+  static const String _isDarkModeKey = 'isDarkMode';
+  static const String _isEnglishKey = 'isEnglish';
+
   bool _isDarkMode = false;
+  bool _isEnglish = true;
+
+  ThemeProvider() {
+    _loadPreferences();
+  }
+
+  Future<void> _loadPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _isDarkMode = prefs.getBool(_isDarkModeKey) ?? false;
+    _isEnglish = prefs.getBool(_isEnglishKey) ?? true;
+    notifyListeners();
+  }
+
+  Future<void> _savePreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_isDarkModeKey, _isDarkMode);
+    await prefs.setBool(_isEnglishKey, _isEnglish);
+  }
 
   bool get isDarkMode => _isDarkMode;
+  bool get isEnglish => _isEnglish;
 
   void toggleTheme() {
     _isDarkMode = !_isDarkMode;
+    _savePreferences();
+    notifyListeners();
+  }
+
+  void toggleLanguage() {
+    _isEnglish = !_isEnglish;
+    _savePreferences();
     notifyListeners();
   }
 

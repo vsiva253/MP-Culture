@@ -31,11 +31,26 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
         preferredSize: const Size.fromHeight(65),
         child: CustomAppBarSecondary(),
       ),
+
       body: homeViewModel.isLoading
           ? const Center(
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
+
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 228,
+              child: Image.asset(
+                'assets/EventHeader.jpg',
+                fit: BoxFit.cover,
+              ),
+            ),
+            Container(
+
               child: Column(
                 children: [
                   Container(

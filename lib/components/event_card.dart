@@ -15,8 +15,10 @@ class _EventCardState extends State<EventCard> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: MediaQuery.of(context).size.height / 1.5163,
-      width: MediaQuery.of(context).size.width / 2.10,
+
+      height: 368,
+      width: 174,
+
       child: Card(
         elevation: 1,
         child: Column(

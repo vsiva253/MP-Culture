@@ -1,6 +1,9 @@
+
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mpc/app_localixation.dart';
+import 'package:mpc/app_localization.dart';
+
 import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
@@ -25,18 +28,23 @@ class _SettingsState extends State<Settings> {
   // }
   late bool isEnglish;
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Set isEnglish based on the current language
-    isEnglish = AppLocalizations.of(context)!.locale == Locale('en', 'US');
-  }
 
-  void _changeLanguage(bool isEnglish) {
-    final locale = isEnglish ? Locale('en', 'US') : Locale('hi', 'IN');
-    AppLocalizations.of(context)!.load(locale);
+
+
+  void _changeLanguage(bool value) {
+    // final locale = isEnglish ? Locale('en', 'US') : Locale('hi', 'IN');
+    // AppLocalizations.of(context)!.load(locale);
+    // setState(() {
+    //   this.isEnglish = !isEnglish; // Corrected line
+    // });
+    if (value) {
+      context.setLocale(const Locale('en', 'US'));
+    } else {
+      context.setLocale(const Locale('hi', 'IN'));
+    }
     setState(() {
-      this.isEnglish = !isEnglish; // Corrected line
+      key = UniqueKey();
+
     });
   }
 
@@ -77,7 +85,7 @@ class _SettingsState extends State<Settings> {
                   padding: const EdgeInsets.only(top: 45),
                   child: Center(
                     child: GradientText(
-                      'Settings',
+                      'settings'.tr(),
                       style: const TextStyle(
                         fontFamily: 'Hind',
                         fontSize: 24.0,
@@ -176,7 +184,7 @@ class _SettingsState extends State<Settings> {
                 ),
                 Center(
                   child: CustomContainer(
-                    text: 'Email Notifications',
+                    text: 'email_notifications'.tr(),
                     icon: Icons.mark_email_unread_outlined,
                     onArrowPressed: () {
                       print('Arrow for Item 1 pressed');
@@ -190,7 +198,7 @@ class _SettingsState extends State<Settings> {
                   ),
                 ),
                 CustomContainer(
-                  text: 'SMS Notifications',
+                  text: 'sms_notifications'.tr(),
                   icon: Icons.notifications,
                   onArrowPressed: () {
                     print('Arrow for Item 1 pressed');
@@ -203,7 +211,7 @@ class _SettingsState extends State<Settings> {
                   },
                 ),
                 CustomContainer(
-                  text: 'Dark Mode',
+                  text: 'dark_mode'.tr(),
                   icon: Icons.dark_mode_outlined,
                   onToggleChanged: (value) {
                     setState(() {
@@ -212,35 +220,40 @@ class _SettingsState extends State<Settings> {
                     themeProvider.toggleTheme();
                     print('Toggle for Dark Mode changed to $value');
                   },
-                  initialValue: toggledStates['Dark Mode'] ?? false,
+                  initialValue: themeProvider.isDarkMode,
                 ),
                 CustomLanguageContainer(
-                  text: 'English',
+
+                  text: 'english'.tr(),
+
                   icon: Icons.language_rounded,
                   onToggleChanged: (value) {
                     _changeLanguage(value);
                     setState(() {
                       toggledStates['English'] = value;
                     });
+
+                    themeProvider.toggleLanguage();
                   },
-                  initialValue: false,
+                  initialValue: themeProvider.isEnglish,
+
                 ),
                 CustomContainer(
-                  text: 'Password',
+                  text: 'password'.tr(),
                   icon: Icons.lock_outline,
                   showForwardArrow: true,
                   onArrowPressed: () {},
                   initialValue: toggledStates['Password'] ?? false,
                 ),
                 CustomContainer(
-                  text: 'Privacy',
+                  text: 'privacy'.tr(),
                   icon: Icons.privacy_tip_outlined,
                   showForwardArrow: true,
                   onArrowPressed: () {},
                   initialValue: toggledStates['Privacy'] ?? false,
                 ),
                 CustomContainer(
-                  text: 'Support',
+                  text: 'support'.tr(),
                   icon: Icons.contact_support_outlined,
                   showForwardArrow: true,
                   onArrowPressed: () {},

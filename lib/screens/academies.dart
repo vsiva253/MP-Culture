@@ -1,6 +1,14 @@
+
 import 'package:flutter/material.dart';
 import 'package:mpc/screens/academies_information_screen.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
+
+import 'dart:math';
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:mpc/screens/academies_information_screen.dart';
+
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
@@ -40,6 +48,7 @@ class _AcademiesPageState extends State<AcademiesPage> {
               bottomRight: Radius.circular(0),
             ),
             child: CustomDrawer()),
+
         body: homeViewModel.isLoading
             ? const Center(
                 child: CircularProgressIndicator(),
@@ -54,6 +63,37 @@ class _AcademiesPageState extends State<AcademiesPage> {
                       height: double.maxFinite,
                       fit: BoxFit.fill,
                     ),
+
+        body: Stack(
+          children: [
+            Opacity(
+              opacity: 0.05,
+              child: Image.asset(
+                'assets/scaffold.jpg',
+                width: double.maxFinite,
+                height: double.maxFinite,
+                fit: BoxFit.fill,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 16, right: 16, top: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  GradientText(
+                    'academy'.tr(),
+                    style: const TextStyle(
+                        fontFamily: 'Poppins',
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600),
+                    colors: const [
+                      Color(0xFFC33764),
+                      Color(0xFF1D2671),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 10,
+
                   ),
                   Container(
                     padding:
@@ -118,6 +158,7 @@ class _AcademiesPageState extends State<AcademiesPage> {
                                   Color repeatColor =
                                       colorList[index % colorList.length];
 
+
                                   return Column(
                                     children: [
                                       GestureDetector(
@@ -139,6 +180,44 @@ class _AcademiesPageState extends State<AcademiesPage> {
                                                 repeatColor, // Use the random color
                                             borderRadius:
                                                 BorderRadius.circular(10),
+
+                      return Column(
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  FadePageRoute(
+                                      builder: (context) =>
+                                          AcademiesInformationScreen()));
+                              print("tapped on container");
+                            },
+                            child: Container(
+                              height: 134,
+                              padding: const EdgeInsets.only(
+                                  left: 10, top: 27, bottom: 20),
+                              decoration: BoxDecoration(
+                                color: repeatColor, // Use the random color
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Row(
+                                children: [
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Expanded(
+                                    flex: 4,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          eventName,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 24,
+                                            fontWeight: FontWeight.w700,
+
                                           ),
                                           child: Row(
                                             children: [

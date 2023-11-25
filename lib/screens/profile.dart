@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mpc/data/models/user_model.dart';
@@ -109,6 +110,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         const SizedBox(
                           height: 20,
                         ),
+
                         Padding(
                           padding: EdgeInsets.only(top: 30),
                           child: Center(
@@ -152,6 +154,241 @@ class _ProfilePageState extends State<ProfilePage> {
                                         ),
                                       )
                                     : null,
+
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Form(
+                      key: _formKey,
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            controller: nameController,
+                            style: const TextStyle(fontSize: 18),
+                            decoration: InputDecoration(
+                              labelText: 'full_name'.tr(),
+                              fillColor: Colors.grey[400],
+                              hintText: 'Enter your full name here',
+                              hintStyle: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(17, 8, 5, 5),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          TextFormField(
+                            controller: phoneNumberController,
+                            style: const TextStyle(fontSize: 18),
+                            decoration: InputDecoration(
+                              labelText: 'mobile_number'.tr(),
+                              hintText: 'Enter your mobile number',
+                              hintStyle: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(17, 8, 5, 5),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          TextFormField(
+                            controller: emailController,
+                            style: const TextStyle(fontSize: 18),
+                            decoration: InputDecoration(
+                              labelText: 'email'.tr(),
+                              hintText: 'Enter your email',
+                              hintStyle: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(17, 8, 5, 5),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          TextFormField(
+                            controller: addressController,
+                            style: const TextStyle(fontSize: 18),
+                            decoration: InputDecoration(
+                              labelText: 'address'.tr(),
+                              hintText: 'Enter your address',
+                              hintStyle: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(17, 8, 5, 5),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          TextFormField(
+                            controller: statusController,
+                            style: const TextStyle(fontSize: 18),
+                            decoration: InputDecoration(
+                              labelText: 'Status',
+                              hintText: 'Enter your status',
+                              hintStyle: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(17, 8, 5, 5),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          TextFormField(
+                            controller: genderController,
+                            style: const TextStyle(fontSize: 18),
+                            decoration: InputDecoration(
+                              labelText: 'gender'.tr(),
+                              hintText: 'Enter your gender',
+                              hintStyle: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(17, 8, 5, 5),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          TextFormField(
+                            controller: dobController,
+                            style: const TextStyle(fontSize: 18),
+                            onTap: () {
+                              _selectDate();
+                            },
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(Icons.calendar_month),
+                                onPressed: () async {
+                                  _selectDate();
+                                },
+                              ),
+                              labelText: 'date_of_birth'.tr(),
+                              hintText: '12/05/1990',
+                              hintStyle: const TextStyle(
+                                fontSize: 18,
+                                color: Colors.grey,
+                              ),
+                              contentPadding:
+                                  const EdgeInsets.fromLTRB(17, 8, 5, 5),
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(3),
+                                borderSide: const BorderSide(
+                                  color: Colors.black, // Border color
+                                  width: 0.3, // Border width
+                                ),
+
                               ),
                             ),
                           ),
