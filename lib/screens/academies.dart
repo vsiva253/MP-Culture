@@ -186,14 +186,14 @@ class _AcademiesPageState extends State<AcademiesPage> {
                                                   width: 64,
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 30,
                                               ),
                                             ],
                                           ),
                                         ),
                                       ),
-                                      SizedBox(height: 10),
+                                      const SizedBox(height: 10),
                                     ],
                                   );
                                 },
