@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mpc/app_localixation.dart';
+import 'package:mpc/app_localization.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
