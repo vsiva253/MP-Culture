@@ -63,9 +63,11 @@ class _AcademiesInformationScreenState
                       ),
                     ),
                   ),
-
+                  SizedBox(
+                    height: 15,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 36, right: 36),
+                    padding: const EdgeInsets.only(left: 25, right: 25),
                     child: Row(
                       children: [
                         Container(
@@ -79,9 +81,9 @@ class _AcademiesInformationScreenState
                                   fit: BoxFit.fitWidth)),
                         ),
                         GradientText(
-                          "sgk",
+                          "संस्कृति संचालनालय",
                           style: const TextStyle(
-                              fontSize: 24,
+                              fontSize: 29,
                               color: Color(0xFF000000),
                               fontWeight: FontWeight.w500),
                           colors: const [

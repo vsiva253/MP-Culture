@@ -17,12 +17,12 @@ class UserViewModel extends ChangeNotifier {
   bool get isLoading => _isLoading;
 
   // User profile data
-  Future<void> fetchUserProfil(BuildContext context, int id) async {
-    if (!(_userModel.id != null)) {
+  Future<void> fetchUserProfile(BuildContext context, int id) async {
+    if (_userModel.id == null) {
       try {
         _isLoading = true;
-        final programs = await apiService.getUserProfile(id);
-        _userModel = programs;
+        final user = await apiService.getUserProfile(id);
+        _userModel = user;
       } catch (e) {
         CustomSnackbar.show(context, 'Error fetching User Profile: $e');
       } finally {

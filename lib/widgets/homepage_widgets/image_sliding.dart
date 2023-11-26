@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:mpc/components/theme_data.dart';
+import 'package:provider/provider.dart';
 
 class ImageSlider extends StatefulWidget {
   final List<String> imageUrls;
@@ -14,6 +16,8 @@ class _ImageSliderState extends State<ImageSlider> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    final theme = themeProvider.getTheme();
     return Column(
       children: [
         CarouselSlider(
@@ -34,8 +38,10 @@ class _ImageSliderState extends State<ImageSlider> {
                   height: 210, // Set the height here
                   width: MediaQuery.of(context).size.width,
                   margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                  decoration: const BoxDecoration(
-                    color: Colors.amber,
+                  decoration: BoxDecoration(
+                    color: themeProvider.isDarkMode
+                        ? Color(0xFF505050)
+                        : Color(0xFFF0F0F0),
                   ),
                   child: Image.network(
                     url,

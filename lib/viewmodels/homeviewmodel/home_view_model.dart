@@ -71,7 +71,8 @@ class HomeViewModel with ChangeNotifier {
         _about = about;
       } catch (e) {
         _isLoading = false;
-        CustomSnackbar.show(context, 'Error fetching aboutUS: $e');
+        CustomSnackbar.show(context, 'Error fetching aboutUS');
+        print("Error fetching aboutUS: $e");
       } finally {}
       _isLoading = false;
       notifyListeners();
@@ -88,7 +89,8 @@ class HomeViewModel with ChangeNotifier {
         _todayPrograms = programs;
       } catch (e) {
         _isLoading = false;
-        CustomSnackbar.show(context, 'Error fetching today\'s programs: $e');
+        CustomSnackbar.show(context, 'Error fetching today\'s programs');
+        print("Error fetching today\'s programs: $e");
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -107,7 +109,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         // Handle error
         _isLoading = false;
-        CustomSnackbar.show(context, 'Error fetching OnGoing\'s programs: $e');
+        CustomSnackbar.show(context, 'Error fetching OnGoing\'s programs');
+        print('Error fetching OnGoing\'s programs: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -126,7 +129,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         // Handle error
         _isLoading = false;
-        CustomSnackbar.show(context, 'Error fetching UpComing\'s programs: $e');
+        CustomSnackbar.show(context, 'Error fetching UpComing\'s programs');
+        print('Error fetching OnGoing\'s programs: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -145,7 +149,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         // Handle error
         _isLoading = false;
-        CustomSnackbar.show(context, 'Error fetching Archived\'s programs: $e');
+        CustomSnackbar.show(context, 'Error fetching Archived\'s programs');
+        print('Error fetching Archived\'s programs: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -163,7 +168,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         _isLoading = false;
         // Handle error
-        CustomSnackbar.show(context, 'Error fetching Slider images: $e');
+        CustomSnackbar.show(context, 'Error fetching Slider images');
+        print('Error fetching Slider images: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -181,7 +187,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         // Handle error
         _isLoading = false;
-        CustomSnackbar.show(context, 'Error fetching Categories: $e');
+        CustomSnackbar.show(context, 'Error fetching Categories');
+        print('Error fetching Categories: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -199,7 +206,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         // Handle error
         _isLoading = false;
-        CustomSnackbar.show(context, 'Error fetching academies: $e');
+        CustomSnackbar.show(context, 'Error fetching academies');
+        print('Error fetching academies: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -217,7 +225,8 @@ class HomeViewModel with ChangeNotifier {
     } catch (e) {
       // Handle error
       _isLoading = false;
-      CustomSnackbar.show(context, 'Error fetching academies: $e');
+      CustomSnackbar.show(context, 'Error fetching academies');
+      print('Error fetching academies: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -233,7 +242,8 @@ class HomeViewModel with ChangeNotifier {
     } catch (e) {
       // Handle error
       _isLoading = false;
-      CustomSnackbar.show(context, 'Error fetching academies: $e');
+      CustomSnackbar.show(context, 'Error fetching academies');
+      print('Error fetching academies: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -251,7 +261,8 @@ class HomeViewModel with ChangeNotifier {
       _byCategoryPrograms = programs;
     } catch (e) {
       _isLoading = false;
-      CustomSnackbar.show(context, 'Error fetching programs: $e');
+      CustomSnackbar.show(context, 'Error fetching programs');
+      print('Error fetching programs: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -269,7 +280,8 @@ class HomeViewModel with ChangeNotifier {
         _byAcademiecPrograms = programs;
       } catch (e) {
         _isLoading = false;
-        CustomSnackbar.show(context, 'Error fetching programs: $e');
+        CustomSnackbar.show(context, 'Error fetching programs');
+        print('Error fetching programs: $e');
       } finally {
         _isLoading = false;
         notifyListeners();

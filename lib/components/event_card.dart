@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/screens/event_information.dart';
@@ -20,7 +19,9 @@ class _EventCardState extends State<EventCard> {
         Navigator.push(
             context,
             FadePageRoute(
-              builder: (context) => EventInformationScreen(),
+              builder: (context) => EventInformationScreen(
+                eventData: widget.event,
+              ),
             ));
       },
       child: SizedBox(
@@ -151,8 +152,8 @@ class _EventCardState extends State<EventCard> {
                               children: [
                                 Row(
                                   children: [
-                                    Text(
-                                      'kalakar'.tr(),
+                                    const Text(
+                                      'कलाकार: ',
                                       style: TextStyle(
                                           color: Color(0xFFFFFFFF),
                                           fontFamily: 'HIND',
@@ -178,8 +179,8 @@ class _EventCardState extends State<EventCard> {
                                 ),
                                 Row(
                                   children: [
-                                    Text(
-                                      'entry'.tr(),
+                                    const Text(
+                                      'प्रवेश: ',
                                       style: TextStyle(
                                           color: Color(0xFFFFFFFF),
                                           fontFamily: 'HIND',
@@ -284,7 +285,9 @@ class _EventCardState extends State<EventCard> {
                                     context,
                                     FadePageRoute(
                                       builder: (context) =>
-                                          EventInformationScreen(),
+                                          EventInformationScreen(
+                                        eventData: widget.event,
+                                      ),
                                     ));
                               },
                               style: ButtonStyle(

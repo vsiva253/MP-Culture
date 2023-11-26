@@ -9,6 +9,7 @@ import 'package:mpc/screens/user/user_preferences.dart';
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/services/language_provider.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
+import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/bottombar.dart';
 
 import 'package:provider/provider.dart';
@@ -19,6 +20,7 @@ import 'package:mpc/data/services/api_service.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
   runApp(
     MultiProvider(
       providers: [
@@ -36,6 +38,12 @@ void main() async {
         ),
         ChangeNotifierProvider(
           create: (context) => LanguageProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => UserViewModel(
+              apiService: ApiService(
+                  baseUrl: 'https://service.codingbandar.com',
+                  basicAuth: 'YWRtaW46YWRtaW4=')),
         ),
         ChangeNotifierProvider(
           create: (context) => HomeViewModel(
