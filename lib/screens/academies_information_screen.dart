@@ -63,17 +63,34 @@ class _AcademiesInformationScreenState
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 25,
-                  ),
+
                   Padding(
                     padding: const EdgeInsets.only(left: 36, right: 36),
-                    child: Container(
-                      // height: MediaQuery.of(context).size.height / 8.14,
-                      child: Image.asset(
-                        "assets/academies_header.jpg",
-                        fit: BoxFit.fitWidth,
-                      ),
+                    child: Row(
+                      children: [
+                        Container(
+                          height: MediaQuery.of(context).size.height / 8.14,
+                          width: 115,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage("assets/academies_header.jpg"),
+                                  fit: BoxFit.fitWidth)),
+                        ),
+                        GradientText(
+                          "sgk",
+                          style: const TextStyle(
+                              fontSize: 24,
+                              color: Color(0xFF000000),
+                              fontWeight: FontWeight.w500),
+                          colors: const [
+                            Color(0xFFC33764),
+                            Color(0xFF1D2671),
+                          ],
+                          stops: const [0.0, 1],
+                        ),
+                      ],
                     ),
                   ),
                   Padding(
