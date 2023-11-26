@@ -17,7 +17,7 @@ class _ImageSliderState extends State<ImageSlider> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    final theme = themeProvider.getTheme();
+
     return Column(
       children: [
         CarouselSlider(

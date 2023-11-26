@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/components/theme_data.dart';
-import 'package:mpc/main.dart';
-import 'package:mpc/screens/live.dart';
+
 import 'package:mpc/screens/settings.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
@@ -202,7 +201,7 @@ class CustomDrawerItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    final theme = themeProvider.getTheme(); // Get the current theme
+    // Get the current theme
     return InkWell(
       onTap: () {
         onTap();

@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mpc/app_localization.dart';
+
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
@@ -169,26 +169,34 @@ class _HomePageState extends State<HomePage> {
                               ),
 
                               EventListCard(
-                                  eventList: homeViewModel.todayPrograms,
-                                  program: "Today Program"),
+                                eventList: homeViewModel.todayPrograms,
+                                program: "Today Program",
+                                ShowProgram: true,
+                              ),
                               const SizedBox(
                                 height: 20,
                               ),
                               EventListCard(
-                                  eventList: homeViewModel.onGoingPrograms,
-                                  program: "OnGoing Program"),
+                                eventList: homeViewModel.onGoingPrograms,
+                                program: "OnGoing Program",
+                                ShowProgram: true,
+                              ),
                               const SizedBox(
                                 height: 20,
                               ),
                               EventListCard(
-                                  eventList: homeViewModel.upConingPrograms,
-                                  program: "UpComing Program"),
+                                eventList: homeViewModel.upConingPrograms,
+                                program: "UpComing Program",
+                                ShowProgram: true,
+                              ),
                               const SizedBox(
                                 height: 20,
                               ),
                               EventListCard(
-                                  eventList: homeViewModel.archivedPrograms,
-                                  program: "Archived Program"),
+                                eventList: homeViewModel.archivedPrograms,
+                                program: "Archived Program",
+                                ShowProgram: true,
+                              ),
                               const SizedBox(
                                 height: 20,
                               ),

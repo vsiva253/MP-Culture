@@ -9,7 +9,10 @@ class EventListCard extends StatelessWidget {
   final String program;
   final List<EventData> eventList;
   const EventListCard(
-      {super.key, required this.eventList, required this.program});
+      {super.key,
+      required this.eventList,
+      required this.program,
+      required bool ShowProgram});
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +45,7 @@ class EventListCard extends StatelessWidget {
                                         EventListView(
                                           eventList: eventList,
                                           program: program,
+                                          ShowProgram: true,
                                         )));
                           },
                           child: GradientText(

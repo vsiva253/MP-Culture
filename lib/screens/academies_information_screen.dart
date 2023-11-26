@@ -67,23 +67,27 @@ class _AcademiesInformationScreenState
                     height: 15,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 25, right: 25),
+                    padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Row(
                       children: [
                         Container(
                           height: MediaQuery.of(context).size.height / 8.14,
-                          width: 115,
+                          width: 100,
                           decoration: BoxDecoration(
                               shape: BoxShape.circle,
                               image: DecorationImage(
                                   image:
                                       AssetImage("assets/academies_header.jpg"),
-                                  fit: BoxFit.fitWidth)),
+                                  scale: 1,
+                                  fit: BoxFit.scaleDown)),
+                        ),
+                        SizedBox(
+                          width: 5,
                         ),
                         GradientText(
                           "संस्कृति संचालनालय",
                           style: const TextStyle(
-                              fontSize: 29,
+                              fontSize: 28,
                               color: Color(0xFF000000),
                               fontWeight: FontWeight.w500),
                           colors: const [

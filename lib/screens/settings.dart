@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:mpc/app_localization.dart';
+
 import 'package:mpc/components/theme_data.dart';
-import 'package:mpc/main.dart';
-import 'package:mpc/screens/profile.dart';
+import 'package:mpc/viewmodels/user_view_modal.dart';
+
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
@@ -27,6 +27,12 @@ class _SettingsState extends State<Settings> {
   //   AppLocalizations.of(context)!.load(locale);
   // }
   late bool isEnglish;
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserViewModel>().fetchUserProfile(context, 3);
+    // Initialize it with a default image path or any other valid initialization.
+  }
 
   void _changeLanguage(bool value) {
     // final locale = isEnglish ? Locale('en', 'US') : Locale('hi', 'IN');
@@ -46,11 +52,12 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    final userViewModel = Provider.of<UserViewModel>(context);
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(65),
-        child: CustomAppBar(),
+        child: CustomAppBarSecondary(),
       ),
       drawer: ClipRRect(
         borderRadius: BorderRadius.only(

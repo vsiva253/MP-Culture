@@ -6,9 +6,13 @@ import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class EventListView extends StatelessWidget {
   final String program;
+  final bool ShowProgram;
   final List<EventData> eventList;
   const EventListView(
-      {super.key, required this.eventList, required this.program});
+      {super.key,
+      required this.eventList,
+      required this.program,
+      required this.ShowProgram});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +38,9 @@ class EventListView extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: GradientText(
-                    program, //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
+                    ShowProgram
+                        ? program
+                        : '', //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
                     style: const TextStyle(
                       fontFamily: 'Hind',
                       fontSize: 18.0,
