@@ -27,5 +27,12 @@
   "artist_introduction": "Artist Introduction",
   "gallery": "Gallery",
   "program_category": "Program Category",
-  "academy": "Academy"
+  "academy": "Academy",
+  "live_program": "Live Program",
+  "today_program": "Today's Program",
+  "upcoming_program": "Upcoming Program",
+  "archived_program": "Archived Program",
+  "arts_categories": "Arts Categories",
+  "log_out": "Logout",
+  "login": "Login"
 }

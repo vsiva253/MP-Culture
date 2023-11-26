@@ -27,5 +27,12 @@
   "artist_introduction": "कलाकार का परिचय",
   "gallery": "गैलरी",
   "program_category": "कार्यक्रम की  श्रेणी",
-  "academy": "अकादमी"
+  "academy": "अकादमी",
+  "live_program": "संचालित हो रहे कार्यक्रम",
+  "today_program": "आज के कार्यक्रम",
+  "upcoming_program": "आगामी कार्यक्रम",
+  "archived_program": "विगत कार्यक्रम",
+  "arts_categories": "कला श्रेणियाँ",
+  "log_out": "लॉग आउट",
+  "login": "लॉगिन"
 }

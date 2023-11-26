@@ -52,6 +52,22 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
+  void _sendAutomaticOTP(String mobileNumber) async {
+    setState(() {
+      showOtpField = true;
+    });
+
+    try {
+      String response = await AuthService.sendOTP(mobileNumber);
+      CustomSnackbar.show(context, "OTP Sent Successfully");
+      print('OTP Sent Response: $response');
+    } catch (e) {
+      CustomSnackbar.show(
+          context, "Error sending OTP, Please Check Your Number");
+      print('Error sending OTP: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -135,7 +151,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   child: Row(
                                     children: [
                                       Expanded(
-                                        flex: 3,
+                                        flex: 7,
                                         child: TextField(
                                           controller: mobileController,
                                           decoration: InputDecoration(
@@ -148,8 +164,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                             ),
                                             enabledBorder:
                                                 const OutlineInputBorder(
-                                                    borderSide:
-                                                        BorderSide.none),
+                                              borderSide: BorderSide.none,
+                                            ),
                                             focusedBorder: OutlineInputBorder(
                                               borderRadius:
                                                   BorderRadius.circular(4),
@@ -160,92 +176,21 @@ class _LoginScreenState extends State<LoginScreen> {
                                               ),
                                             ),
                                           ),
-                                        ),
-                                      ),
-                                      Container(
-                                        color: Colors.white,
-                                        width: 5,
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: GestureDetector(
-                                          onTap: () async {
-                                            setState(() {
-                                              showOtpField = true;
-                                            });
-                                            try {
-                                              String response =
-                                                  await AuthService.sendOTP(
-                                                      mobileController.text);
-                                              CustomSnackbar.show(context,
-                                                  "OTP Sent Successfully");
-                                              print(
-                                                  'OTP Sent Response: $response');
-
-                                              // Show the OTP field after successfully sending OTP
-                                            } catch (e) {
-                                              // ignore: use_build_context_synchronously
-                                              CustomSnackbar.show(context,
-                                                  "Error sending OTP: $e");
-                                              print('Error sending OTP: $e');
+                                          onChanged: (value) {
+                                            // Check if the entered number is 10 digits, then automatically send OTP
+                                            if (value.length == 10) {
+                                              _sendAutomaticOTP(value);
                                             }
                                           },
-                                          child: Container(
-                                            decoration: BoxDecoration(
-                                                color: const Color(0xFFDcebfe)
-                                                    .withOpacity(1),
-                                                borderRadius:
-                                                    BorderRadius.circular(4),
-                                                border: Border.all(
-                                                    color: Colors.grey
-                                                        .withOpacity(0.5))),
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 2,
-                                                  child: IconButton(
-                                                    onPressed: () async {
-                                                      try {
-                                                        // Replace 'cookieForSendingOTP' with the actual cookie value
-                                                        String response =
-                                                            await AuthService
-                                                                .sendOTP(
-                                                          mobileController.text,
-                                                        );
-                                                        ScaffoldMessenger.of(
-                                                                context)
-                                                            .showSnackBar(
-                                                          const SnackBar(
-                                                            elevation: 10,
-                                                            behavior:
-                                                                SnackBarBehavior
-                                                                    .floating,
-                                                            content: Text(
-                                                                'OTP Sent Successfully'),
-                                                          ),
-                                                        );
-                                                        print(
-                                                            'OTP Sent Response: $response');
-                                                      } catch (e) {
-                                                        CustomSnackbar.show(
-                                                            context,
-                                                            "Error sending OTP: $e");
-                                                        print(
-                                                            'Error sending OTP: $e');
-                                                      }
-                                                    },
-                                                    icon: Icon(
-                                                      Icons.call_outlined,
-                                                      color: Colors.red
-                                                          .withOpacity(0.6),
-                                                    ),
-                                                  ),
-                                                ),
-                                                const Expanded(
-                                                    flex: 3,
-                                                    child: Text("Get OTP"))
-                                              ],
-                                            ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: IconButton(
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            Icons.call_outlined,
+                                            color: Colors.red.withOpacity(0.6),
                                           ),
                                         ),
                                       )

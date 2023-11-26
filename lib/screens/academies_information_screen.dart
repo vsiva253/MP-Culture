@@ -51,14 +51,45 @@ class _AcademiesInformationScreenState
             SizedBox(
               height: 25,
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 36, right: 36),
-              child: Container(
-                // height: MediaQuery.of(context).size.height / 8.14,
-                child: Image.asset(
-                  "assets/academies_header.jpg",
-                  fit: BoxFit.fitWidth,
-                ),
+            Container(
+              padding: EdgeInsets.only(
+                left: 20,
+                right: 20,
+              ),
+              height: MediaQuery.of(context).size.height / 8.139,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height / 8.139,
+                    width: MediaQuery.of(context).size.width / 3.722,
+                    decoration: BoxDecoration(
+                        // borderRadius: BorderRadius.circular(104),
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                            image: AssetImage("assets/academies_header.jpg"))),
+                    // child: Image.asset(
+                    //   "assets/academies_header.jpg",
+                    //   fit: BoxFit.cover,
+                    // ),
+                  ),
+                  Transform.scale(
+                    scale: 0.8,
+                    child: GradientText(
+                      "संस्कृति संचालनालय",
+                      style: const TextStyle(
+                          fontSize: 29,
+                          color: Color(0xFF000000),
+                          fontWeight: FontWeight.w500),
+                      colors: const [
+                        Color(0xFFC33764),
+                        Color(0xFF1D2671),
+                      ],
+                      stops: const [0.0, 1],
+                      maxLines: 1,
+                    ),
+                  ),
+                ],
               ),
             ),
             Padding(

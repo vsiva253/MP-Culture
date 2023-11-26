@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/main.dart';
@@ -82,7 +83,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                         CustomDrawerItem(
                           image: 'assets/logo/play.png',
-                          text: 'सीधा प्रसारण',
+                          text: 'live_program'.tr(),
                           isSelected: selectedItem == 'सीधा प्रसारण',
                           onTap: () {
                             setState(() {
@@ -98,7 +99,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                         CustomDrawerItem(
                           image: 'assets/logo/light.png',
-                          text: 'आज के कार्यक्र',
+                          text: 'today_program'.tr(),
                           isSelected: selectedItem == 'आज के कार्यक्र',
                           onTap: () {
                             setSelectedItem('आज के कार्यक्र');
@@ -106,7 +107,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                         CustomDrawerItem(
                           image: 'assets/logo/light.png',
-                          text: 'आज के कार्यक्रम',
+                          text: 'upcoming_program'.tr(),
                           isSelected: selectedItem == 'आज के कार्यक्रम',
                           onTap: () {
                             setSelectedItem('आज के कार्यक्रम');
@@ -114,7 +115,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                         CustomDrawerItem(
                           image: 'assets/logo/save.png',
-                          text: 'विगत कार्यक्रम',
+                          text: 'archived_program'.tr(),
                           isSelected: selectedItem == 'विगत कार्यक्रम',
                           onTap: () {
                             setSelectedItem('विगत कार्यक्रम');
@@ -122,7 +123,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                         CustomDrawerItem(
                           image: 'assets/logo/bookmark.png',
-                          text: 'कला विधायें',
+                          text: 'arts_categories'.tr(),
                           isSelected: selectedItem == 'कला विधायें',
                           onTap: () {
                             setSelectedItem('कला विधायें');
@@ -130,7 +131,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                         CustomDrawerItem(
                           image: 'assets/logo/settings.png',
-                          text: 'Setting',
+                          text: 'settings'.tr(),
                           isSelected: selectedItem == 'Setting',
                           onTap: () {
                             setState(() {
@@ -144,7 +145,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         ),
                         CustomDrawerItem(
                           image: 'assets/logo/logout.png',
-                          text: 'Log Out',
+                          text: 'log_out'.tr(),
                           isSelected: selectedItem == 'Log Out',
                           onTap: () {
                             setSelectedItem('Log Out');
