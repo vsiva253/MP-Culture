@@ -53,7 +53,7 @@ void main() async {
         ),
       ],
       child: EasyLocalization(
-        supportedLocales: const [
+        supportedLocales: [
           Locale('en', 'US'),
           Locale('hi', 'IN'),
         ],

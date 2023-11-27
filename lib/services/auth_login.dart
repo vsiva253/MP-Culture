@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:http/http.dart' as http;
+import 'package:mpc/data/models/user_model.dart';
 
 class AuthService {
   static final String baseUrl = 'https://service.codingbandar.com/Api';
@@ -19,29 +22,9 @@ class AuthService {
       throw Exception('Error: $error');
     }
   }
-  // static String? sessionCookie; // Store the session cookie
 
-  // static Future<String> sendOTP(String mobileNumber) async {
-  //   var request = http.MultipartRequest(
-  //       'POST', Uri.parse('https://service.codingbandar.com/Api/login'));
-  //   request.fields.addAll({
-  //     'mobile': mobileNumber,
-  //   });
-
-  //   var response = await request.send();
-
-  //   if (response.statusCode == 200) {
-  //     // Extract and store the session cookie
-  //     sessionCookie = response.headers['set-cookie'];
-  //     print(sessionCookie);
-
-  //     return await response.stream.bytesToString();
-  //   } else {
-  //     throw Exception(
-  //         'Failed to send OTP. Status code: ${response.statusCode}');
-  //   }
   // }
-  static Future<String> verifyOTP(String mobileNumber, String otp) async {
+  static Future<UserModel> verifyOTP(String mobileNumber, String otp) async {
     try {
       var response = await http.post(
         Uri.parse('$baseUrl/verify_otp'),
@@ -49,7 +32,9 @@ class AuthService {
       );
 
       if (response.statusCode == 200) {
-        return response.body;
+        // Parse the JSON response and return a UserModel instance
+        var jsonMap = json.decode(response.body);
+        return UserModel.fromJson(jsonMap);
       } else {
         throw Exception(
             'Failed to verify OTP. Status code: ${response.statusCode}');
@@ -58,32 +43,4 @@ class AuthService {
       throw Exception('Error: $error');
     }
   }
-  // static Future<String> verifyOTP(String mobileNumber, String otp) async {
-  //   // Convert headers to Map<String, String>
-  //   Map<String, String> headers = {
-  //     'Cookie': sessionCookie ?? '',
-  //   };
-
-  //   var request = http.MultipartRequest(
-  //     'POST',
-  //     Uri.parse('https://service.codingbandar.com/Api/verify_otp'),
-  //   );
-
-  //   request.fields.addAll({
-  //     'mobile': mobileNumber,
-  //     'otp': otp,
-  //   });
-
-  //   request.headers.addAll(headers);
-
-  //   var response = await request.send();
-
-  //   if (response.statusCode == 200) {
-  //     return await response.stream.bytesToString();
-  //   } else {
-  //     throw Exception(
-  //       'Failed to verify OTP. Status code: ${response.statusCode}',
-  //     );
-  //   }
-  // }
 }

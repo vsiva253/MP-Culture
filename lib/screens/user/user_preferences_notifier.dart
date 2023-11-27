@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferences extends ChangeNotifier {
+  bool a = false;
+  bool b = false;
   bool smsSelected = false;
   bool emailSelected = false;
   bool bothSelected = false;
@@ -17,18 +19,23 @@ class UserPreferences extends ChangeNotifier {
 
   Future<void> updateSMS(bool value) async {
     smsSelected = value;
+
     await _savePreferences();
     notifyListeners();
   }
 
   Future<void> updateEmail(bool value) async {
     emailSelected = value;
+
     await _savePreferences();
     notifyListeners();
   }
 
   Future<void> updateBoth(bool value) async {
     bothSelected = value;
+    updateEmail(value);
+    updateSMS(value);
+
     await _savePreferences();
     notifyListeners();
   }
