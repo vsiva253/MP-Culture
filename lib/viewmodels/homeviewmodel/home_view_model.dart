@@ -222,11 +222,12 @@ class HomeViewModel with ChangeNotifier {
       _singleAcademic = SingleAacademies();
       final programs = await apiService.getSingleAcademice(id);
       _singleAcademic = programs;
+      print("acadmin name ${_singleAcademic.deptName} ");
+      _fetchAcademiecPrograms(context, _singleAcademic.deptName!);
     } catch (e) {
       // Handle error
       _isLoading = false;
-      CustomSnackbar.show(context, 'Error fetching academies');
-      print('Error fetching academies: $e');
+      CustomSnackbar.show(context, 'Error fetching academies: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -286,6 +287,24 @@ class HomeViewModel with ChangeNotifier {
         _isLoading = false;
         notifyListeners();
       }
+    }
+  }
+
+  // academiec programes
+  Future<void> _fetchAcademiecPrograms(
+      BuildContext context, String depName) async {
+    try {
+      _byAcademiecPrograms = [];
+      _isLoading = true;
+      final programs = await apiService.getTodayPrograms(
+          "/Api/programs_by_academies?program_academies=$depName");
+      _byAcademiecPrograms = programs;
+    } catch (e) {
+      _isLoading = false;
+      CustomSnackbar.show(context, 'Error fetching failed programs: $e');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
   }
 }
