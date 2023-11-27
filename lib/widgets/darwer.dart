@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:mpc/components/theme_data.dart';
 
 import 'package:mpc/screens/settings.dart';
+import 'package:mpc/screens/user/auth_status.dart';
+import 'package:mpc/screens/user/user_preferences.dart';
+import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:provider/provider.dart';
@@ -164,7 +167,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                     child: const Text('Cancel'),
                                   ),
                                   TextButton(
-                                    onPressed: () {},
+                                    onPressed: () async {
+                                      await AuthProvider().logout(context);
+                                    },
                                     child: const Text('OK'),
                                   ),
                                 ],

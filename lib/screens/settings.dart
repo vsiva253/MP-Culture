@@ -53,6 +53,7 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     final userViewModel = Provider.of<UserViewModel>(context);
+    var userData = userViewModel.userModel;
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
       appBar: PreferredSize(
@@ -123,7 +124,7 @@ class _SettingsState extends State<Settings> {
                             ),
                           ),
                         ),
-                        const Padding(
+                        Padding(
                           padding: EdgeInsets.all(18),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -131,7 +132,7 @@ class _SettingsState extends State<Settings> {
                             children: [
                               Center(
                                 child: Text(
-                                  "John Andrew",
+                                  userData.name!,
                                   style: TextStyle(
                                     fontFamily: 'inter',
                                     fontSize: 18.0,
@@ -141,11 +142,11 @@ class _SettingsState extends State<Settings> {
                                 ),
                               ),
                               SizedBox(
-                                height: 3,
+                                height: 5,
                               ),
                               Center(
                                 child: Text(
-                                  "example@example.com",
+                                  userData.email!,
                                   style: TextStyle(
                                     fontFamily: 'inter',
                                     fontSize: 14.0,

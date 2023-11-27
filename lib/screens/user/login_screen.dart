@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/register_screen.dart';
 import 'package:mpc/services/auth_login.dart';
@@ -70,6 +71,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08), // Set the color of the status bar
       // Set the color of the navigation bar (if present)
@@ -123,9 +125,13 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Container(
                         height: MediaQuery.of(context).size.height / 2.2,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          color: themeProvider.isDarkMode
+                              ? primaryColor
+                              : Colors.white,
                           border: Border.all(
-                            color: Colors.grey.withOpacity(0.6),
+                            color: themeProvider.isDarkMode
+                                ? Colors.grey.withOpacity(0.4)
+                                : Colors.grey.withOpacity(0.6),
                             width: 1,
                           ),
                         ),
@@ -140,8 +146,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                 Container(
                                   height: 50,
                                   decoration: BoxDecoration(
-                                    color:
-                                        const Color(0xFFDcebfe).withOpacity(1),
+                                    color: themeProvider.isDarkMode
+                                        ? Colors.grey.withOpacity(0.4)
+                                        : const Color(0xFFDcebfe)
+                                            .withOpacity(1),
                                     borderRadius: BorderRadius.circular(4),
                                     border: Border.all(
                                       color: Colors.grey.withOpacity(0.4),
@@ -206,8 +214,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFFDcebfe)
-                                          .withOpacity(1),
+                                      color: themeProvider.isDarkMode
+                                          ? Colors.grey.withOpacity(0.4)
+                                          : const Color(0xFFDcebfe)
+                                              .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -367,18 +377,22 @@ class _LoginScreenState extends State<LoginScreen> {
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.grey.withOpacity(0.6),
+                                          color: themeProvider.isDarkMode
+                                              ? Colors.white.withOpacity(0.6)
+                                              : Colors.grey.withOpacity(0.6),
                                         ),
                                       ),
                                       const SizedBox(
                                         width: 5,
                                       ),
-                                      const Text(
+                                      Text(
                                         'साइन अप करें',
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,
-                                          color: Colors.black,
+                                          color: themeProvider.isDarkMode
+                                              ? Colors.white
+                                              : Colors.black,
                                         ),
                                       ),
                                     ],

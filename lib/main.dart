@@ -137,7 +137,7 @@ class SplashScreen extends StatelessWidget {
       body: Center(
         child: Image.asset(
           'assets/logo/mpc.png',
-          height: 100,
+          height: 120,
         ), // Replace with your splash image
       ),
     );

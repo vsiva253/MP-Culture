@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/screens/user/login_screen.dart';
 import 'package:mpc/services/auth_registration.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/custom_snackbar.dart';
+import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({Key? key}) : super(key: key);
@@ -67,6 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08),
     ));
@@ -166,7 +169,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         padding: const EdgeInsets.only(left: 0, right: 0),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: themeProvider.isDarkMode
+                                ? primaryColor
+                                : Colors.white,
                             border: Border.all(
                               color: Colors.grey.withOpacity(0.6),
                               width: 1,
@@ -187,17 +192,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Mobile Number*"
                                             : "मोबाइल नंबर*",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black,
-                                        )),
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: themeProvider.isDarkMode
+                                                ? Colors.white70
+                                                : Colors.black)),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFFDcebfe)
-                                          .withOpacity(1),
+                                      color: themeProvider.isDarkMode
+                                          ? Colors.grey.withOpacity(0.2)
+                                          : const Color(0xFFDcebfe)
+                                              .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -257,17 +265,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Email*"
                                             : "ईमेल*",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black,
-                                        )),
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: themeProvider.isDarkMode
+                                                ? Colors.white70
+                                                : Colors.black)),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFFDcebfe)
-                                          .withOpacity(1),
+                                      color: themeProvider.isDarkMode
+                                          ? Colors.grey.withOpacity(0.2)
+                                          : const Color(0xFFDcebfe)
+                                              .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -316,17 +327,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Full Name*"
                                             : "पूरा नाम*",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black,
-                                        )),
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: themeProvider.isDarkMode
+                                                ? Colors.white70
+                                                : Colors.black)),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFFDcebfe)
-                                          .withOpacity(1),
+                                      color: themeProvider.isDarkMode
+                                          ? Colors.grey.withOpacity(0.2)
+                                          : const Color(0xFFDcebfe)
+                                              .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -375,17 +389,21 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Password*"
                                             : "पासवर्ड*",
-                                        style: const TextStyle(
+                                        style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
-                                          color: Colors.black,
+                                          color: themeProvider.isDarkMode
+                                              ? Colors.white70
+                                              : Colors.black,
                                         )),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFFDcebfe)
-                                          .withOpacity(1),
+                                      color: themeProvider.isDarkMode
+                                          ? Colors.grey.withOpacity(0.2)
+                                          : const Color(0xFFDcebfe)
+                                              .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -435,17 +453,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Confirm Password*"
                                             : "पासवर्ड की पुष्टि करें*",
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Colors.black,
-                                        )),
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: themeProvider.isDarkMode
+                                                ? Colors.white70
+                                                : Colors.black)),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: const Color(0xFFDcebfe)
-                                          .withOpacity(1),
+                                      color: themeProvider.isDarkMode
+                                          ? Colors.grey.withOpacity(0.2)
+                                          : const Color(0xFFDcebfe)
+                                              .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -626,11 +647,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           selectedLanguage == 'English'
                                               ? 'Login'
                                               : "लॉग इन करें",
-                                          style: const TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.black,
-                                          ),
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                              color: themeProvider.isDarkMode
+                                                  ? Colors.white
+                                                  : Colors.black),
                                         ),
                                       ],
                                     ),
