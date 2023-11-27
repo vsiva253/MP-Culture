@@ -3,12 +3,14 @@ import 'package:flutter/services.dart';
 
 import 'package:mpc/components/theme_data.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:mpc/data/models/user_login_model.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
 
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/services/language_provider.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
+import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/bottombar.dart';
 
@@ -16,10 +18,20 @@ import 'package:provider/provider.dart';
 //import flutter localization
 // import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mpc/data/services/api_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+
+  var api = ApiService(
+    baseUrl: 'https://service.codingbandar.com',
+    basicAuth: 'YWRtaW46YWRtaW4=',
+  );
+
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final String? savedLoginResponseString = prefs.getString('loginResponse');
+  final LoginResponse? savedLoginResponse;
 
   runApp(
     MultiProvider(
@@ -40,16 +52,13 @@ void main() async {
           create: (context) => LanguageProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => UserViewModel(
-              apiService: ApiService(
-                  baseUrl: 'https://service.codingbandar.com',
-                  basicAuth: 'YWRtaW46YWRtaW4=')),
+          create: (context) => HomeViewModel(apiService: api),
         ),
         ChangeNotifierProvider(
-          create: (context) => HomeViewModel(
-              apiService: ApiService(
-                  baseUrl: 'https://service.codingbandar.com',
-                  basicAuth: 'YWRtaW46YWRtaW4=')),
+          create: (context) => UserViewModel(apiService: api),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => LoginSignupViewModel(apiService: api),
         ),
       ],
       child: EasyLocalization(

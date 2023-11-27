@@ -1,11 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:mpc/components/theme_data.dart';
+import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/login_screen.dart';
-import 'package:mpc/services/auth_registration.dart';
+import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
-import 'package:mpc/widgets/custom_snackbar.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -17,59 +15,39 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   String selectedLanguage = 'English';
-  TextEditingController mobileController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController nameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController confirmPasswordController = TextEditingController();
-  final ApiService _apiService =
-      ApiService(); // Create an instance of ApiService
+  // TextEditingController mobileController = TextEditingController();
+  // TextEditingController emailController = TextEditingController();
+  // TextEditingController nameController = TextEditingController();
+  // TextEditingController passwordController = TextEditingController();
+  // TextEditingController confirmPasswordController = TextEditingController();
+  // final ApiService _apiService =
+  //     ApiService(); // Create an instance of ApiService
 
-  Future<void> registerUser() async {
-    try {
-      await _apiService.registerUser(
-        name: nameController.text,
-        email: emailController.text,
-        mobile: mobileController.text,
-        password: passwordController.text,
-        confirmPassword: confirmPasswordController.text,
-      );
+  // Future<void> registerUser() async {
+  //   try {
+  //     await _apiService.registerUser(
+  //       name: nameController.text,
+  //       email: emailController.text,
+  //       mobile: mobileController.text,
+  //       password: passwordController.text,
+  //       confirmPassword: confirmPasswordController.text,
+  //     );
 
-      // Navigate to login screen after successful registration
-      Navigator.pushReplacement(
-        context,
-        FadePageRoute(builder: (context) => const LoginScreen()),
-      );
-    } catch (e) {
-      // Handle errors
-      print("Error: $e");
-      showCustomSnackbar(context, 'Registration Failed! Try Again :)');
-    }
-  }
-
-  bool _validateFields() {
-    if (mobileController.text.isEmpty ||
-        emailController.text.isEmpty ||
-        nameController.text.isEmpty ||
-        passwordController.text.isEmpty ||
-        confirmPasswordController.text.isEmpty) {
-      showCustomSnackbar(context, 'Please fill in all the required fields.');
-      return false;
-    }
-
-    if (passwordController.text != confirmPasswordController.text) {
-      showCustomSnackbar(context, 'Passwords do not match.');
-      return false;
-    }
-
-    // You can add more validation checks as needed
-
-    return true;
-  }
+  //     // Navigate to login screen after successful registration
+  //     Navigator.pushReplacement(
+  //       context,
+  //       FadePageRoute(builder: (context) => const LoginScreen()),
+  //     );
+  //   } catch (e) {
+  //     // Handle errors
+  //     print("Error: $e");
+  //     showCustomSnackbar(context, 'Registration Failed! Try Again :)');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    final signupModel = context.watch<LoginSignupViewModel>();
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08),
     ));
@@ -169,9 +147,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         padding: const EdgeInsets.only(left: 0, right: 0),
                         child: Container(
                           decoration: BoxDecoration(
-                            color: themeProvider.isDarkMode
-                                ? primaryColor
-                                : Colors.white,
+                            color: Colors.white,
                             border: Border.all(
                               color: Colors.grey.withOpacity(0.6),
                               width: 1,
@@ -192,20 +168,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Mobile Number*"
                                             : "मोबाइल नंबर*",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: themeProvider.isDarkMode
-                                                ? Colors.white70
-                                                : Colors.black)),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        )),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: themeProvider.isDarkMode
-                                          ? Colors.grey.withOpacity(0.2)
-                                          : const Color(0xFFDcebfe)
-                                              .withOpacity(1),
+                                      color: const Color(0xFFDcebfe)
+                                          .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -217,7 +190,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         Expanded(
                                           flex: 6,
                                           child: TextField(
-                                            controller: mobileController,
+                                            controller:
+                                                signupModel.rMobileController,
                                             decoration: InputDecoration(
                                               hintText: 'Mobile No.',
                                               hintStyle: TextStyle(
@@ -265,20 +239,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Email*"
                                             : "ईमेल*",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: themeProvider.isDarkMode
-                                                ? Colors.white70
-                                                : Colors.black)),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        )),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: themeProvider.isDarkMode
-                                          ? Colors.grey.withOpacity(0.2)
-                                          : const Color(0xFFDcebfe)
-                                              .withOpacity(1),
+                                      color: const Color(0xFFDcebfe)
+                                          .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -290,7 +261,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         Expanded(
                                           flex: 7,
                                           child: TextField(
-                                            controller: emailController,
+                                            controller:
+                                                signupModel.emailController,
                                             decoration: InputDecoration(
                                               hintText: 'Email',
                                               hintStyle: TextStyle(
@@ -327,20 +299,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Full Name*"
                                             : "पूरा नाम*",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: themeProvider.isDarkMode
-                                                ? Colors.white70
-                                                : Colors.black)),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        )),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: themeProvider.isDarkMode
-                                          ? Colors.grey.withOpacity(0.2)
-                                          : const Color(0xFFDcebfe)
-                                              .withOpacity(1),
+                                      color: const Color(0xFFDcebfe)
+                                          .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -352,7 +321,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         Expanded(
                                           flex: 7,
                                           child: TextField(
-                                            controller: nameController,
+                                            controller:
+                                                signupModel.nameController,
                                             decoration: InputDecoration(
                                               hintText: 'Full Name',
                                               hintStyle: TextStyle(
@@ -389,21 +359,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Password*"
                                             : "पासवर्ड*",
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
-                                          color: themeProvider.isDarkMode
-                                              ? Colors.white70
-                                              : Colors.black,
+                                          color: Colors.black,
                                         )),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: themeProvider.isDarkMode
-                                          ? Colors.grey.withOpacity(0.2)
-                                          : const Color(0xFFDcebfe)
-                                              .withOpacity(1),
+                                      color: const Color(0xFFDcebfe)
+                                          .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -415,7 +381,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         Expanded(
                                           flex: 7,
                                           child: TextField(
-                                            controller: passwordController,
+                                            controller:
+                                                signupModel.passwordController,
                                             obscureText: true,
                                             decoration: InputDecoration(
                                               hintText: 'Password',
@@ -453,20 +420,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         selectedLanguage == 'English'
                                             ? "Confirm Password*"
                                             : "पासवर्ड की पुष्टि करें*",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: themeProvider.isDarkMode
-                                                ? Colors.white70
-                                                : Colors.black)),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Colors.black,
+                                        )),
                                   ),
                                   Container(
                                     height: 50,
                                     decoration: BoxDecoration(
-                                      color: themeProvider.isDarkMode
-                                          ? Colors.grey.withOpacity(0.2)
-                                          : const Color(0xFFDcebfe)
-                                              .withOpacity(1),
+                                      color: const Color(0xFFDcebfe)
+                                          .withOpacity(1),
                                       borderRadius: BorderRadius.circular(4),
                                       border: Border.all(
                                         color: Colors.grey.withOpacity(0.4),
@@ -478,8 +442,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         Expanded(
                                           flex: 7,
                                           child: TextField(
-                                            controller:
-                                                confirmPasswordController,
+                                            controller: signupModel
+                                                .confirmPasswordController,
                                             obscureText: true,
                                             decoration: InputDecoration(
                                               hintText: 'Confirm Password',
@@ -553,13 +517,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       Expanded(
                                         flex: 1,
                                         child: GestureDetector(
-                                          onTap: () {
-                                            if (!_validateFields()) {
-                                              return;
-                                            }
-
-                                            // Only call registerUser when the form is valid
-                                            registerUser();
+                                          onTap: () async {
+                                            bool isSignUp = await signupModel
+                                                .userSignUp(context);
+                                            Provider.of<AuthProvider>(context,
+                                                    listen: false)
+                                                .setLoggedInStatus(isSignUp);
                                           },
                                           child: Container(
                                             width: double.maxFinite,
@@ -572,8 +535,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             child: Center(
                                               child: Text(
                                                 selectedLanguage == 'English'
-                                                    ? 'Next'
-                                                    : "आगे",
+                                                    ? 'Register'
+                                                    : "पंजीकरण करे",
                                                 style: const TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
@@ -647,12 +610,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           selectedLanguage == 'English'
                                               ? 'Login'
                                               : "लॉग इन करें",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w600,
-                                              color: themeProvider.isDarkMode
-                                                  ? Colors.white
-                                                  : Colors.black),
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.black,
+                                          ),
                                         ),
                                       ],
                                     ),

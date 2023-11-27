@@ -5,7 +5,9 @@ import 'package:mpc/data/models/category_model.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/data/models/single_academiec_model.dart';
 import 'package:mpc/data/models/single_event_model.dart';
+import 'package:mpc/data/models/user_login_model.dart';
 import 'package:mpc/data/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ApiService {
   final String baseUrl;
@@ -164,56 +166,13 @@ class ApiService {
     }
   }
 
-  // // get programs by category
-
-  // Future<List<EventData>> getProgramsByCategory(String categoreyName) async {
-  //   try {
-  //     final response = await http.get(
-  //       Uri.parse('$baseUrl/Api/programs_by_category?program_category=$categoreyName'),
-  //       headers: {'Authorization': 'Basic $basicAuth'},
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       final List<dynamic> jsonData = json.decode(response.body);
-  //       return jsonData.map((json) => EventData.fromJson(json)).toList();
-  //     } else {
-  //       throw Exception(
-  //           'Failed to load programs. Status code: ${response.statusCode}');
-  //     }
-  //   } catch (e) {
-  //     throw Exception('Error fetching programs: $e');
-  //   }
-  // }
-  // // get programs by Academiec
-
-  // Future<List<EventData>> getProgramsByAcademiec(String academiecName) async {
-  //   try {
-  //     final response = await http.get(
-  //       Uri.parse('$baseUrl/Api/programs_by_academies?program_category=$academiecName'),
-  //       headers: {'Authorization': 'Basic $basicAuth'},
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       final List<dynamic> jsonData = json.decode(response.body);
-  //       return jsonData.map((json) => EventData.fromJson(json)).toList();
-  //     } else {
-  //       throw Exception(
-  //           'Failed to load programs. Status code: ${response.statusCode}');
-  //     }
-  //   } catch (e) {
-  //     throw Exception('Error fetching programs: $e');
-  //   }
-  // }
-
   // user profile
-  Future<UserModel> getUserProfile(int id) async {
+  Future<UserModel> getUserProfile(String id) async {
     try {
       final response = await http.get(
         Uri.parse('$baseUrl/Api/get_profile?id=$id'),
         headers: {'Authorization': 'Basic $basicAuth'},
       );
-      print(response.statusCode);
-      print(response.body);
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonData = json.decode(response.body);
         return UserModel.fromJson(jsonData);
@@ -223,6 +182,88 @@ class ApiService {
       }
     } catch (e) {
       throw Exception('Error fetching user profile: $e');
+    }
+  }
+
+//save user login state
+  void _saveLoginResponse(LoginResponse loginResponse) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('loginResponse', json.encode(loginResponse.toJson()));
+  }
+
+  // user login api
+  Future<Map<String, dynamic>> login(String mobile) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/Api/login'),
+        body: {'mobile': mobile},
+      );
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        return responseData;
+      } else {
+        throw ('Request failed with status: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw ('Error: $error');
+    }
+  }
+// OTP verify api
+
+  Future<UserModel> verifyOTP(String mobile, String otp) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/Api/verify_otp'),
+        body: {
+          'mobile': mobile,
+          'otp': otp,
+        },
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        final Map<String, dynamic> userData = responseData['user'];
+        UserModel user = UserModel.fromJson(userData);
+        LoginResponse userResponse = LoginResponse(true, user);
+        _saveLoginResponse(userResponse);
+        return user;
+      } else {
+        throw ('Request failed with status: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw ('Error: $error');
+    }
+  }
+
+  // signup api
+  Future<UserModel> signUp(String name, String email, String mobile,
+      String password, String cpassword) async {
+    try {
+      final response = await http.post(
+        Uri.parse('$baseUrl/Api/signup'),
+        body: {
+          'name': name,
+          'email': email,
+          'mobile': mobile,
+          'password': password,
+          'cpassword': cpassword,
+        },
+      );
+      print(response.statusCode);
+      print(response.body);
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> responseData = json.decode(response.body);
+        final Map<String, dynamic> userData = responseData['user'];
+        UserModel user = UserModel.fromJson(userData);
+        LoginResponse userResponse = LoginResponse(true, user);
+        _saveLoginResponse(userResponse);
+        return user;
+      } else {
+        throw ('Registration failed with status: ${response.statusCode}');
+      }
+    } catch (error) {
+      throw ('Error: $error');
     }
   }
 }

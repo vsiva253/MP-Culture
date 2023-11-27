@@ -65,6 +65,42 @@ class UserModel {
     this.status,
   });
 
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'roles': roles,
+      'name': name,
+      'email': email,
+      'mobile': mobile,
+      'sex': sex,
+      'state': state,
+      'city': city,
+      'address': address,
+      'dob': dob,
+      'age': age,
+      'username': username,
+      'password': password,
+      'cpassword': cpassword,
+      'companyname': companyname,
+      'companyownername': companyownername,
+      'companyaddress': companyaddress,
+      'logo': logo,
+      'website': website,
+      'google': google,
+      'facebook': facebook,
+      'twitter': twitter,
+      'linkedin': linkedin,
+      'instagram': instagram,
+      'profileimage': profileimage,
+      'date': date,
+      'sms_enable': smsEnable,
+      'email_enable': emailEnable,
+      'created_at': createdAt,
+      'updated_at': updatedAt,
+      'status': status,
+    };
+  }
+
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
       id: json['id'],
