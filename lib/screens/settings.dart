@@ -30,7 +30,8 @@ class _SettingsState extends State<Settings> {
   @override
   void initState() {
     super.initState();
-    context.read<UserViewModel>().fetchUserProfile(context, 3);
+    context.read<UserViewModel>().userLogin(context);
+    // context.read<UserViewModel>().fetchUserProfile(context, 3);
     // Initialize it with a default image path or any other valid initialization.
   }
 

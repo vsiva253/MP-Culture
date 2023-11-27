@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
+import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
 import 'package:mpc/widgets/homepage_widgets/peogram_list.dart';
@@ -19,7 +20,8 @@ class _LivePageState extends State<LivePage> {
   int selectedTabIndex = 2;
 
   void getData() {
-    context.read<HomeViewModel>().fetchUpComingPrograms(context);
+    context.read<HomeViewModel>().fetchOnGoingPrograms(context);
+    context.read<UserViewModel>().userLogin(context);
   }
 
   @override
@@ -31,8 +33,7 @@ class _LivePageState extends State<LivePage> {
   @override
   Widget build(BuildContext context) {
     final homeViewModel = context.watch<HomeViewModel>();
-    final isLoggedInNotifier =
-        Provider.of<AuthProvider>(context).isLoggedInNotifier;
+    final userViewModel = context.watch<UserViewModel>();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -40,64 +41,60 @@ class _LivePageState extends State<LivePage> {
         child: CustomAppBar(),
       ),
       drawer: ClipRRect(borderRadius: BorderRadius.zero, child: CustomDrawer()),
-      body: ValueListenableBuilder<bool>(
-        valueListenable: isLoggedInNotifier,
-        builder: (context, isLoggedIn, child) {
-          if (isLoggedIn) {
-            // User is logged in, display the main content
-            return Stack(
-              children: [
-                Opacity(
-                  opacity: 0.05,
-                  child: Image.asset(
-                    'assets/scaffold.jpg',
-                    width: double.maxFinite,
-                    height: double.maxFinite,
-                    fit: BoxFit.fill,
+      body: homeViewModel.isLoading
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : userViewModel.userLoginData!.isSuccess
+              ? Stack(
+                  children: [
+                    Opacity(
+                      opacity: 0.05,
+                      child: Image.asset(
+                        'assets/scaffold.jpg',
+                        width: double.maxFinite,
+                        height: double.maxFinite,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(left: 16, right: 16, top: 20),
+                      child: SingleChildScrollView(
+                        child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              EventListCard(
+                                eventList: homeViewModel.onGoingPrograms,
+                                program: "live_program".tr(),
+                                ShowProgram: false,
+                              ),
+                            ]),
+                      ),
+                    )
+                  ],
+                )
+              : Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text('Please login to view this screen'),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => UserPreferencesScreen()),
+                          );
+                        },
+                        child: Text('Login'),
+                      ),
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 16, top: 20),
-                  child: SingleChildScrollView(
-                    child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          EventListCard(
-                            eventList: homeViewModel.onGoingPrograms,
-                            program: "live_program".tr(),
-                            ShowProgram: false,
-                          ),
-                        ]),
-                  ),
-                )
-              ],
-            );
-          } else {
-            // User is not logged in, display a message prompting to log in
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('Please login to view this screen'),
-                  ElevatedButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => UserPreferencesScreen()),
-                      );
-                    },
-                    child: Text('Login'),
-                  ),
-                ],
-              ),
-            );
-          }
-        },
-      ),
     );
   }
 }

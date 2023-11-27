@@ -6,6 +6,7 @@ import 'package:mpc/screens/settings.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
+import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:provider/provider.dart';
@@ -169,6 +170,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                   TextButton(
                                     onPressed: () async {
                                       await AuthProvider().logout(context);
+                                      context.read<UserViewModel>().clearUser();
                                     },
                                     child: const Text('OK'),
                                   ),
