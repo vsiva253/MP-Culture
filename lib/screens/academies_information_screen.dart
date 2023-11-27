@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/academies_model.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
-import 'package:mpc/widgets/academies_programs.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
+import 'package:mpc/widgets/homepage_widgets/peogram_list.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -47,8 +47,8 @@ class _AcademiesInformationScreenState
                     ),
                   ),
                   Container(
-                    padding:
-                        EdgeInsets.only(top: 3, bottom: 3, left: 2, right: 2),
+                    padding: const EdgeInsets.only(
+                        top: 3, bottom: 3, left: 2, right: 2),
                     color: Color(0xFFE91E63),
                     width: MediaQuery.of(context).size.width,
                     child: const Align(
@@ -297,52 +297,54 @@ class _AcademiesInformationScreenState
                     thickness: 1,
                     color: Colors.grey.withOpacity(0.6),
                   ),
+                  EventListCard(
+                      eventList: homeViewModel.byAcaedmiecProgramList,
+                      program: "अकादमी के कार्यक्रम"),
+                  // Align(
+                  //   alignment: Alignment.centerLeft,
+                  //   child: Container(
+                  //       padding: const EdgeInsets.only(left: 16, right: 16),
+                  //       child: GradientText(
+                  //         "अकादमी के कार्यक्रम",
+                  //         style: const TextStyle(
+                  //           fontFamily: 'Hind',
+                  //           fontSize: 24.0,
+                  //           fontWeight: FontWeight.w600,
+                  //           height: 1,
+                  //         ),
+                  //         colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
+                  //       )),
+                  // ),
 
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Container(
-                        padding: const EdgeInsets.only(left: 16, right: 16),
-                        child: GradientText(
-                          "अकादमी के कार्यक्रम",
-                          style: const TextStyle(
-                            fontFamily: 'Hind',
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w600,
-                            height: 1,
-                          ),
-                          colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
-                        )),
-                  ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: 16, top: 10),
+                  //   child: SingleChildScrollView(
+                  //     scrollDirection: Axis.horizontal,
+                  //     child: Row(
+                  //       children: [
+                  //         AccademiesProgramsCards(),
+                  //         AccademiesProgramsCards(),
+                  //         AccademiesProgramsCards(),
+                  //         // Add more AccademiesProgramsCards as needed
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
 
-                  Padding(
-                    padding: EdgeInsets.only(left: 16, top: 10),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          AccademiesProgramsCards(),
-                          AccademiesProgramsCards(),
-                          AccademiesProgramsCards(),
-                          // Add more AccademiesProgramsCards as needed
-                        ],
-                      ),
-                    ),
-                  ),
-
-                  Padding(
-                    padding: EdgeInsets.only(left: 16, top: 30),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          AccademiesProgramsCards(),
-                          AccademiesProgramsCards(),
-                          AccademiesProgramsCards(),
-                          // Add more AccademiesProgramsCards as needed
-                        ],
-                      ),
-                    ),
-                  )
+                  // Padding(
+                  //   padding: EdgeInsets.only(left: 16, top: 30),
+                  //   child: SingleChildScrollView(
+                  //     scrollDirection: Axis.horizontal,
+                  //     child: Row(
+                  //       children: [
+                  //         AccademiesProgramsCards(),
+                  //         AccademiesProgramsCards(),
+                  //         AccademiesProgramsCards(),
+                  //         // Add more AccademiesProgramsCards as needed
+                  //       ],
+                  //     ),
+                  //   ),
+                  // )
                 ],
               ),
             ),

@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/academies_model.dart';
@@ -7,14 +9,16 @@ import 'package:mpc/data/models/category_model.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/data/models/single_academiec_model.dart';
 import 'package:mpc/data/models/single_event_model.dart';
+import 'package:mpc/data/models/user_login_model.dart';
 import 'package:mpc/data/services/api_service.dart';
 import 'package:mpc/widgets/custom_snackbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeViewModel with ChangeNotifier {
   final ApiService apiService;
 
   HomeViewModel({required this.apiService});
-
+  LoginResponse? _savedLoginResponse;
   List<EventData> _todayPrograms = [];
   List<EventData> _onGoingPrograms = [];
   List<EventData> _upCominPrograms = [];
@@ -47,6 +51,7 @@ class HomeViewModel with ChangeNotifier {
   String get version => _version;
   SingleAacademies get singleAacademies => _singleAcademic;
   SingleProgram get singleProgram => _singleProgram;
+  LoginResponse? get userLoginData => _savedLoginResponse;
 
   set isExpanded(bool value) {
     _isExpanded = value;
@@ -60,6 +65,22 @@ class HomeViewModel with ChangeNotifier {
         duration: const Duration(seconds: 3),
       ),
     );
+  }
+
+// check user
+  void user() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final String? savedLoginResponseString = prefs.getString('loginResponse');
+    if (savedLoginResponseString != null) {
+      final Map<String, dynamic> savedLoginResponseMap =
+          json.decode(savedLoginResponseString);
+      _savedLoginResponse = LoginResponse.fromJson(savedLoginResponseMap);
+      print(
+          "if section print ${_savedLoginResponse!.isSuccess} user ${_savedLoginResponse!.currentUser!.id.toString()}");
+    } else {
+      _savedLoginResponse = LoginResponse(false, null);
+      print("else section print ${_savedLoginResponse!.isSuccess}");
+    }
   }
 
   // about data
@@ -214,6 +235,8 @@ class HomeViewModel with ChangeNotifier {
       _singleAcademic = SingleAacademies();
       final programs = await apiService.getSingleAcademice(id);
       _singleAcademic = programs;
+      print("acadmin name ${_singleAcademic.deptName} ");
+      _fetchAcademiecPrograms(context, _singleAcademic.deptName!);
     } catch (e) {
       // Handle error
       _isLoading = false;
@@ -274,6 +297,24 @@ class HomeViewModel with ChangeNotifier {
         _isLoading = false;
         notifyListeners();
       }
+    }
+  }
+
+  // academiec programes
+  Future<void> _fetchAcademiecPrograms(
+      BuildContext context, String depName) async {
+    try {
+      _byAcademiecPrograms = [];
+      _isLoading = true;
+      final programs = await apiService.getTodayPrograms(
+          "/Api/programs_by_academies?program_academies=$depName");
+      _byAcademiecPrograms = programs;
+    } catch (e) {
+      _isLoading = false;
+      CustomSnackbar.show(context, 'Error fetching failed programs: $e');
+    } finally {
+      _isLoading = false;
+      notifyListeners();
     }
   }
 }

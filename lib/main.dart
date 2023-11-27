@@ -1,21 +1,43 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/app_localixation.dart';
 import 'package:mpc/components/theme_data.dart';
+import 'package:mpc/data/models/user_login_model.dart';
 
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
 
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
+import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
 import 'package:mpc/viewmodels/userviewmodel/user_view_model.dart';
 import 'package:mpc/widgets/bottombar.dart';
 
 import 'package:provider/provider.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mpc/data/services/api_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // Retrieve the saved LoginResponse from SharedPreferences
+  final SharedPreferences prefs = await SharedPreferences.getInstance();
+  final String? savedLoginResponseString = prefs.getString('loginResponse');
+  final LoginResponse? savedLoginResponse;
+
+  if (savedLoginResponseString != null) {
+    final Map<String, dynamic> savedLoginResponseMap =
+        json.decode(savedLoginResponseString);
+    savedLoginResponse = LoginResponse.fromJson(savedLoginResponseMap);
+    print(
+        "if section print ${savedLoginResponse.isSuccess} user ${savedLoginResponse.currentUser!.id.toString()}");
+  } else {
+    savedLoginResponse = LoginResponse(false, null);
+    print("else section print ${savedLoginResponse.isSuccess}");
+  }
+
   var api = ApiService(
     baseUrl: 'https://service.codingbandar.com',
     basicAuth: 'YWRtaW46YWRtaW4=',
@@ -41,14 +63,18 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => UserViewModel(apiService: api),
         ),
+        ChangeNotifierProvider(
+          create: (context) => LoginSignupViewModel(apiService: api),
+        ),
       ],
-      child: MyApp(),
+      child: MyApp(loginResponse: savedLoginResponse),
     ),
   );
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({Key? key});
+  final LoginResponse? loginResponse;
+  const MyApp({Key? key, required this.loginResponse});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -108,11 +134,13 @@ class _MyAppState extends State<MyApp> {
           : ValueListenableBuilder<bool>(
               valueListenable: isLoggedInNotifier,
               builder: (context, isLoggedIn, child) {
-                if (isLoggedIn) {
-                  // User is logged in, navigate to the home screen
+                if (widget.loginResponse!.isSuccess) {
+                  print(
+                      "if of run section print ${(widget.loginResponse!.isSuccess)} user ${widget.loginResponse!.currentUser!.id.toString()}");
                   return CustomBottomBar(selectedIndex: 0);
                 } else {
-                  // User is not logged in, show user preferences screen
+                  print(
+                      "else of run section print ${(widget.loginResponse!.isSuccess)}");
                   return UserPreferencesScreen();
                 }
               },

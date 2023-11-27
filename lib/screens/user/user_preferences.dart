@@ -1,12 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mpc/data/models/user_login_model.dart';
 import 'package:mpc/screens/user/login_screen.dart';
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserPreferencesScreen extends StatelessWidget {
+  void _saveLoginResponse(LoginResponse loginResponse) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('loginResponse', json.encode(loginResponse.toJson()));
+  }
+
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -346,6 +355,8 @@ class UserPreferencesScreen extends StatelessWidget {
                                   ),
                                   onPressed: () {
                                     // Cancel logic here
+                                    _saveLoginResponse(
+                                        LoginResponse(false, null));
                                     Navigator.push(
                                         context,
                                         FadePageRoute(
