@@ -34,7 +34,9 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     // context.read<UserViewModel>().fetchUserProfile(context, 3);
-    context.read<UserViewModel>().userLogin(context);
+    // context.read<UserViewModel>().userLogin(context);
+    final userViewModel = Provider.of<UserViewModel>(context, listen: false);
+    userViewModel.userLogin(context);
     _avatarImage = File(
         'assets/homepage/4.png'); // Initialize it with a default image path or any other valid initialization.
   }
@@ -70,7 +72,7 @@ class _ProfilePageState extends State<ProfilePage> {
             bottomRight: Radius.circular(0),
           ),
           child: CustomDrawer()),
-      body: userViewModel.userLoginData!.isSuccess
+      body: userViewModel.userLoginData?.isSuccess == true
           ? userViewModel.isLoading
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -121,13 +123,10 @@ class _ProfilePageState extends State<ProfilePage> {
                                     radius: 60,
                                     backgroundColor: Colors.grey[400],
                                     backgroundImage: (userData.profileimage !=
-                                            null)
-                                        ? NetworkImage(userData.profileimage!)
-                                            as ImageProvider<Object>?
-                                        : (_avatarImage != null)
-                                            ? FileImage(_avatarImage)
-                                                as ImageProvider<Object>?
-                                            : null,
+                                            "images/homepage/4.png")
+                                        ? NetworkImage(userData.profileimage ??
+                                            "images/homepage/4.png")
+                                        : null,
                                     child: _showCameraIcon
                                         ? Positioned(
                                             bottom: 0,
@@ -138,7 +137,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                               onPressed: _getImage,
                                             ),
                                           )
-                                        : null,
+                                        : Container(),
                                   ),
                                 ),
                               ),

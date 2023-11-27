@@ -133,7 +133,7 @@ class _SettingsState extends State<Settings> {
                             children: [
                               Center(
                                 child: Text(
-                                  userData.name!,
+                                  userData.name ?? 'Name',
                                   style: TextStyle(
                                     fontFamily: 'inter',
                                     fontSize: 18.0,
@@ -147,7 +147,7 @@ class _SettingsState extends State<Settings> {
                               ),
                               Center(
                                 child: Text(
-                                  userData.email!,
+                                  userData.email ?? 'Email',
                                   style: TextStyle(
                                     fontFamily: 'inter',
                                     fontSize: 14.0,
