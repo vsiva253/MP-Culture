@@ -53,19 +53,42 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  void _sendAutomaticOTP(String mobileNumber) async {
+  Future<void> _sendAutomaticOTP(String mobileNumber) async {
     setState(() {
       showOtpField = true;
     });
 
     try {
-      String response = await AuthService.sendOTP(mobileNumber);
+      await AuthService.sendOTP(mobileNumber);
       CustomSnackbar.show(context, "OTP Sent Successfully");
-      print('OTP Sent Response: $response');
     } catch (e) {
       CustomSnackbar.show(
           context, "Error sending OTP, Please Check Your Number");
       print('Error sending OTP: $e');
+    }
+  }
+
+  // ... (other functions)
+
+  Future<void> _verifyOTP(String mobileNumber, String otp) async {
+    try {
+      await AuthService.verifyOTP(mobileNumber, otp);
+      CustomSnackbar.show(context, "OTP Verified Successfully");
+
+      // Set the login status
+      Provider.of<AuthProvider>(context, listen: false).setLoggedInStatus(true);
+
+      Navigator.pushReplacement(
+        context,
+        FadePageRoute(
+          builder: (BuildContext context) => CustomBottomBar(
+            selectedIndex: 0,
+          ),
+        ),
+      );
+    } catch (e) {
+      print('Error verifying OTP: $e');
+      CustomSnackbar.show(context, "An error occurred. Please try again.");
     }
   }
 
@@ -298,32 +321,35 @@ class _LoginScreenState extends State<LoginScreen> {
                                     }
 
                                     try {
+                                      _verifyOTP(mobileController.text,
+                                          otpController.text);
+
                                       // Use the AuthProvider to verify OTP
-                                      String response =
-                                          await Provider.of<AuthProvider>(
-                                        context,
-                                        listen: false,
-                                      ).verifyOTP(
-                                        mobileController.text,
-                                        otpController.text,
-                                      );
+                                      // String response =
+                                      //     await Provider.of<AuthProvider>(
+                                      //   context,
+                                      //   listen: false,
+                                      // ).verifyOTP(
+                                      //   mobileController.text,
+                                      //   otpController.text,
+                                      // );
 
-                                      CustomSnackbar.show(context, response);
+                                      // CustomSnackbar.show(context, response);
 
-                                      // Set the login status
-                                      Provider.of<AuthProvider>(context,
-                                              listen: false)
-                                          .setLoggedInStatus(true);
+                                      // // Set the login status
+                                      // Provider.of<AuthProvider>(context,
+                                      //         listen: false)
+                                      //     .setLoggedInStatus(true);
 
-                                      Navigator.pushReplacement(
-                                        context,
-                                        FadePageRoute(
-                                          builder: (BuildContext context) =>
-                                              CustomBottomBar(
-                                            selectedIndex: 0,
-                                          ),
-                                        ),
-                                      );
+                                      // Navigator.pushReplacement(
+                                      //   context,
+                                      //   FadePageRoute(
+                                      //     builder: (BuildContext context) =>
+                                      //         CustomBottomBar(
+                                      //       selectedIndex: 0,
+                                      //     ),
+                                      //   ),
+                                      // );
                                     } catch (e) {
                                       print('Error verifying OTP: $e');
                                       CustomSnackbar.show(context,
