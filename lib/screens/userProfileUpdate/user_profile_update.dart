@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mpc/data/models/user_model.dart';
-import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
@@ -391,283 +390,61 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                                   ),
                                 ),
                                 const SizedBox(height: 15),
-                                Container(
-                                  padding: const EdgeInsets.only(
-                                      left: 16.0, right: 0.0, top: 25),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child:
-                                                      Consumer<UserPreferences>(
-                                                    builder: (context,
-                                                        userPreferences, _) {
-                                                      return Transform.scale(
-                                                        scale: 1.4,
-                                                        child: Checkbox(
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.0),
-                                                          ),
-                                                          side:
-                                                              MaterialStateBorderSide
-                                                                  .resolveWith(
-                                                            (states) =>
-                                                                const BorderSide(
-                                                                    width: 1.5,
-                                                                    color: Color(
-                                                                        0xFF6815eb)),
-                                                          ),
-                                                          activeColor:
-                                                              Colors.white,
-                                                          checkColor:
-                                                              const Color(
-                                                                  0xFF6815eb),
-                                                          value: userPreferences
-                                                              .smsSelected,
-                                                          onChanged: (value) {
-                                                            Provider.of<UserPreferences>(
-                                                                    context,
-                                                                    listen:
-                                                                        false)
-                                                                .updateSMS(
-                                                                    value ??
-                                                                        false);
-                                                          },
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 16.0),
-                                                    child: const Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text(
-                                                          'एसएमएस',
-                                                          style: TextStyle(
-                                                              fontSize: 12.0,
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600),
-                                                          maxLines: 1,
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                        ),
-                                                        Text('SMS',
-                                                            style: TextStyle(
-                                                                fontSize: 12.0,
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600)),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child:
-                                                      Consumer<UserPreferences>(
-                                                    builder: (context,
-                                                        userPreferences, _) {
-                                                      return Transform.scale(
-                                                        scale: 1.4,
-                                                        child: Checkbox(
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.0),
-                                                          ),
-                                                          side:
-                                                              MaterialStateBorderSide
-                                                                  .resolveWith(
-                                                            (states) =>
-                                                                const BorderSide(
-                                                                    width: 1.5,
-                                                                    color: Color(
-                                                                        0xFF6815eb)),
-                                                          ),
-                                                          activeColor:
-                                                              Colors.white,
-                                                          checkColor:
-                                                              const Color(
-                                                                  0xFF6815eb),
-                                                          value: userPreferences
-                                                              .emailSelected,
-                                                          onChanged: (value) {
-                                                            Provider.of<UserPreferences>(
-                                                                    context,
-                                                                    listen:
-                                                                        false)
-                                                                .updateEmail(
-                                                                    value ??
-                                                                        false);
-                                                          },
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 16.0),
-                                                    child: const Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text('ईमेल',
-                                                            style: TextStyle(
-                                                                fontSize: 12.0,
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600)),
-                                                        Text('Email',
-                                                            style: TextStyle(
-                                                                fontSize: 12.0,
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600)),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: Row(
-                                              children: [
-                                                Expanded(
-                                                  flex: 1,
-                                                  child:
-                                                      Consumer<UserPreferences>(
-                                                    builder: (context,
-                                                        userPreferences, _) {
-                                                      return Transform.scale(
-                                                        scale: 1.4,
-                                                        child: Checkbox(
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.0),
-                                                          ),
-                                                          side:
-                                                              MaterialStateBorderSide
-                                                                  .resolveWith(
-                                                            (states) =>
-                                                                const BorderSide(
-                                                                    width: 1.5,
-                                                                    color: Color(
-                                                                        0xFF6815eb)),
-                                                          ),
-                                                          activeColor:
-                                                              Colors.white,
-                                                          checkColor:
-                                                              const Color(
-                                                                  0xFF6815eb),
-                                                          value: userPreferences
-                                                              .bothSelected,
-                                                          onChanged: (value) {
-                                                            Provider.of<UserPreferences>(
-                                                                    context,
-                                                                    listen:
-                                                                        false)
-                                                                .updateBoth(
-                                                                    value ??
-                                                                        false);
-                                                          },
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
-                                                ),
-                                                Expanded(
-                                                  flex: 3,
-                                                  child: Container(
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        horizontal: 16.0),
-                                                    child: const Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Text('दोनों',
-                                                            style: TextStyle(
-                                                                fontSize: 12.0,
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600)),
-                                                        Text('Both',
-                                                            style: TextStyle(
-                                                                fontSize: 12.0,
-                                                                color:
-                                                                    Colors.grey,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600)),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      const SizedBox(height: 16.0),
-                                    ],
-                                  ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          value: userViewModel.isSmsEnalbe,
+                                          onChanged: (value) {
+                                            userViewModel.toggleSms();
+                                          },
+                                        ),
+                                        const Text('SMS Enable'),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          value: userViewModel.isEmailEnable,
+                                          onChanged: (value) {
+                                            userViewModel.toggleEmail();
+                                          },
+                                        ),
+                                        const Text('Email Enable'),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Checkbox(
+                                          value: userViewModel.isBothEnable,
+                                          onChanged: (value) {
+                                            userViewModel.bothEnable();
+                                          },
+                                        ),
+                                        const Text('both'),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(height: 23),
                                 ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context
+                                          .read<UserViewModel>()
+                                          .updateUserProfile(context,
+                                              id: widget.user.id!,
+                                              name: nameController.text,
+                                              mobile:
+                                                  phoneNumberController.text,
+                                              email: emailController.text,
+                                              address: addressController.text,
+                                              state: statusController.text,
+                                              dob: dobController.text,
+                                              sex: genderController.text);
+                                    },
                                     child: const Text("Save Update")),
                                 const SizedBox(height: 23),
                               ],

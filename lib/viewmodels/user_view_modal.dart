@@ -20,12 +20,40 @@ class UserViewModel extends ChangeNotifier {
   bool _isEmailEnable = false;
   UserModel _userModel = UserModel();
 
+  bool _isBoothEnable = false;
+
   UserModel get userModel => _userModel;
   bool get isLoading => _isLoading;
   bool get isLogin => _isLogin;
   bool get isSmsEnalbe => _isSmaEnable;
   bool get isEmailEnable => _isEmailEnable;
+  bool get isBothEnable => _isBoothEnable;
   LoginResponse? get userLoginData => _savedLoginResponse;
+
+  void bothEnable() {
+    _isBoothEnable = !_isBoothEnable;
+    notifyListeners();
+    if (isBothEnable) {
+      _isSmaEnable = true;
+      _isEmailEnable = true;
+      notifyListeners();
+      saveBothNotification(true, true);
+    } else {
+      _isSmaEnable = false;
+      _isEmailEnable = false;
+      notifyListeners();
+    }
+  }
+
+  void checkIsBothEnableOrNot() {
+    if (_isSmaEnable && _isEmailEnable) {
+      _isBoothEnable = true;
+      notifyListeners();
+    } else {
+      _isBoothEnable = false;
+      notifyListeners();
+    }
+  }
 
   void saveBothNotification(bool isSmsEnable, bool isEmailEnable) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -38,22 +66,30 @@ class UserViewModel extends ChangeNotifier {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isSmsEnable', !_isSmaEnable);
     getSmsEnable();
+    Future.delayed(const Duration(microseconds: 1), () {
+      checkIsBothEnableOrNot();
+    });
   }
 
   void toggleEmail() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isEmailEnable', !_isEmailEnable);
     getEmailEnable();
+    Future.delayed(const Duration(microseconds: 10), () {
+      checkIsBothEnableOrNot();
+    });
   }
 
   Future<void> getSmsEnable() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     _isSmaEnable = prefs.getBool('isSmsEnable') ?? false;
+    notifyListeners();
   }
 
   Future<void> getEmailEnable() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     _isEmailEnable = prefs.getBool('isEmailEnable') ?? false;
+    notifyListeners();
   }
 
   void clearUser() {
@@ -97,6 +133,53 @@ class UserViewModel extends ChangeNotifier {
     } else {
       _isLoading = false;
       notifyListeners();
+    }
+  }
+
+  int _smsEnable() {
+    if (isSmsEnalbe) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  int _emailEnable() {
+    if (isEmailEnable) {
+      return 1;
+    } else {
+      return 0;
+    }
+  }
+
+  // update profile
+
+  Future<void> updateUserProfile(
+    BuildContext context, {
+    required String id,
+    required String name,
+    String email = 'NA',
+    required String mobile,
+    String sex = 'NA',
+    String state = 'NA',
+    String address = 'NA',
+    String dob = 'NA',
+  }) async {
+    try {
+      await apiService.updateProfile(
+          id: id,
+          name: name,
+          mobile: mobile,
+          email: email,
+          sex: sex,
+          address: address,
+          state: state,
+          dob: dob,
+          smsEnable: _smsEnable(),
+          emailEnable: _emailEnable());
+      _fetchUserProfil(context);
+    } catch (e) {
+      print('Error: $e');
     }
   }
 }

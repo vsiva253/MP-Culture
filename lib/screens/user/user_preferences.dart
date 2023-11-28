@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/screens/user/login_screen.dart';
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
+import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +10,8 @@ import 'package:provider/provider.dart';
 class UserPreferencesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    final userViewModel = Provider.of<UserViewModel>(context);
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08), // Set the color of the status bar
       // Set the color of the navigation bar (if present)
     ));
@@ -112,13 +114,9 @@ class UserPreferencesScreen extends StatelessWidget {
                                               activeColor: Colors.white,
                                               checkColor:
                                                   const Color(0xFF6815eb),
-                                              value:
-                                                  userPreferences.smsSelected,
+                                              value: userViewModel.isSmsEnalbe,
                                               onChanged: (value) {
-                                                Provider.of<UserPreferences>(
-                                                        context,
-                                                        listen: false)
-                                                    .updateSMS(value ?? false);
+                                                userViewModel.toggleSms();
                                               },
                                             ),
                                           );
@@ -181,13 +179,9 @@ class UserPreferencesScreen extends StatelessWidget {
                                               checkColor:
                                                   const Color(0xFF6815eb),
                                               value:
-                                                  userPreferences.emailSelected,
+                                                  userViewModel.isEmailEnable,
                                               onChanged: (value) {
-                                                Provider.of<UserPreferences>(
-                                                        context,
-                                                        listen: false)
-                                                    .updateEmail(
-                                                        value ?? false);
+                                                userViewModel.toggleEmail();
                                               },
                                             ),
                                           );
@@ -246,13 +240,9 @@ class UserPreferencesScreen extends StatelessWidget {
                                               activeColor: Colors.white,
                                               checkColor:
                                                   const Color(0xFF6815eb),
-                                              value:
-                                                  userPreferences.bothSelected,
+                                              value: userViewModel.isBothEnable,
                                               onChanged: (value) {
-                                                Provider.of<UserPreferences>(
-                                                        context,
-                                                        listen: false)
-                                                    .updateBoth(value ?? false);
+                                                userViewModel.bothEnable();
                                               },
                                             ),
                                           );
@@ -311,9 +301,9 @@ class UserPreferencesScreen extends StatelessWidget {
                                             (states) =>
                                                 const Color(0xFFE52f08)),
                                   ),
-                                  onPressed: (userPreferences.smsSelected ||
-                                          userPreferences.emailSelected ||
-                                          userPreferences.bothSelected)
+                                  onPressed: (userViewModel.isSmsEnalbe ||
+                                          userViewModel.isEmailEnable ||
+                                          userViewModel.isBothEnable)
                                       ? () {
                                           Navigator.push(
                                               context,
