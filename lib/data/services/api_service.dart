@@ -296,7 +296,6 @@ class ApiService {
         headers: {'Authorization': 'Basic $basicAuth'},
         body: body,
       );
-
       if (response.statusCode == 200) {
         print('Profile updated successfully.');
       } else {
