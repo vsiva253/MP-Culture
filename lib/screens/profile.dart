@@ -35,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
   void initState() {
     super.initState();
     // context.read<UserViewModel>().fetchUserProfile(context, 3);
-    // context.read<UserViewModel>().userLogin(context);
+
     final userViewModel = Provider.of<UserViewModel>(context, listen: false);
     userViewModel.userLogin(context);
     _avatarImage = File(
@@ -62,6 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final userViewModel = Provider.of<UserViewModel>(context);
     var userData = userViewModel.userModel;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
@@ -171,6 +172,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                                             context) =>
                                                         ProfilUpdateView(
                                                           user: userData,
+                                                          userViewModel:
+                                                              userViewModel,
                                                         )),
                                               );
                                             },
@@ -210,7 +213,8 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => UserPreferencesScreen()),
+                          builder: (context) => UserPreferencesScreen(),
+                        ),
                       );
                     },
                     child: Text('Login'),
