@@ -34,6 +34,16 @@ class _CustomContainerState extends State<CustomContainer> {
   }
 
   @override
+  void didUpdateWidget(CustomContainer oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.initialValue != oldWidget.initialValue) {
+      setState(() {
+        isToggled = widget.initialValue;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 16, right: 16, top: 14, bottom: 0),

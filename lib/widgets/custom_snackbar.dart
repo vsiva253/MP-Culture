@@ -25,6 +25,11 @@ class CustomSnackbar {
   static void show(BuildContext context, String message) {
     OverlayEntry overlayEntry;
 
+    // Check if the context is still active before proceeding
+    if (!Navigator.of(context).userGestureInProgress) {
+      return;
+    }
+
     overlayEntry = OverlayEntry(
       builder: (BuildContext context) => Positioned(
         bottom: MediaQuery.of(context).size.height - 190,
@@ -60,6 +65,7 @@ class CustomSnackbar {
     });
   }
 }
+
 
 // class CustomSnackbar {
 //   static void show(BuildContext context, String message) {
