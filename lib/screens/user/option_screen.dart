@@ -131,7 +131,7 @@ class _OptionScreenViewState extends State<OptionScreenView> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
+                            Navigator.pushReplacement(
                                 context,
                                 FadePageRoute(
                                     builder: (context) => const LoginScreen()));

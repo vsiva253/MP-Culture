@@ -310,7 +310,7 @@ class UserPreferencesScreen extends StatelessWidget {
                                               context,
                                               FadePageRoute(
                                                   builder: (context) =>
-                                                      const RegisterScreen()));
+                                                      const LoginScreen()));
                                           // Register logic here585858
                                           print(
                                               'Registered: SMS - ${userPreferences.smsSelected}, Email - ${userPreferences.emailSelected}, Both - ${userPreferences.bothSelected}');

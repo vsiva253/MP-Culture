@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/screens/user/auth_status.dart';
+import 'package:mpc/screens/user/option_screen.dart';
 import 'package:mpc/screens/user/register_screen.dart';
 import 'package:mpc/services/auth_login.dart';
 import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
@@ -359,11 +360,11 @@ class _LoginScreenState extends State<LoginScreen> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.pushReplacement(
+                                    Navigator.push(
                                         context,
                                         FadePageRoute(
                                             builder: (BuildContext context) =>
-                                                const RegisterScreen()));
+                                                const OptionScreenView()));
                                   },
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
