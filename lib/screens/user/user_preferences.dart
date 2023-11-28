@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/screens/user/login_screen.dart';
+import 'package:mpc/screens/user/register_screen.dart';
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
@@ -309,7 +310,7 @@ class UserPreferencesScreen extends StatelessWidget {
                                               context,
                                               FadePageRoute(
                                                   builder: (context) =>
-                                                      LoginScreen()));
+                                                      const RegisterScreen()));
                                           // Register logic here585858
                                           print(
                                               'Registered: SMS - ${userPreferences.smsSelected}, Email - ${userPreferences.emailSelected}, Both - ${userPreferences.bothSelected}');

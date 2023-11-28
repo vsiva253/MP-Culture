@@ -5,6 +5,7 @@ import 'package:mpc/components/theme_data.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:mpc/data/models/user_login_model.dart';
 import 'package:mpc/screens/user/auth_status.dart';
+import 'package:mpc/screens/user/option_screen.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
 
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
@@ -131,7 +132,8 @@ class _MyAppState extends State<MyApp> {
                   return CustomBottomBar(selectedIndex: 0);
                 } else {
                   // User is not logged in, show user preferences screen
-                  return UserPreferencesScreen();
+                  // return UserPreferencesScreen();
+                  return const OptionScreenView();
                 }
               },
             ),

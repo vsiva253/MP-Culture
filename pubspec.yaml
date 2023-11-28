@@ -49,6 +49,7 @@ dependencies:
   # flutter_localization: ^0.1.14
   easy_localization: ^3.0.3
   carousel_slider: ^4.2.1
+  webview_flutter: ^4.4.2
 
 dev_dependencies:
   flutter_test:
