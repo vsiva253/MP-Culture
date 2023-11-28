@@ -38,6 +38,27 @@ class ApiService {
       throw Exception('Error fetching today\'s programs: $e');
     }
   }
+  // on going program api
+
+  Future<List<EventData>> getOnGoingPrograms(String endPoint) async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl$endPoint'),
+        headers: {'Authorization': 'Basic $basicAuth'},
+      );
+
+      if (response.statusCode == 200) {
+        final Map<String, dynamic> data = json.decode(response.body);
+        final List<dynamic> programListData = data['programs'];
+        return programListData.map((json) => EventData.fromJson(json)).toList();
+      } else {
+        throw Exception(
+            'Failed to load today\'s programs. Status code: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception('Error fetching today\'s programs: $e');
+    }
+  }
 
   // single program api
   Future<SingleProgram> getSingleProgram(String id) async {
@@ -219,7 +240,8 @@ class ApiService {
           'otp': otp,
         },
       );
-
+      print(response.statusCode);
+      print(response.body);
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final Map<String, dynamic> userData = responseData['user'];

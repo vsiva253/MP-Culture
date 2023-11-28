@@ -33,13 +33,17 @@ class LoginSignupViewModel extends ChangeNotifier {
 
   // User login click
   Future<void> loginClick(BuildContext context) async {
+    CustomSnackbar.show(context, "Sending OTP...");
+    print("call for otp");
     try {
-      print("mobile no =${mobileController.text}");
+      print(" try call for otp");
       _isLoading = true;
-      final response = await apiService.login(mobileController.text);
-      print(response);
+      await apiService.login(mobileController.text);
+      CustomSnackbar.show(context, 'OTP Sent Successfully');
       _isLoading = false;
+      print("done call for otp");
     } catch (e) {
+      print("failed call for otp");
       _isLoading = false;
       CustomSnackbar.show(context, 'Error fetching User Profile: $e');
     } finally {
@@ -50,10 +54,17 @@ class LoginSignupViewModel extends ChangeNotifier {
 
   // veryfied OTP
   Future<bool> otpCheck(BuildContext context) async {
+    print(
+        "call for verfy mobile ${mobileController.text}  otp =${otpController.text}");
+    CustomSnackbar.show(context, "Veryfing OTP...");
     try {
+      print("try call for verfy otp");
       _isLoading = true;
       await apiService.verifyOTP(mobileController.text, otpController.text);
+      CustomSnackbar.show(context, "OTP verified successfully!");
+      print("done call for verfy otp");
       _isLoading = false;
+      CustomSnackbar.show(context, 'Login Success');
       Navigator.pushReplacement(
         context,
         FadePageRoute(
@@ -64,6 +75,7 @@ class LoginSignupViewModel extends ChangeNotifier {
       );
       return true;
     } catch (e) {
+      print("failed call for verfy otp $e");
       _isLoading = false;
       CustomSnackbar.show(context, 'Error: invalid otp $e');
       return false;
@@ -103,7 +115,6 @@ class LoginSignupViewModel extends ChangeNotifier {
     return true;
   }
 
-  // user signup api
   // user signup api
   Future<bool> userSignUp(BuildContext context) async {
     if (_validateFields(context)) {
