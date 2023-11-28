@@ -18,8 +18,8 @@ class UserViewModel extends ChangeNotifier {
   bool _isLogin = false;
   bool _isSmaEnable = false;
   bool _isEmailEnable = false;
-  UserModel _userModel = UserModel();
 
+  UserModel _userModel = UserModel();
   bool _isBoothEnable = false;
 
   UserModel get userModel => _userModel;
@@ -28,6 +28,7 @@ class UserViewModel extends ChangeNotifier {
   bool get isSmsEnalbe => _isSmaEnable;
   bool get isEmailEnable => _isEmailEnable;
   bool get isBothEnable => _isBoothEnable;
+
   LoginResponse? get userLoginData => _savedLoginResponse;
 
   void bothEnable() {
@@ -63,21 +64,26 @@ class UserViewModel extends ChangeNotifier {
   }
 
   void toggleSms() async {
+    print("print");
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isSmsEnable', !_isSmaEnable);
     getSmsEnable();
     Future.delayed(const Duration(microseconds: 1), () {
       checkIsBothEnableOrNot();
     });
+
+    notifyListeners();
   }
 
   void toggleEmail() async {
+    print("print");
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isEmailEnable', !_isEmailEnable);
     getEmailEnable();
     Future.delayed(const Duration(microseconds: 10), () {
       checkIsBothEnableOrNot();
     });
+    notifyListeners();
   }
 
   Future<void> getSmsEnable() async {
@@ -106,8 +112,8 @@ class UserViewModel extends ChangeNotifier {
       _savedLoginResponse = LoginResponse.fromJson(savedLoginResponseMap);
       notifyListeners();
       _isLogin = true;
-      Future.delayed(const Duration(seconds: 3), () {
-        _fetchUserProfil(context);
+      Future.delayed(const Duration(seconds: 1), () {
+        fetchUserProfil(context);
       });
     } else {
       _isLoading = false;
@@ -117,23 +123,28 @@ class UserViewModel extends ChangeNotifier {
   }
 
   // User profile data
-  Future<void> _fetchUserProfil(BuildContext context) async {
+  Future<void> fetchUserProfil(BuildContext context) async {
     if (!(_userModel.id != null)) {
       try {
         _isLoading = true;
         final programs = await apiService
             .getUserProfile(_savedLoginResponse!.currentUser!.id!);
         _userModel = programs;
+
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setBool(
+            'isSmsEnable', _userModel.smsEnable == '1' ? true : false);
+        prefs.setBool(
+            'isEmailEnable', _userModel.emailEnable == '1' ? true : false);
       } catch (e) {
         CustomSnackbar.show(context, 'Error fetching User Profile: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
       }
-    } else {
-      _isLoading = false;
-      notifyListeners();
     }
+    _isLoading = false;
+    notifyListeners();
   }
 
   int _smsEnable() {
@@ -177,7 +188,9 @@ class UserViewModel extends ChangeNotifier {
           dob: dob,
           smsEnable: _smsEnable(),
           emailEnable: _emailEnable());
-      _fetchUserProfil(context);
+      clearUser();
+      fetchUserProfil(context);
+      Navigator.pop(context);
     } catch (e) {
       print('Error: $e');
     }
