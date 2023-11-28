@@ -16,12 +16,45 @@ class UserViewModel extends ChangeNotifier {
   LoginResponse? _savedLoginResponse;
   bool _isLoading = false;
   bool _isLogin = false;
+  bool _isSmaEnable = false;
+  bool _isEmailEnable = false;
   UserModel _userModel = UserModel();
 
   UserModel get userModel => _userModel;
   bool get isLoading => _isLoading;
   bool get isLogin => _isLogin;
+  bool get isSmsEnalbe => _isSmaEnable;
+  bool get isEmailEnable => _isEmailEnable;
   LoginResponse? get userLoginData => _savedLoginResponse;
+
+  void saveBothNotification(bool isSmsEnable, bool isEmailEnable) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    // Save the boolean values to SharedPreferences
+    prefs.setBool('isSmsEnable', isSmsEnable);
+    prefs.setBool('isEmailEnable', isEmailEnable);
+  }
+
+  void toggleSms() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isSmsEnable', !_isSmaEnable);
+    getSmsEnable();
+  }
+
+  void toggleEmail() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('isEmailEnable', !_isEmailEnable);
+    getEmailEnable();
+  }
+
+  Future<void> getSmsEnable() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    _isSmaEnable = prefs.getBool('isSmsEnable') ?? false;
+  }
+
+  Future<void> getEmailEnable() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    _isEmailEnable = prefs.getBool('isEmailEnable') ?? false;
+  }
 
   void clearUser() {
     _userModel = UserModel();

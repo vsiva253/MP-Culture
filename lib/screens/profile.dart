@@ -2,9 +2,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
+import 'package:mpc/screens/userProfileUpdate/user_profile_update.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
+import 'package:mpc/widgets/animation_page_route.dart';
 
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
@@ -77,102 +78,128 @@ class _ProfilePageState extends State<ProfilePage> {
               ? const Center(
                   child: CircularProgressIndicator(),
                 )
-              : Stack(
-                  children: [
-                    Opacity(
-                      opacity: 0.05,
-                      child: Image.asset(
-                        'assets/scaffold.jpg',
-                        width: double.maxFinite,
-                        height: double.infinity,
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                    SingleChildScrollView(
-                      child: Container(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 30),
-                              child: Center(
-                                child: GradientText(
-                                  'Account',
-                                  style: const TextStyle(
-                                      fontFamily: 'Hind',
-                                      fontSize: 22.0,
-                                      fontWeight: FontWeight.w600,
-                                      height: 1),
-                                  colors: const [
-                                    Color(0xFFC33764),
-                                    Color(0xFF1D2671),
-                                  ],
+              : userData.id == null
+                  ? const Center(
+                      child: Text("User Data Loading..."),
+                    )
+                  : Stack(
+                      children: [
+                        Opacity(
+                          opacity: 0.05,
+                          child: Image.asset(
+                            'assets/scaffold.jpg',
+                            width: double.maxFinite,
+                            height: double.infinity,
+                            fit: BoxFit.fill,
+                          ),
+                        ),
+                        SingleChildScrollView(
+                          child: Container(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                const SizedBox(
+                                  height: 20,
                                 ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 25),
-                              child: SizedBox(
-                                height: 100,
-                                width: 100,
-                                child: Center(
-                                  child: CircleAvatar(
-                                    radius: 60,
-                                    backgroundColor: Colors.grey[400],
-                                    backgroundImage: (userData.profileimage !=
-                                            "images/homepage/4.png")
-                                        ? NetworkImage(userData.profileimage ??
-                                            "images/homepage/4.png")
-                                        : null,
-                                    child: _showCameraIcon
-                                        ? Positioned(
-                                            bottom: 0,
-                                            right: 0,
-                                            child: IconButton(
-                                              icon:
-                                                  const Icon(Icons.camera_alt),
-                                              onPressed: _getImage,
-                                            ),
-                                          )
-                                        : Container(),
+                                Padding(
+                                  padding: EdgeInsets.only(top: 30),
+                                  child: Center(
+                                    child: GradientText(
+                                      'Account',
+                                      style: const TextStyle(
+                                          fontFamily: 'Hind',
+                                          fontSize: 22.0,
+                                          fontWeight: FontWeight.w600,
+                                          height: 1),
+                                      colors: const [
+                                        Color(0xFFC33764),
+                                        Color(0xFF1D2671),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 25),
+                                  child: SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: Center(
+                                      child: CircleAvatar(
+                                        radius: 60,
+                                        backgroundColor: Colors.grey[400],
+                                        backgroundImage: (userData
+                                                    .profileimage !=
+                                                null)
+                                            ? NetworkImage(
+                                                    userData.profileimage!)
+                                                as ImageProvider<Object>?
+                                            : (_avatarImage != null)
+                                                ? FileImage(_avatarImage)
+                                                    as ImageProvider<Object>?
+                                                : null,
+                                        child: _showCameraIcon
+                                            ? Positioned(
+                                                bottom: 0,
+                                                right: 0,
+                                                child: IconButton(
+                                                  icon: const Icon(
+                                                      Icons.camera_alt),
+                                                  onPressed: _getImage,
+                                                ),
+                                              )
+                                            : null,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 16, right: 16),
+                                  child: Column(
+                                    children: [
+                                      Align(
+                                          alignment: Alignment.centerRight,
+                                          child: TextButton(
+                                            onPressed: () {
+                                              Navigator.push(
+                                                context,
+                                                FadePageRoute(
+                                                    builder: (BuildContext
+                                                            context) =>
+                                                        ProfilUpdateView(
+                                                          user: userData,
+                                                        )),
+                                              );
+                                            },
+                                            child: const Text("Edit Profile"),
+                                          )),
+                                      const SizedBox(height: 10),
+                                      WidgetsClass.TextW(
+                                          "Full Name", userData.name ?? "NA"),
+                                      WidgetsClass.TextW("Mobile Number",
+                                          userData.mobile ?? "NA"),
+                                      WidgetsClass.TextW(
+                                          "Email", userData.email ?? "NA"),
+                                      WidgetsClass.TextW(
+                                          "Address", userData.address ?? "NA"),
+                                      WidgetsClass.TextW(
+                                          "State", userData.state ?? "NA"),
+                                      WidgetsClass.TextW(
+                                          "Gender", userData.sex ?? "NA"),
+                                      WidgetsClass.TextW(
+                                          "DOB", userData.dob ?? "NA"),
+                                    ],
+                                  ),
+                                )
+                              ],
                             ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 16, right: 16),
-                              child: Column(
-                                children: [
-                                  WidgetsClass.TextW(
-                                      "Full Name", userData.name ?? "NA"),
-                                  WidgetsClass.TextW(
-                                      "Mobile Number", userData.mobile ?? "NA"),
-                                  WidgetsClass.TextW(
-                                      "Email", userData.email ?? "NA"),
-                                  WidgetsClass.TextW(
-                                      "Address", userData.address ?? "NA"),
-                                  WidgetsClass.TextW(
-                                      "State", userData.state ?? "NA"),
-                                  WidgetsClass.TextW(
-                                      "Gender", userData.sex ?? "NA"),
-                                  WidgetsClass.TextW(
-                                      "DOB", userData.dob ?? "NA"),
-                                ],
-                              ),
-                            )
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
-                )
+                      ],
+                    )
           : Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

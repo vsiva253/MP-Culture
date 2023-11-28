@@ -31,6 +31,8 @@ class _SettingsState extends State<Settings> {
   void initState() {
     super.initState();
     context.read<UserViewModel>().userLogin(context);
+    context.read<UserViewModel>().getEmailEnable();
+    context.read<UserViewModel>().getSmsEnable();
     // context.read<UserViewModel>().fetchUserProfile(context, 3);
     // Initialize it with a default image path or any other valid initialization.
   }
@@ -194,12 +196,13 @@ class _SettingsState extends State<Settings> {
                     onArrowPressed: () {
                       print('Arrow for Item 1 pressed');
                     },
-                    initialValue: toggledStates['Email Notifications'] ?? false,
                     onToggleChanged: (value) {
-                      setState(() {
-                        toggledStates['Email Notifications'] = value;
-                      });
+                      // setState(() {
+                      //   toggledStates['Email Notifications'] = value;
+                      // });
+                      userViewModel.toggleEmail();
                     },
+                    initialValue: userViewModel.isEmailEnable,
                   ),
                 ),
                 CustomContainer(
@@ -208,12 +211,13 @@ class _SettingsState extends State<Settings> {
                   onArrowPressed: () {
                     print('Arrow for Item 1 pressed');
                   },
-                  initialValue: toggledStates['SMS Notifications'] ?? false,
                   onToggleChanged: (value) {
-                    setState(() {
-                      toggledStates['SMS Notifications'] = value;
-                    });
+                    // setState(() {
+                    //   toggledStates['SMS Notifications'] = value;
+                    // });
+                    userViewModel.toggleSms();
                   },
+                  initialValue: userViewModel.isSmsEnalbe,
                 ),
                 CustomContainer(
                   text: 'dark_mode'.tr(),
