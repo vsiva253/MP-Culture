@@ -249,9 +249,6 @@ class ApiService {
           'cpassword': cpassword,
         },
       );
-      print(response.statusCode);
-      print(response.body);
-
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final Map<String, dynamic> userData = responseData['user'];
@@ -264,6 +261,51 @@ class ApiService {
       }
     } catch (error) {
       throw ('Error: $error');
+    }
+  }
+
+  // update profile
+  Future<void> updateProfile({
+    required String id,
+    required String name,
+    String email = 'NA',
+    required String mobile,
+    String sex = 'NA',
+    String state = 'NA',
+    String address = 'NA',
+    String dob = 'NA',
+    int smsEnable = 0,
+    int emailEnable = 0,
+  }) async {
+    try {
+      final Map<String, String> body = {
+        'id': id,
+        'name': name,
+        'email': email,
+        'mobile': mobile,
+        'sex': sex,
+        'state': state,
+        'address': address,
+        'dob': dob,
+        'sms_enable': smsEnable.toString(),
+        'email_enable': emailEnable.toString(),
+      };
+
+      final response = await http.post(
+        Uri.parse('$baseUrl/Api/profile_update'),
+        headers: {'Authorization': 'Basic $basicAuth'},
+        body: body,
+      );
+
+      if (response.statusCode == 200) {
+        print('Profile updated successfully.');
+      } else {
+        print('Failed to update profile. Status code: ${response.statusCode}');
+        // Handle error here
+      }
+    } catch (e) {
+      print('Error updating profile: $e');
+      // Handle error here
     }
   }
 }
