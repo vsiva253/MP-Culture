@@ -45,7 +45,7 @@ class _LivePageState extends State<LivePage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : userViewModel.userLoginData!.isSuccess
+          : userViewModel.userLoginData?.isSuccess == true
               ? Stack(
                   children: [
                     Opacity(

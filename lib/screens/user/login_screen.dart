@@ -54,7 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
     super.dispose();
   }
 
-  Future<void> _sendAutomaticOTP(String mobileNumber) async {
+  Future<void> _sendAutomaticOTP(
+      String mobileNumber, BuildContext context) async {
     setState(() {
       showOtpField = true;
     });
@@ -206,7 +207,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           onChanged: (value) {
                                             // Check if the entered number is 10 digits, then automatically send OTP
                                             if (value.length == 10) {
-                                              _sendAutomaticOTP(value);
+                                              _sendAutomaticOTP(value, context);
                                             }
                                           },
                                         ),

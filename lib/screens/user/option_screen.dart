@@ -23,8 +23,17 @@ class _OptionScreenViewState extends State<OptionScreenView> {
       height: 70,
       width: MediaQuery.of(context).size.width / 2 * 1.5,
       decoration: BoxDecoration(
-          color: const Color(0xFFE52f08),
-          borderRadius: BorderRadius.circular(5)),
+        color: const Color(0xFFE52f08),
+        borderRadius: BorderRadius.circular(5),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: const Offset(0, 3),
+          ),
+        ],
+      ),
       child: Center(
           child: Text(
         btnName,
