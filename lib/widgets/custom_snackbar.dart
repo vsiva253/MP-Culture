@@ -26,9 +26,6 @@ class CustomSnackbar {
     OverlayEntry overlayEntry;
 
     // Check if the context is still active before proceeding
-    if (!Navigator.of(context).userGestureInProgress) {
-      return;
-    }
 
     overlayEntry = OverlayEntry(
       builder: (BuildContext context) => Positioned(
