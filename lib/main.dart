@@ -132,8 +132,7 @@ class _MyAppState extends State<MyApp> {
                   return CustomBottomBar(selectedIndex: 0);
                 } else {
                   // User is not logged in, show user preferences screen
-                  // return UserPreferencesScreen();
-                  return const OptionScreenView();
+                  return UserPreferencesScreen();
                 }
               },
             ),

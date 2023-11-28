@@ -54,15 +54,11 @@ class LoginSignupViewModel extends ChangeNotifier {
 
   // veryfied OTP
   Future<bool> otpCheck(BuildContext context) async {
-    print(
-        "call for verfy mobile ${mobileController.text}  otp =${otpController.text}");
-    CustomSnackbar.show(context, "Veryfing OTP...");
+    CustomSnackbar.show(context, "OTP Veryfing....");
     try {
-      print("try call for verfy otp");
       _isLoading = true;
       await apiService.verifyOTP(mobileController.text, otpController.text);
       CustomSnackbar.show(context, "OTP verified successfully!");
-      print("done call for verfy otp");
       _isLoading = false;
       CustomSnackbar.show(context, 'Login Success');
       Navigator.pushReplacement(

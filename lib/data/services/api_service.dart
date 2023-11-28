@@ -38,27 +38,6 @@ class ApiService {
       throw Exception('Error fetching today\'s programs: $e');
     }
   }
-  // on going program api
-
-  Future<List<EventData>> getOnGoingPrograms(String endPoint) async {
-    try {
-      final response = await http.get(
-        Uri.parse('$baseUrl$endPoint'),
-        headers: {'Authorization': 'Basic $basicAuth'},
-      );
-
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> data = json.decode(response.body);
-        final List<dynamic> programListData = data['programs'];
-        return programListData.map((json) => EventData.fromJson(json)).toList();
-      } else {
-        throw Exception(
-            'Failed to load today\'s programs. Status code: ${response.statusCode}');
-      }
-    } catch (e) {
-      throw Exception('Error fetching today\'s programs: $e');
-    }
-  }
 
   // single program api
   Future<SingleProgram> getSingleProgram(String id) async {
@@ -217,6 +196,7 @@ class ApiService {
     try {
       final response = await http.post(
         Uri.parse('$baseUrl/Api/login'),
+        headers: {'Authorization': 'Basic $basicAuth'},
         body: {'mobile': mobile},
       );
       if (response.statusCode == 200) {
@@ -232,9 +212,11 @@ class ApiService {
 // OTP verify api
 
   Future<UserModel> verifyOTP(String mobile, String otp) async {
+    print("api mobile no $mobile otp $otp");
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/Api/verify_otp'),
+        Uri.parse('https://service.codingbandar.com/Api/verify_otp'),
+        headers: {'Authorization': 'Basic $basicAuth'},
         body: {
           'mobile': mobile,
           'otp': otp,
