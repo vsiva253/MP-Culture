@@ -104,6 +104,7 @@ class LoginSignupViewModel extends ChangeNotifier {
   }
 
   // user signup api
+  // user signup api
   Future<bool> userSignUp(BuildContext context) async {
     if (_validateFields(context)) {
       try {
@@ -126,15 +127,16 @@ class LoginSignupViewModel extends ChangeNotifier {
         return true;
       } catch (e) {
         _isLoading = false;
-
-        CustomSnackbar.show(context, 'Error: Failed to Registr $e');
+        CustomSnackbar.show(context, 'Error: Failed to Register $e');
         return false;
       } finally {
         _isLoading = false;
         notifyListeners();
       }
     } else {
-      throw "Every field";
+      // Handle validation error here
+      CustomSnackbar.show(context, 'Please fill in all the required fields.');
+      return false;
     }
   }
 }
