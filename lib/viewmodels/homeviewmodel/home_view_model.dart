@@ -104,7 +104,7 @@ class HomeViewModel with ChangeNotifier {
       try {
         _isLoading = true;
         final programs =
-            await apiService.getOnGoingPrograms("/Api/ongoing_programme");
+            await apiService.getTodayPrograms("/Api/ongoing_programme");
         _onGoingPrograms = programs;
       } catch (e) {
         // Handle error

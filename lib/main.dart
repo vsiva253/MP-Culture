@@ -139,8 +139,6 @@ class _MyAppState extends State<MyApp> {
                       ),
                       child: CustomBottomBar(selectedIndex: 0));
                 } else {
-                  // User is not logged in, show user preferences screen
-                  // return UserPreferencesScreen();
                   return UpgradeAlert(
                       upgrader: Upgrader(
                         canDismissDialog: false,
