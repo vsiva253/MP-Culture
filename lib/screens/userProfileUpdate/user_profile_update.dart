@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mpc/data/models/user_model.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
@@ -165,7 +166,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                             controller: nameController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Full Name',
+                              labelText: StringValue.fullName,
                               fillColor: Colors.grey[400],
                               hintText: 'Enter your full name here',
                               hintStyle: const TextStyle(
@@ -197,7 +198,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                             controller: phoneNumberController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Mobile Number',
+                              labelText: StringValue.mobileNo,
                               hintText: 'Enter your mobile number',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -228,7 +229,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                             controller: emailController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Email',
+                              labelText: StringValue.email,
                               hintText: 'Enter your email',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -259,7 +260,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                             controller: addressController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Address',
+                              labelText: StringValue.address,
                               hintText: 'Enter your address',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -290,7 +291,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                             controller: statusController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'State',
+                              labelText: StringValue.state,
                               hintText: 'Enter your State',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -321,7 +322,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                             controller: genderController,
                             style: const TextStyle(fontSize: 18),
                             decoration: InputDecoration(
-                              labelText: 'Gender',
+                              labelText: StringValue.gender,
                               hintText: 'Enter your gender',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -361,7 +362,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                                   _selectDate();
                                 },
                               ),
-                              labelText: 'DOB',
+                              labelText: StringValue.dob,
                               hintText: '12/05/1990',
                               hintStyle: const TextStyle(
                                 fontSize: 18,
@@ -386,49 +387,54 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                             ),
                           ),
                           const SizedBox(height: 15),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: widget.userViewModel.isSmsEnalbe,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        widget.userViewModel.toggleSms();
-                                      });
-                                    },
-                                  ),
-                                  const Text('SMS Enable'),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: widget.userViewModel.isEmailEnable,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        widget.userViewModel.toggleEmail();
-                                      });
-                                    },
-                                  ),
-                                  const Text('Email Enable'),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Checkbox(
-                                    value: widget.userViewModel.isBothEnable,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        widget.userViewModel.bothEnable();
-                                      });
-                                    },
-                                  ),
-                                  const Text('both'),
-                                ],
-                              ),
-                            ],
+                          SingleChildScrollView(
+                            scrollDirection: Axis.horizontal,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: widget.userViewModel.isSmsEnalbe,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          widget.userViewModel.toggleSms();
+                                        });
+                                      },
+                                    ),
+                                    Text(StringValue.smsEnable),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: widget.userViewModel.isEmailEnable,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          widget.userViewModel.toggleEmail();
+                                        });
+                                      },
+                                    ),
+                                    Text(
+                                      StringValue.emailEnable,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Checkbox(
+                                      value: widget.userViewModel.isBothEnable,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          widget.userViewModel.bothEnable();
+                                        });
+                                      },
+                                    ),
+                                    const Text('both'),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
                           const SizedBox(height: 23),
                           ElevatedButton(

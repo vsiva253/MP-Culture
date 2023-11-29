@@ -1,0 +1,44 @@
+import 'package:easy_localization/easy_localization.dart';
+
+class StringValue {
+  static final String welcome = "welcome".tr();
+  static final String fullName = "full_name".tr();
+  static final String mobileNo = "mobile_number".tr();
+  static final String email = "email".tr();
+  static final String address = "address".tr();
+  static final String state = "state".tr();
+  static final String gender = "gender".tr();
+  static final String dob = "date_of_birth".tr();
+  static final String about = "about_us".tr();
+  static final String date = "date".tr();
+  static final String smsEnable = "sms_notifications".tr();
+  static final String emailEnable = "email_notifications".tr();
+  static final String english = "english".tr();
+  static final String editProfile = "edit_profile".tr();
+  static final String dartMode = "dark_mode".tr();
+  static final String password = "password".tr();
+  static final String privacy = "privacy".tr();
+  static final String support = "support".tr();
+  static final String setting = "settings".tr();
+  static final String programName = "programme_name".tr();
+  static final String time = "time".tr();
+  static final String organize = "organizer".tr();
+  static final String aboutThisProgram = "about_the_programme".tr();
+  static final String artistName = "artist_name".tr();
+  static final String entry = "entry".tr();
+  static final String artCategory = "art_category".tr();
+  static final String artistInfo = "artist_introduction".tr();
+  static final String gallery = "gallery".tr();
+  static final String pogramCategory = "program_category".tr();
+  static final String liveProgram = "live_program".tr();
+  static final String todayProgram = "today_program".tr();
+  static final String upcomingProgram = "upcoming_program".tr();
+  static final String archivedProgram = "archived_program".tr();
+  static final String artsCategory = "arts_categories".tr();
+  static final String logOut = "log_out".tr();
+  static final String logIn = "login".tr();
+  static final String haveAccount = "have_account".tr();
+  static final String signUp = "sign_up".tr();
+  static final String enterMobileNo = "enter_mobile_no".tr();
+  static final String enterOtp = "enter_otp".tr();
+}

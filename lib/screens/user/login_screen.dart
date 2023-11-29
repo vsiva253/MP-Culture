@@ -3,8 +3,8 @@ import 'package:flutter/services.dart';
 import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/option_screen.dart';
-import 'package:mpc/screens/user/register_screen.dart';
 import 'package:mpc/services/auth_login.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
@@ -66,27 +66,27 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // ... (other functions)
 
-  Future<void> _verifyOTP(String mobileNumber, String otp) async {
-    try {
-      await AuthService.verifyOTP(mobileNumber, otp);
-      CustomSnackbar.show(context, "OTP Verified Successfully");
+  // Future<void> _verifyOTP(String mobileNumber, String otp) async {
+  //   try {
+  //     await AuthService.verifyOTP(mobileNumber, otp);
+  //     CustomSnackbar.show(context, "OTP Verified Successfully");
 
-      // Set the login status
-      Provider.of<AuthProvider>(context, listen: false).setLoggedInStatus(true);
+  //     // Set the login status
+  //     Provider.of<AuthProvider>(context, listen: false).setLoggedInStatus(true);
 
-      Navigator.pushReplacement(
-        context,
-        FadePageRoute(
-          builder: (BuildContext context) => CustomBottomBar(
-            selectedIndex: 0,
-          ),
-        ),
-      );
-    } catch (e) {
-      print('Error verifying OTP: $e');
-      CustomSnackbar.show(context, "An error occurred. Please try again.");
-    }
-  }
+  //     Navigator.pushReplacement(
+  //       context,
+  //       FadePageRoute(
+  //         builder: (BuildContext context) => CustomBottomBar(
+  //           selectedIndex: 0,
+  //         ),
+  //       ),
+  //     );
+  //   } catch (e) {
+  //     print('Error verifying OTP: $e');
+  //     CustomSnackbar.show(context, "An error occurred. Please try again.");
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -127,10 +127,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const SizedBox(
                       height: 20,
                     ),
-                    const Center(
+                    Center(
                       child: Text(
-                        'आपका स्वागत है',
-                        style: TextStyle(
+                        StringValue.welcome,
+                        style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w600,
                           color: Colors.black,
@@ -184,7 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                           controller:
                                               loginModel.mobileController,
                                           decoration: InputDecoration(
-                                            hintText: 'Mobile No.',
+                                            hintText: StringValue.mobileNo,
                                             hintStyle: TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.w500,
@@ -253,7 +253,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                             controller:
                                                 loginModel.otpController,
                                             decoration: InputDecoration(
-                                              hintText: 'Enter Your OTP',
+                                              hintText: StringValue.enterOtp,
                                               hintStyle: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
@@ -305,7 +305,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     if (loginModel
                                         .mobileController.text.isEmpty) {
                                       CustomSnackbar.show(
-                                          context, "Please enter mobile no.");
+                                          context, StringValue.enterMobileNo);
                                       FocusScope.of(context).requestFocus(
                                           mobileFocusNode); // Set focus to mobile field
                                       return;
@@ -314,7 +314,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     if (showOtpField &&
                                         loginModel.otpController.text.isEmpty) {
                                       CustomSnackbar.show(
-                                          context, "Please enter OTP");
+                                          context, StringValue.enterOtp);
                                       FocusScope.of(context).requestFocus(
                                           otpFocusNode); // Set focus to OTP field
                                       return;
@@ -350,10 +350,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         //       122.32 * 3.1415927 / 180),
                                         // ),
                                         ),
-                                    child: const Center(
+                                    child: Center(
                                       child: Text(
-                                        'लॉग इन करें',
-                                        style: TextStyle(
+                                        StringValue.logIn,
+                                        style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w600,
                                           color: Colors.white,
@@ -377,7 +377,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        'अगर आपके पास खाता नहीं है?',
+                                        StringValue.haveAccount,
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
@@ -390,7 +390,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                         width: 5,
                                       ),
                                       Text(
-                                        'साइन अप करें',
+                                        StringValue.signUp,
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,

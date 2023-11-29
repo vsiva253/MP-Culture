@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
 import 'package:mpc/screens/userProfileUpdate/user_profile_update.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 
@@ -177,23 +179,23 @@ class _ProfilePageState extends State<ProfilePage> {
                                                         )),
                                               );
                                             },
-                                            child: const Text("Edit Profile"),
+                                            child: Text("edit_profile".tr()),
                                           )),
                                       const SizedBox(height: 10),
-                                      WidgetsClass.TextW(
-                                          "Full Name", userData.name ?? "NA"),
-                                      WidgetsClass.TextW("Mobile Number",
+                                      WidgetsClass.TextW(StringValue.fullName,
+                                          userData.name ?? "NA"),
+                                      WidgetsClass.TextW(StringValue.mobileNo,
                                           userData.mobile ?? "NA"),
-                                      WidgetsClass.TextW(
-                                          "Email", userData.email ?? "NA"),
-                                      WidgetsClass.TextW(
-                                          "Address", userData.address ?? "NA"),
-                                      WidgetsClass.TextW(
-                                          "State", userData.state ?? "NA"),
-                                      WidgetsClass.TextW(
-                                          "Gender", userData.sex ?? "NA"),
-                                      WidgetsClass.TextW(
-                                          "DOB", userData.dob ?? "NA"),
+                                      WidgetsClass.TextW(StringValue.email,
+                                          userData.email ?? "NA"),
+                                      WidgetsClass.TextW(StringValue.address,
+                                          userData.address ?? "NA"),
+                                      WidgetsClass.TextW(StringValue.state,
+                                          userData.state ?? "NA"),
+                                      WidgetsClass.TextW(StringValue.dob,
+                                          userData.sex ?? "NA"),
+                                      WidgetsClass.TextW("date_of_birth".tr(),
+                                          userData.dob ?? "NA"),
                                     ],
                                   ),
                                 )
