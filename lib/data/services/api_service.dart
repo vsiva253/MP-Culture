@@ -195,10 +195,11 @@ class ApiService {
   Future<Map<String, dynamic>> login(String mobile) async {
     try {
       final response = await http.post(
-        Uri.parse('$baseUrl/Api/login'),
-        headers: {'Authorization': 'Basic $basicAuth'},
+        Uri.parse('https://service.codingbandar.com/Api/login'),
         body: {'mobile': mobile},
       );
+      print("status code ${response.statusCode}");
+      print("body ${response.body}");
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
         return responseData;
@@ -209,33 +210,38 @@ class ApiService {
       throw ('Error: $error');
     }
   }
-// OTP verify api
 
-  Future<UserModel> verifyOTP(String mobile, String otp) async {
-    print("api mobile no $mobile otp $otp");
-    try {
-      final response = await http.post(
-        Uri.parse('https://service.codingbandar.com/Api/verify_otp'),
-        headers: {'Authorization': 'Basic $basicAuth'},
-        body: {
-          'mobile': mobile,
-          'otp': otp,
-        },
-      );
-      print(response.statusCode);
-      print(response.body);
-      if (response.statusCode == 200) {
-        final Map<String, dynamic> responseData = json.decode(response.body);
+// OTP verify api
+  Future<UserModel?> verifyOTP(String mobile, String otp) async {
+    final response = await http.post(
+      Uri.parse('$baseUrl/Api/verify_otp'),
+      body: {
+        'mobile': mobile,
+        'otp': otp,
+      },
+    );
+    print("otp check body ${response.body}");
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = json.decode(response.body);
+
+      if (responseData['user'] != null) {
         final Map<String, dynamic> userData = responseData['user'];
-        UserModel user = UserModel.fromJson(userData);
-        LoginResponse userResponse = LoginResponse(true, user);
-        _saveLoginResponse(userResponse);
-        return user;
+
+        if (responseData['register'] == 1) {
+          UserModel user = UserModel.fromJson(userData);
+          LoginResponse userResponse = LoginResponse(true, user);
+          _saveLoginResponse(userResponse);
+          return user;
+        } else {
+          return null;
+        }
       } else {
-        throw ('Request failed with status: ${response.statusCode}');
+        // Handle the case when 'user' is null
+        return null;
       }
-    } catch (error) {
-      throw ('Error: $error');
+    } else {
+      throw ('Request failed with status: ${response.statusCode}');
     }
   }
 

@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
+import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
 import 'package:mpc/widgets/homepage_widgets/categories.dart';
@@ -28,6 +29,7 @@ class _HomePageState extends State<HomePage> {
     context.read<HomeViewModel>().fetchAboutUs(context);
     context.read<HomeViewModel>().fetchSliderImages(context);
     context.read<HomeViewModel>().fetchAllCategories(context);
+    context.read<UserViewModel>().userLogin(context);
   }
 
   @override
@@ -39,6 +41,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final homeViewModel = context.watch<HomeViewModel>();
+    final userViewModel = context.watch<UserViewModel>();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
@@ -90,7 +93,15 @@ class _HomePageState extends State<HomePage> {
                               homeViewModel.category.isNotEmpty
                                   ? RowWithCards(
                                       categroy: homeViewModel.category)
-                                  : const Text("Retry"),
+                                  : GestureDetector(
+                                      onTap: getData,
+                                      child: const Text(
+                                        "Retry",
+                                        style: TextStyle(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
                               const SizedBox(
                                 height: 20,
                               ),
@@ -170,32 +181,36 @@ class _HomePageState extends State<HomePage> {
 
                               EventListCard(
                                 eventList: homeViewModel.todayPrograms,
-                                program: "Today Program",
-                                ShowProgram: true,
+                                program: "today_program".tr(),
+                                ShowProgram: false,
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
                               EventListCard(
                                 eventList: homeViewModel.onGoingPrograms,
-                                program: "OnGoing Program",
-                                ShowProgram: true,
+                                program: "live_program".tr(),
+                                ShowProgram:
+                                    userViewModel.userLoginData?.isSuccess ==
+                                            true
+                                        ? false
+                                        : true,
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
                               EventListCard(
                                 eventList: homeViewModel.upConingPrograms,
-                                program: "UpComing Program",
-                                ShowProgram: true,
+                                program: "upcoming_program".tr(),
+                                ShowProgram: false,
                               ),
                               const SizedBox(
                                 height: 20,
                               ),
                               EventListCard(
                                 eventList: homeViewModel.archivedPrograms,
-                                program: "Archived Program",
-                                ShowProgram: true,
+                                program: "archived_program".tr(),
+                                ShowProgram: false,
                               ),
                               const SizedBox(
                                 height: 20,

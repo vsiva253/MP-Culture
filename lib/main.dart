@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 import 'package:mpc/components/theme_data.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:mpc/data/models/user_login_model.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/option_screen.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
@@ -29,10 +28,6 @@ void main() async {
     baseUrl: 'https://service.codingbandar.com',
     basicAuth: 'YWRtaW46YWRtaW4=',
   );
-
-  final SharedPreferences prefs = await SharedPreferences.getInstance();
-  final String? savedLoginResponseString = prefs.getString('loginResponse');
-  final LoginResponse? savedLoginResponse;
 
   runApp(
     MultiProvider(
@@ -147,7 +142,7 @@ class _MyAppState extends State<MyApp> {
                         dialogStyle: UpgradeDialogStyle.cupertino,
                         durationUntilAlertAgain: Duration(seconds: 1),
                       ),
-                      child: const OptionScreenView());
+                      child: UserPreferencesScreen());
                 }
               },
             ),
