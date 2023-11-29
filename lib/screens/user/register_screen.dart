@@ -191,7 +191,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           flex: 6,
                                           child: TextField(
                                             controller:
-                                                signupModel.rMobileController,
+                                                signupModel.mobileController,
                                             decoration: InputDecoration(
                                               hintText: 'Mobile No.',
                                               hintStyle: TextStyle(

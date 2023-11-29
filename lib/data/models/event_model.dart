@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 class EventData {
   final String? id;
   final String? programName;
@@ -62,9 +60,8 @@ class EventData {
   });
 
   factory EventData.fromJson(Map<String, dynamic> json) {
-    // Parse the "artists" field as a JSON array
-    List<dynamic>? artistsJson =
-        json['artists'] != null ? jsonDecode(json['artists']) : null;
+    // Parse the "artists" field as a list of maps
+    List<dynamic>? artistsJson = json['artists'];
 
     return EventData(
       id: json['id'],

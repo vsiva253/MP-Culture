@@ -74,7 +74,10 @@ class HomeViewModel with ChangeNotifier {
         CustomSnackbar.show(context, 'Error fetching aboutUS');
         print("Error fetching aboutUS: $e");
       } finally {}
-      _isLoading = false;
+      Future.delayed(const Duration(seconds: 1), () {
+        _isLoading = false;
+      });
+
       notifyListeners();
     }
   }
@@ -190,7 +193,10 @@ class HomeViewModel with ChangeNotifier {
         CustomSnackbar.show(context, 'Error fetching Categories');
         print('Error fetching Categories: $e');
       } finally {
-        _isLoading = false;
+        Future.delayed(const Duration(seconds: 1), () {
+          _isLoading = false;
+        });
+
         notifyListeners();
       }
     }

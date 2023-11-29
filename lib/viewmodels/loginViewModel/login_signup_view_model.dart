@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/user_model.dart';
 import 'package:mpc/data/services/api_service.dart';
+import 'package:mpc/screens/user/register_screen.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
@@ -19,7 +20,7 @@ class LoginSignupViewModel extends ChangeNotifier {
   TextEditingController otpController = TextEditingController();
 
   // register page Controller
-  TextEditingController rMobileController = TextEditingController();
+
   TextEditingController emailController = TextEditingController();
   TextEditingController nameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -57,19 +58,28 @@ class LoginSignupViewModel extends ChangeNotifier {
     CustomSnackbar.show(context, "OTP Veryfing....");
     try {
       _isLoading = true;
-      await apiService.verifyOTP(mobileController.text, otpController.text);
+      UserModel? user =
+          await apiService.verifyOTP(mobileController.text, otpController.text);
       CustomSnackbar.show(context, "OTP verified successfully!");
       _isLoading = false;
       CustomSnackbar.show(context, 'Login Success');
-      Navigator.pushReplacement(
-        context,
-        FadePageRoute(
-          builder: (BuildContext context) => CustomBottomBar(
-            selectedIndex: 0,
-          ),
-        ),
-      );
-      return true;
+      if (user != null) {
+        Navigator.pushAndRemoveUntil(
+          context,
+          FadePageRoute(
+              builder: (BuildContext context) =>
+                  CustomBottomBar(selectedIndex: 0)),
+          (Route<dynamic> route) => false,
+        );
+        return true;
+      } else {
+        Navigator.push(
+          context,
+          FadePageRoute(
+              builder: (BuildContext context) => const RegisterScreen()),
+        );
+        return false;
+      }
     } catch (e) {
       print("failed call for verfy otp $e");
       _isLoading = false;
@@ -95,7 +105,7 @@ class LoginSignupViewModel extends ChangeNotifier {
   // check field is empity or not
 
   bool _validateFields(BuildContext context) {
-    if (rMobileController.text.isEmpty ||
+    if (mobileController.text.isEmpty ||
         emailController.text.isEmpty ||
         nameController.text.isEmpty ||
         passwordController.text.isEmpty ||
@@ -119,18 +129,18 @@ class LoginSignupViewModel extends ChangeNotifier {
         await apiService.signUp(
             nameController.text,
             emailController.text,
-            rMobileController.text,
+            mobileController.text,
             passwordController.text,
             confirmPasswordController.text);
         _isLoading = false;
-        Navigator.pushReplacement(
+        Navigator.pushAndRemoveUntil(
           context,
           FadePageRoute(
-            builder: (BuildContext context) => CustomBottomBar(
-              selectedIndex: 0,
-            ),
-          ),
+              builder: (BuildContext context) =>
+                  CustomBottomBar(selectedIndex: 0)),
+          (Route<dynamic> route) => false,
         );
+
         return true;
       } catch (e) {
         _isLoading = false;
