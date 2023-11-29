@@ -319,6 +319,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                           otpFocusNode); // Set focus to OTP field
                                       return;
                                     }
+                                    try {
+                                      await AuthService.verifyOTP(
+                                          loginModel.mobileController.text,
+                                          loginModel.otpController.text);
+                                    } catch (e) {
+                                      print(e.toString());
+                                    }
 
                                     bool isLogin = await context
                                         .read<LoginSignupViewModel>()

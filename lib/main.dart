@@ -7,7 +7,7 @@ import 'package:mpc/data/models/user_login_model.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/option_screen.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
-
+import 'package:upgrader/upgrader.dart';
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/services/language_provider.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
@@ -129,10 +129,25 @@ class _MyAppState extends State<MyApp> {
               builder: (context, isLoggedIn, child) {
                 if (isLoggedIn) {
                   // User is logged in, navigate to the home screen
-                  return CustomBottomBar(selectedIndex: 0);
+                  return UpgradeAlert(
+                      upgrader: Upgrader(
+                        canDismissDialog: false,
+                        showIgnore: false,
+                        showLater: false,
+                        dialogStyle: UpgradeDialogStyle.cupertino,
+                        durationUntilAlertAgain: Duration(seconds: 1),
+                      ),
+                      child: CustomBottomBar(selectedIndex: 0));
                 } else {
-                  // User is not logged in, show user preferences screen
-                  return UserPreferencesScreen();
+                  return UpgradeAlert(
+                      upgrader: Upgrader(
+                        canDismissDialog: false,
+                        showIgnore: false,
+                        showLater: false,
+                        dialogStyle: UpgradeDialogStyle.cupertino,
+                        durationUntilAlertAgain: Duration(seconds: 1),
+                      ),
+                      child: const OptionScreenView());
                 }
               },
             ),
