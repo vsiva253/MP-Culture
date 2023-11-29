@@ -1,7 +1,9 @@
 {
   "english": "English",
+  "edit_profile": "Edit Profile",
   "email_notifications": "Email Notifications",
   "sms_notifications": "SMS Notifications",
+  "welcome": "Welcome To You",
   "dark_mode": "Dark Mode",
   "password": "Password",
   "privacy": "Privacy",
@@ -11,7 +13,7 @@
   "email": "Email",
   "mobile_number": "Mobile Number",
   "address": "Address",
-  "stats": "Stats",
+  "state": "State",
   "gender": "Gender",
   "date_of_birth": "Date of Birth",
   "about_us": "About Us",
@@ -34,5 +36,9 @@
   "archived_program": "Archived Program",
   "arts_categories": "Arts Categories",
   "log_out": "Logout",
-  "login": "Login"
+  "login": "Login",
+  "have_account": "Are you already registered?",
+  "sign_up": "Registration",
+  "enter_otp": "Enter Your OTP",
+  "enter_mobile_no": "Please enter mobile no."
 }

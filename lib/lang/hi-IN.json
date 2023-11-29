@@ -1,7 +1,9 @@
 {
   "english": "अंग्रेजी",
+  "edit_profile": "Edit Profile",
   "email_notifications": "ईमेल सूचनाएँ",
   "sms_notifications": "एसएमएस सूचनाएँ",
+  "welcome": "आपका स्वागत है",
   "dark_mode": "डार्क मोड",
   "password": "पासवर्ड",
   "privacy": "गोपनीयता",
@@ -11,7 +13,7 @@
   "email": "ईमेल",
   "mobile_number": "मोबाइल नंबर",
   "address": "पता",
-  "stats": "आँकड़े",
+  "state": "आँकड़े",
   "gender": "लिंग",
   "date_of_birth": "जन्मतिथि",
   "about_us": "हमारे बारे में",
@@ -34,5 +36,9 @@
   "archived_program": "विगत कार्यक्रम",
   "arts_categories": "कला श्रेणियाँ",
   "log_out": "लॉग आउट",
-  "login": "लॉगिन"
+  "login": "लॉगिन",
+  "have_account": "क्या आप पहले से पंजीकृत है?",
+  "sign_up": "पंजीयन करे",
+  "enter_otp": "OTP दर्ज करे",
+  "enter_mobile_no": "कृपया मोबाइल नंबर दर्ज करे"
 }

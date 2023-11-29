@@ -29,13 +29,13 @@ class _HomePageState extends State<HomePage> {
     context.read<HomeViewModel>().fetchAboutUs(context);
     context.read<HomeViewModel>().fetchSliderImages(context);
     context.read<HomeViewModel>().fetchAllCategories(context);
-    context.read<UserViewModel>().userLogin(context);
   }
 
   @override
   void initState() {
     super.initState();
     getData();
+    context.read<UserViewModel>().userLogin(context);
   }
 
   @override
