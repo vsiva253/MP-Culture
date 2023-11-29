@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     final homeViewModel = context.watch<HomeViewModel>();
 
     var data = homeViewModel.singleProgram;
@@ -511,11 +513,11 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const Align(
+                        Align(
                           alignment: Alignment.centerLeft,
                           child: Text(
-                            "About",
-                            style: TextStyle(
+                            StringValue.about,
+                            style: const TextStyle(
                                 fontSize: 24,
                                 color: Color(0xFF000000),
                                 fontWeight: FontWeight.w500),
@@ -562,11 +564,11 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                     padding: const EdgeInsets.only(left: 16),
                     child: Column(
                       children: [
-                        const Align(
+                        Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            'कलाकारों',
-                            style: TextStyle(
+                            StringValue.artistName,
+                            style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xFF000000)),
@@ -618,11 +620,11 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                     padding: const EdgeInsets.only(left: 16),
                     child: Column(
                       children: [
-                        const Align(
+                        Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            'गैलरी',
-                            style: TextStyle(
+                            StringValue.gallery,
+                            style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xFF000000)),

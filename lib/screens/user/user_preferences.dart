@@ -1,16 +1,35 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/screens/user/login_screen.dart';
-import 'package:mpc/screens/user/register_screen.dart';
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:provider/provider.dart';
 
-class UserPreferencesScreen extends StatelessWidget {
+class UserPreferencesScreen extends StatefulWidget {
+  const UserPreferencesScreen({super.key});
+
+  @override
+  State<UserPreferencesScreen> createState() => _UserPreferencesScreenState();
+}
+
+class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
+  void _changeLanguage(bool value) {
+    if (value) {
+      context.setLocale(const Locale('en', 'US'));
+    } else {
+      context.setLocale(const Locale('hi', 'IN'));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    StringValue.updateValues();
     final userViewModel = Provider.of<UserViewModel>(context);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08), // Set the color of the status bar
@@ -44,8 +63,32 @@ class UserPreferencesScreen extends StatelessWidget {
                         ),
                       ),
                     ),
+                    const SizedBox(height: 15),
                     Padding(
-                      padding: const EdgeInsets.only(top: 35),
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: DropdownButton<String>(
+                          value: themeProvider.selectedLanguage,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              themeProvider.selectedLanguage = newValue!;
+                              themeProvider.toggleLanguage();
+                              _changeLanguage(themeProvider.isEnglish);
+                            });
+                          },
+                          items: <String>['English', 'Hindi']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.366,
                         decoration: BoxDecoration(
@@ -316,8 +359,8 @@ class UserPreferencesScreen extends StatelessWidget {
                                               'Registered: SMS - ${userPreferences.smsSelected}, Email - ${userPreferences.emailSelected}, Both - ${userPreferences.bothSelected}');
                                         }
                                       : null,
-                                  child: const Text(
-                                    'Register',
+                                  child: Text(
+                                    StringValue.register,
                                     style: TextStyle(color: Colors.white),
                                   ),
                                 ),
@@ -345,7 +388,7 @@ class UserPreferencesScreen extends StatelessWidget {
                                                   selectedIndex: 0,
                                                 ))); // Close the screen
                                   },
-                                  child: const Text('Cancel',
+                                  child: Text(StringValue.cancel,
                                       style: TextStyle(color: Colors.white)),
                                 ),
                               ),

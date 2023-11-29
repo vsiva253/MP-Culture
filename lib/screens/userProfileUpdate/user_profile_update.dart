@@ -76,6 +76,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
@@ -110,12 +111,12 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                     padding: EdgeInsets.only(top: 30),
                     child: Center(
                       child: GradientText(
-                        'Update Account',
+                        StringValue.updateAccount,
                         style: const TextStyle(
                             fontFamily: 'Hind',
                             fontSize: 22.0,
                             fontWeight: FontWeight.w600,
-                            height: 1),
+                            height: 1.5),
                         colors: const [
                           Color(0xFFC33764),
                           Color(0xFF1D2671),
@@ -450,7 +451,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                                     dob: dobController.text,
                                     sex: genderController.text);
                               },
-                              child: const Text("Save Update")),
+                              child: Text(StringValue.updateSave)),
                           const SizedBox(height: 23),
                         ],
                       ),

@@ -64,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     final userViewModel = Provider.of<UserViewModel>(context);
     var userData = userViewModel.userModel;
-
+    StringValue.updateValues();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),

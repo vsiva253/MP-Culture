@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/components/theme_data.dart';
@@ -7,7 +8,6 @@ import 'package:mpc/services/auth_login.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
-import 'package:mpc/widgets/bottombar.dart';
 import 'package:mpc/widgets/custom_snackbar.dart';
 import 'package:provider/provider.dart';
 
@@ -22,6 +22,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // TextEditingController mobileController = TextEditingController();
   // TextEditingController otpController = TextEditingController();
   bool showOtpField = false;
+  Map<String, bool> toggledStates = {};
   // ValueNotifier to track login status
   ValueNotifier<bool> isLoggedInNotifier = ValueNotifier<bool>(false);
   FocusNode mobileFocusNode = FocusNode();
@@ -87,15 +88,24 @@ class _LoginScreenState extends State<LoginScreen> {
   //     CustomSnackbar.show(context, "An error occurred. Please try again.");
   //   }
   // }
+  void _changeLanguage(bool value) {
+    if (value) {
+      context.setLocale(const Locale('en', 'US'));
+    } else {
+      context.setLocale(const Locale('hi', 'IN'));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     final loginModel = context.watch<LoginSignupViewModel>();
     final themeProvider = Provider.of<ThemeProvider>(context);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08), // Set the color of the status bar
       // Set the color of the navigation bar (if present)
     ));
+    StringValue.updateValues();
     return Scaffold(
       body: Stack(
         children: [
@@ -137,9 +147,31 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 40,
+                    const SizedBox(height: 15),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 20),
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: DropdownButton<String>(
+                          value: themeProvider.selectedLanguage,
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              themeProvider.selectedLanguage = newValue!;
+                              themeProvider.toggleLanguage();
+                              _changeLanguage(themeProvider.isEnglish);
+                            });
+                          },
+                          items: <String>['English', 'Hindi']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
                     ),
+                    const SizedBox(height: 15),
                     Padding(
                       padding: const EdgeInsets.only(left: 0, right: 0),
                       child: Container(
@@ -390,7 +422,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                         width: 5,
                                       ),
                                       Text(
-                                        StringValue.signUp,
+                                        // StringValue.signUp,
+                                        "login".tr(),
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,

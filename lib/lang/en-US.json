@@ -3,7 +3,7 @@
   "edit_profile": "Edit Profile",
   "email_notifications": "Email Notifications",
   "sms_notifications": "SMS Notifications",
-  "welcome": "Welcome To You",
+  "welcome": "Welcome To Back",
   "dark_mode": "Dark Mode",
   "password": "Password",
   "privacy": "Privacy",
@@ -40,5 +40,12 @@
   "have_account": "Are you already registered?",
   "sign_up": "Registration",
   "enter_otp": "Enter Your OTP",
-  "enter_mobile_no": "Please enter mobile no."
+  "enter_mobile_no": "Please enter mobile no.",
+  "registration_for_program": "Registration for the programme",
+  "registration_for_artist": "Registration of artist",
+  "all_category": "All Category",
+  "save_update": "Save Update",
+  "update_account": "Update Account",
+  "registration": "Registration",
+  "cancel": "Cancel"
 }

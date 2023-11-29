@@ -48,6 +48,7 @@ ThemeData darkTheme = ThemeData(
 class ThemeProvider extends ChangeNotifier {
   static const String _isDarkModeKey = 'isDarkMode';
   static const String _isEnglishKey = 'isEnglish';
+  String selectedLanguage = 'English';
 
   bool _isDarkMode = false;
   bool _isEnglish = true;
@@ -82,6 +83,11 @@ class ThemeProvider extends ChangeNotifier {
     _isEnglish = !_isEnglish;
     _savePreferences();
     notifyListeners();
+  }
+
+  Future<String> getLanguagePreference() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool(_isEnglishKey) ?? true ? 'English' : 'Hindi';
   }
 
   ThemeData getTheme() {

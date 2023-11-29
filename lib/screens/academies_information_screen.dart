@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/academies_model.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/homepage_widgets/peogram_list.dart';
@@ -25,6 +26,7 @@ class _AcademiesInformationScreenState
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     final homeViewModel = context.watch<HomeViewModel>();
     return Scaffold(
       appBar: PreferredSize(

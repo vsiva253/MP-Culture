@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/data/models/category_model.dart';
 import 'package:mpc/screens/categoryList/category_list_view.dart';
 import 'package:mpc/screens/eventlist/category_academiec_event_list.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
+import 'package:provider/provider.dart';
 
 class WidgetsClass {
   static Widget TextW(String title, String value) {
@@ -32,12 +34,12 @@ class WidgetsClass {
         height: 69,
         child: GestureDetector(
           onTap: () {
-            name == "All Category"
+            name == "All Category" || name == "सभी श्रेणियाँ"
                 ? Navigator.push(
                     context,
                     FadePageRoute(
                       builder: (context) =>
-                          CategorysListView(categoryList: list!),
+                          CategorysListView(categoryList: list ?? []),
                     ))
                 : Navigator.push(
                     context,

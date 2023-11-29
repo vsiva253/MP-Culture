@@ -1,6 +1,6 @@
 {
   "english": "अंग्रेजी",
-  "edit_profile": "Edit Profile",
+  "edit_profile": "प्रोफ़ाइल संपादित करें.",
   "email_notifications": "ईमेल सूचनाएँ",
   "sms_notifications": "एसएमएस सूचनाएँ",
   "welcome": "आपका स्वागत है",
@@ -13,7 +13,7 @@
   "email": "ईमेल",
   "mobile_number": "मोबाइल नंबर",
   "address": "पता",
-  "state": "आँकड़े",
+  "state": "राज्य",
   "gender": "लिंग",
   "date_of_birth": "जन्मतिथि",
   "about_us": "हमारे बारे में",
@@ -40,5 +40,13 @@
   "have_account": "क्या आप पहले से पंजीकृत है?",
   "sign_up": "पंजीयन करे",
   "enter_otp": "OTP दर्ज करे",
-  "enter_mobile_no": "कृपया मोबाइल नंबर दर्ज करे"
+  "enter_mobile_no": "कृपया मोबाइल नंबर दर्ज करे",
+  "registration_for_program": "कार्यक्रम हेतु पंजीयन",
+  "registration_for_artist": "कलाकार का पंजीयन",
+  "all_category": "सभी श्रेणियाँ",
+  "save_update": "बदलाव सहेजें",
+  "update_account": "अकाउंट में बदलाव",
+  "registration": "पंजीयन करे",
+  "cancel": "रद करें"
+ 
 }

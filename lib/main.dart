@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:mpc/components/theme_data.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:mpc/screens/user/auth_status.dart';
-import 'package:mpc/screens/user/option_screen.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
@@ -18,9 +17,11 @@ import 'package:provider/provider.dart';
 //import flutter localization
 // import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mpc/data/services/api_service.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
+  // Create a GlobalKey<NavigatorState>
+  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
 
@@ -58,13 +59,13 @@ void main() async {
         ),
       ],
       child: EasyLocalization(
-        supportedLocales: [
+        supportedLocales: const [
           Locale('en', 'US'),
           Locale('hi', 'IN'),
         ],
         path: 'lib/lang',
-        fallbackLocale: Locale('en', 'US'),
-        child: MyApp(),
+        fallbackLocale: const Locale('en', 'US'),
+        child:  const MyApp(),
       ),
     ),
   );

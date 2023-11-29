@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/data/models/category_model.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/profile_text.dart';
+import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class CategorysListView extends StatelessWidget {
@@ -10,6 +13,8 @@ class CategorysListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(65),
@@ -32,7 +37,8 @@ class CategorysListView extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: GradientText(
-                    "All Category", //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
+                    StringValue
+                        .allCategory, //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
                     style: const TextStyle(
                       fontFamily: 'Hind',
                       fontSize: 18.0,
@@ -63,7 +69,9 @@ class CategorysListView extends StatelessWidget {
                           for (var item in itemsToDisplay)
                             WidgetsClass.buildItem(
                               'Image1',
-                              item.categoryHindi!,
+                              themeProvider.isEnglish
+                                  ? item.category ?? "NA"
+                                  : item.categoryHindi ?? "NA",
                               'assets/homepage/1.png',
                               context,
                               [],

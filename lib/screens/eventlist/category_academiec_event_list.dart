@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/components/event_card.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +27,7 @@ class _ByCategoryEventListViewState extends State<ByCategoryEventListView> {
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     final homeViewModel = context.watch<HomeViewModel>();
     return Scaffold(
         appBar: PreferredSize(

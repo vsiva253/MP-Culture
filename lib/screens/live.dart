@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/screens/user/auth_status.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
@@ -32,6 +33,7 @@ class _LivePageState extends State<LivePage> {
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     final homeViewModel = context.watch<HomeViewModel>();
     final userViewModel = context.watch<UserViewModel>();
 
