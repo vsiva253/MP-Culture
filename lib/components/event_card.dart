@@ -126,7 +126,7 @@ class _EventCardState extends State<EventCard> {
                           padding:
                               const EdgeInsets.only(top: 2, left: 8, right: 8),
                           child: Text(
-                            widget.event.programName!,
+                            widget.event.programName ?? "NA",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -161,7 +161,10 @@ class _EventCardState extends State<EventCard> {
                                           fontSize: 11),
                                     ),
                                     Text(
-                                      'भारत की लोकभारत...',
+                                      // 'भारत की लोकभारत...',
+                                      widget.event.artists != null
+                                          ? "${widget.event.artists?[0].name}"
+                                          : "NA",
                                       style: TextStyle(
                                         color: const Color(0xFFFFFFFF)
                                             .withOpacity(0.8),
@@ -188,7 +191,7 @@ class _EventCardState extends State<EventCard> {
                                           fontSize: 11),
                                     ),
                                     Text(
-                                      widget.event.entryType!,
+                                      widget.event.entryType ?? "NA",
                                       style: TextStyle(
                                         color: const Color(0xFFFFFFFF)
                                             .withOpacity(0.8),
@@ -222,7 +225,7 @@ class _EventCardState extends State<EventCard> {
                             )),
                           ),
                           Text(
-                            widget.event.departmentBy!,
+                            widget.event.departmentBy ?? "NA",
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
@@ -263,7 +266,7 @@ class _EventCardState extends State<EventCard> {
                                         width: 3,
                                       ),
                                       Text(
-                                        widget.event.district!,
+                                        widget.event.district ?? "NA",
                                         style: const TextStyle(
                                             color: Color(0xFFFFFFFF),
                                             fontWeight: FontWeight.w500,

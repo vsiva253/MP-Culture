@@ -95,7 +95,8 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               Align(
                                 alignment: Alignment.centerLeft,
                                 child: GradientText(
-                                  data.programName!, //वर्तमान मैं संचालित हो रहे कार्यक्रम
+                                  data.programName ??
+                                      "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
                                   style: const TextStyle(
                                     fontFamily: 'Hind',
                                     fontSize: 24.0,
@@ -124,7 +125,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                         width: 5,
                                       ),
                                       Text(
-                                        "${data.startingDate} at ${data.startingTime}",
+                                        "${data.startingDate ?? "NA"} at ${data.startingTime ?? "NA"}",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
@@ -143,7 +144,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                         width: 5,
                                       ),
                                       Text(
-                                        "${data.city},${data.district}",
+                                        "${data.city ?? "NA"},${data.district ?? "NA"}",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
@@ -296,7 +297,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                 width: 10,
                               ),
                               Text(
-                                data.entryType!,
+                                data.entryType ?? "NA",
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -510,7 +511,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                           height: 10,
                         ),
                         Text(
-                          data.about!,
+                          data.about ?? "NA",
                           style: const TextStyle(
                               fontSize: 16, // Set text size
                               fontWeight: FontWeight.w400,
