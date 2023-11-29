@@ -473,14 +473,10 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
       lastDate: DateTime(2040),
     );
 
-    if (pickedDate != null) {
-      String formattedDate =
-          '${pickedDate.day}-${pickedDate.month}-${pickedDate.year}';
-      setState(() {
-        dobController.text = formattedDate;
-      });
-    } else {
-      mySnackBarShow(context, 'Please select a date');
-    }
+    String formattedDate =
+        '${pickedDate?.day}-${pickedDate?.month}-${pickedDate?.year}';
+    setState(() {
+      dobController.text = formattedDate;
+    });
   }
 }
