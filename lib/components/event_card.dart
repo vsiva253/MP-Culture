@@ -146,13 +146,11 @@ class _EventCardState extends State<EventCard> {
                     //   thickness: 0.3,
                     // ),
                     Container(
-                      width: double.infinity,
                       padding:
-                          const EdgeInsets.only(left: 8.5, right: 8.5, top: 5),
+                          const EdgeInsets.only(left: 8.5, right: 8.5, top: 3),
                       child: Column(
                         children: [
                           SizedBox(
-                            width: double.infinity,
                             child: Column(
                               children: [
                                 Row(
@@ -165,20 +163,22 @@ class _EventCardState extends State<EventCard> {
                                           fontWeight: FontWeight.w500,
                                           fontSize: 14),
                                     ),
-                                    Text(
-                                      // 'भारत की लोकभारत...',
-                                      widget.event.artists != null
-                                          ? "${widget.event.artists?[0].name}"
-                                          : "NA",
-                                      style: TextStyle(
-                                        color: const Color(0xFFFFFFFF)
-                                            .withOpacity(0.8),
-                                        fontFamily: 'HIND',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 13,
+                                    Expanded(
+                                      child: Text(
+                                        // 'भारत की लोकभारत...',
+                                        widget.event.artists != null
+                                            ? "${widget.event.artists?[0].name}"
+                                            : "NA",
+                                        style: TextStyle(
+                                          color: const Color(0xFFFFFFFF)
+                                              .withOpacity(0.8),
+                                          fontFamily: 'HIND',
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
                                 ),

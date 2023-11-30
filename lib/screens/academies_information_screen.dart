@@ -63,7 +63,7 @@ class _AcademiesInformationScreenState
                         scrollAxis: Axis.horizontal,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         blankSpace: 20.0,
-                        velocity: 100.0,
+                        velocity: 60.0,
                         pauseAfterRound: const Duration(seconds: 1),
                         startPadding: 10.0,
                         accelerationDuration: const Duration(seconds: 1),
