@@ -125,10 +125,10 @@ class _HomePageState extends State<HomePage> {
                                           GradientText(
                                             'about_us'.tr(),
                                             style: const TextStyle(
-                                                fontFamily: 'Hind',
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w600,
-                                                height: 2),
+                                              fontFamily: 'Hind',
+                                              fontSize: 16.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                             colors: const [
                                               Color(0xFFC33764),
                                               Color(0xFF1D2671),

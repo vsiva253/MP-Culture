@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
+import 'package:mpc/widgets/homepage_widgets/image_sliding.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -23,6 +25,48 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
         .fetchSingleProgram(context, widget.eventData.id!);
   }
 
+  Widget textRow(String name, String value) {
+    return Row(
+      children: [
+        SizedBox(
+          child: Text(
+            name,
+            style: const TextStyle(
+                fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Text(
+          // widget.eventData.artists?[0].name ??
+          //     "NA", // "भारत की लोकभारत की लोक.....",
+          value,
+          maxLines: 5,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+            color: Colors.grey[700],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget showArtist(ArtistModel value) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 5),
+      child: Column(children: [
+        textRow("${StringValue.artistName}:", value.name ?? "NA"),
+        textRow("${'art_forms'.tr()}:", value.category ?? "NA"),
+        textRow("${'artist_datetime'.tr()}:", value.artistDatetime ?? "NA"),
+        textRow("${'artist_description'.tr()}:", value.description ?? "NA"),
+        const SizedBox(height: 20)
+      ]),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     StringValue.updateValues();
@@ -35,22 +79,23 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
         child: CustomAppBarSecondary(),
       ),
       body: homeViewModel.isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 228,
-                    child: Image.asset(
-                      'assets/EventHeader.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                      width: MediaQuery.of(context).size.width,
+                      height: 228,
+                      child: ImageSlider(imageUrls: [
+                        widget.eventData.bannerImg ?? "NA",
+                        widget.eventData.bannerImg1 ?? "NA",
+                      ])),
                   Container(
+                    margin: const EdgeInsets.only(left: 16, right: 15),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Padding(
                         //   padding: const EdgeInsets.only(
@@ -84,99 +129,113 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         //           ),
                         //         ),
                         //       ),
+
                         //     ),
                         //   ),
                         // ),
-                        GradientText(
-                          data.programCategory ??
-                              "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
-                          style: const TextStyle(
-                            fontFamily: 'Hind',
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w500,
-                            height: 1.5,
+                        // GradientText(
+                        //   data.programCategory ??
+                        //       "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
+                        //   style: const TextStyle(
+                        //     fontFamily: 'Hind',
+                        //     fontSize: 24.0,
+                        //     fontWeight: FontWeight.w500,
+                        //     height: 1.5,
+                        //   ),
+                        //   colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
+                        // ),
+                        // const SizedBox(
+                        //   height: 20,
+                        // ),
+                        Container(
+                          height: 34,
+                          alignment: Alignment.center,
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          margin: const EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFCE6ED1),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
+                          child: Text(
+                            data.programCategory ?? "NA",
+                            style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16),
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: GradientText(
-                                  data.programName ??
-                                      "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
-                                  style: const TextStyle(
-                                    fontFamily: 'Hind',
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.5,
-                                  ),
-                                  colors: const [
-                                    Color(0xFFC33764),
-                                    Color(0xFF1D2671)
+                        const SizedBox(height: 10),
+                        Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: GradientText(
+                                data.programName ??
+                                    "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
+                                style: const TextStyle(
+                                  fontFamily: 'Hind',
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.5,
+                                ),
+                                colors: const [
+                                  Color(0xFFC33764),
+                                  Color(0xFF1D2671)
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 6),
+                            Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.calendar_month_outlined,
+                                      color: Colors.grey[600],
+                                      size: 20,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "${data.startingDate ?? "NA"} at ${data.startingTime ?? "NA"}",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.grey[600]),
+                                    ),
                                   ],
                                 ),
-                              ),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.calendar_month_outlined,
-                                        color: Colors.grey[600],
-                                        size: 20,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "${data.startingDate ?? "NA"} at ${data.startingTime ?? "NA"}",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.grey[600]),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.location_on_outlined,
-                                        color: Colors.grey[600],
-                                        size: 20,
-                                      ),
-                                      const SizedBox(
-                                        width: 5,
-                                      ),
-                                      Text(
-                                        "${data.city ?? "NA"},${data.district ?? "NA"}",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.grey[600]),
-                                      ),
-                                    ],
-                                  ),
-                                  const Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("View on Maps",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color(0xFFA01B8A))),
-                                  ),
-                                ],
-                              )
-                            ],
-                          ),
+                                Row(
+                                  children: [
+                                    Icon(
+                                      Icons.location_on_outlined,
+                                      color: Colors.grey[600],
+                                      size: 20,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      "${data.city ?? "NA"},${data.district ?? "NA"}",
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w400,
+                                          color: Colors.grey[600]),
+                                    ),
+                                  ],
+                                ),
+                                const Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text("View on Maps",
+                                      style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          color: Color(0xFFA01B8A))),
+                                ),
+                              ],
+                            )
+                          ],
                         )
                       ],
                     ),
@@ -234,13 +293,13 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               left: 16, right: 16, top: 10),
                           child: Row(
                             children: [
-                              const SizedBox(
+                              SizedBox(
                                 width: 70,
                                 child: Text(
-                                  "कलाकार:",
-                                  style: TextStyle(
+                                  "${"kalakar".tr()}:",
+                                  style: const TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
                               ),
@@ -267,12 +326,12 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                           child: Row(
                             children: [
                               Container(
-                                width: 70,
+                                width: 78,
                                 child: Text(
-                                  "कला प्रकार:",
-                                  style: TextStyle(
+                                  "${"art_forms".tr()}:",
+                                  style: const TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
                               ),
@@ -301,10 +360,10 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               Container(
                                 width: 70,
                                 child: Text(
-                                  "प्रवेश :",
-                                  style: TextStyle(
+                                  "${"entry".tr()}:",
+                                  style: const TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
                               ),
@@ -332,10 +391,10 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               Container(
                                 width: 70,
                                 child: Text(
-                                  "वेणु:",
-                                  style: TextStyle(
+                                  "${"venue".tr()}:",
+                                  style: const TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
                               ),
@@ -526,18 +585,22 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         const SizedBox(
                           height: 1.50,
                         ),
-                        Text(
-                          data.about ?? "NA",
-                          style: const TextStyle(
-                              fontSize: 16, // Set text size
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF797494) // Set font weight
-                              ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text(
+                            data.about ?? "NA",
+                            style: const TextStyle(
+                                fontSize: 16, // Set text size
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF797494) // Set font weight
+                                ),
 
-                          maxLines: homeViewModel.isExpanded
-                              ? 1000
-                              : 3, // Show only three lines if not expanded
-                          overflow: TextOverflow.ellipsis,
+                            maxLines: homeViewModel.isExpanded
+                                ? 1000
+                                : 3, // Show only three lines if not expanded
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         GestureDetector(
                           child: Row(
@@ -567,7 +630,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            StringValue.artistName,
+                            'kalakar'.tr(),
                             style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
@@ -578,36 +641,14 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                           padding: const EdgeInsets.only(
                               left: 0, right: 16, top: 10),
                           child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
+                            scrollDirection: Axis.vertical,
+                            child: Column(
                               children: List.generate(
                                   widget.eventData.artists?.length ?? 0,
                                   (index) {
-                                var data = widget.eventData.artists?[index];
-                                return Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 158,
-                                        width: 158,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                        ),
-                                        child: Image.asset("assets/Artist.jpg",
-                                            fit: BoxFit.cover),
-                                      ),
-                                      Text(
-                                        data?.name ?? "NA",
-                                        style: const TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color(0xFF000000)),
-                                      )
-                                    ],
-                                  ),
-                                );
+                                ArtistModel? data =
+                                    widget.eventData.artists?[index];
+                                return showArtist(data ?? ArtistModel());
                               }),
                             ),
                           ),
@@ -630,35 +671,39 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                 color: Color(0xFF000000)),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 0, right: 16, top: 10),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(
-                                6,
-                                (index) => Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 158,
-                                        width: 158,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                        ),
-                                        child: Image.asset("assets/Artist.jpg",
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        Container(
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text("gallery_not".tr())),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(
+                        //       left: 0, right: 16, top: 10),
+                        //   child: SingleChildScrollView(
+                        //     scrollDirection: Axis.horizontal,
+                        //     child: Row(
+                        //       children: List.generate(
+                        //         6,
+                        //         (index) => Padding(
+                        //           padding: const EdgeInsets.only(right: 16),
+                        //           child: Column(
+                        //             children: [
+                        //               Container(
+                        //                 height: 158,
+                        //                 width: 158,
+                        //                 decoration: BoxDecoration(
+                        //                   borderRadius:
+                        //                       BorderRadius.circular(4),
+                        //                 ),
+                        //                 child: Image.asset("assets/Artist.jpg",
+                        //                     fit: BoxFit.cover),
+                        //               ),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(height: 23)
                       ],
                     ),
