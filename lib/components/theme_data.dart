@@ -61,6 +61,7 @@ class ThemeProvider extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     _isDarkMode = prefs.getBool(_isDarkModeKey) ?? false;
     _isEnglish = prefs.getBool(_isEnglishKey) ?? true;
+    getLanguagePreference();
     notifyListeners();
   }
 

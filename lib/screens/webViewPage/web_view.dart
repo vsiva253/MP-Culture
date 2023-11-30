@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class WebViewScreen extends StatefulWidget {
-  const WebViewScreen({super.key});
+  final String url;
+  const WebViewScreen({super.key, required this.url});
 
   @override
   State<WebViewScreen> createState() => _WebViewScreenState();
@@ -16,8 +17,7 @@ class _WebViewScreenState extends State<WebViewScreen> {
   void initState() {
     super.initState();
     _webViewController = WebViewController()
-      ..loadRequest(Uri.parse(
-          "https://jusmarktech.in/mpculturedept/artistregistration.php"))
+      ..loadRequest(Uri.parse(widget.url))
       ..setNavigationDelegate(NavigationDelegate(onPageStarted: (url) {
         setState(() {
           progress = 0;

@@ -108,7 +108,7 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
                     height: 20,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 30),
+                    padding: const EdgeInsets.only(top: 30),
                     child: Center(
                       child: GradientText(
                         StringValue.updateAccount,

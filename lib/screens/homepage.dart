@@ -49,8 +49,8 @@ class _HomePageState extends State<HomePage> {
         preferredSize: const Size.fromHeight(65),
         child: CustomAppBar(),
       ),
-      drawer: ClipRRect(
-          borderRadius: const BorderRadius.only(
+      drawer: const ClipRRect(
+          borderRadius: BorderRadius.only(
             topRight: Radius.circular(0),
             bottomRight: Radius.circular(0),
           ),
@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                                 fontFamily: 'Hind',
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w600,
-                                                height: 1),
+                                                height: 2),
                                             colors: const [
                                               Color(0xFFC33764),
                                               Color(0xFF1D2671),
@@ -184,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                               EventListCard(
                                 eventList: homeViewModel.todayPrograms,
                                 program: "today_program".tr(),
-                                ShowProgram: false,
+                                showProgram: false,
                               ),
                               const SizedBox(
                                 height: 20,
@@ -192,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                               EventListCard(
                                 eventList: homeViewModel.onGoingPrograms,
                                 program: "live_program".tr(),
-                                ShowProgram:
+                                showProgram:
                                     userViewModel.userLoginData?.isSuccess ==
                                             true
                                         ? false
@@ -204,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                               EventListCard(
                                 eventList: homeViewModel.upConingPrograms,
                                 program: "upcoming_program".tr(),
-                                ShowProgram: false,
+                                showProgram: false,
                               ),
                               const SizedBox(
                                 height: 20,
@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> {
                               EventListCard(
                                 eventList: homeViewModel.archivedPrograms,
                                 program: "archived_program".tr(),
-                                ShowProgram: false,
+                                showProgram: false,
                               ),
                               const SizedBox(
                                 height: 20,

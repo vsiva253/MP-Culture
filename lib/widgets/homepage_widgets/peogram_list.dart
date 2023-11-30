@@ -1,21 +1,21 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/components/event_card.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/screens/eventlist/event_list.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class EventListCard extends StatelessWidget {
   final String program;
-  final bool ShowProgram;
+  final bool showProgram;
   final List<EventData> eventList;
   const EventListCard(
       {super.key,
       required this.eventList,
       required this.program,
-      required this.ShowProgram});
+      required this.showProgram});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +32,9 @@ class EventListCard extends StatelessWidget {
                     program, // "Today Program", //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
                     style: const TextStyle(
                       fontFamily: 'Hind',
-                      fontSize: 16.0,
+                      fontSize: 17.0,
                       fontWeight: FontWeight.w600,
-                      height: 1,
+                      height: 1.8,
                     ),
                     colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
                   ),
@@ -70,9 +70,9 @@ class EventListCard extends StatelessWidget {
               )),
         ),
         const SizedBox(
-          height: 20,
+          height: 10,
         ),
-        !(ShowProgram)
+        !(showProgram)
             ? eventList.isEmpty
                 ? const Center(child: Text("Events are not availables"))
                 : Container(
@@ -94,16 +94,17 @@ class EventListCard extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Please login to view this Program List'),
+                    Text(StringValue.loginForProgram),
                     ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => UserPreferencesScreen()),
+                              builder: (context) =>
+                                  const UserPreferencesScreen()),
                         );
                       },
-                      child: Text('login'.tr()),
+                      child: Text(StringValue.logIn),
                     ),
                   ],
                 ),

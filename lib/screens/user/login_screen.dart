@@ -168,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: DropdownButton<String>(
-                          value: themeProvider.selectedLanguage,
+                          value: themeProvider.isEnglish ? "English" : "Hindi",
                           onChanged: (String? newValue) {
                             setState(() {
                               themeProvider.selectedLanguage = newValue!;

@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
@@ -72,7 +71,7 @@ class _LivePageState extends State<LivePage> {
                               EventListCard(
                                 eventList: homeViewModel.onGoingPrograms,
                                 program: "live_program".tr(),
-                                ShowProgram: false,
+                                showProgram: false,
                               ),
                             ]),
                       ),
@@ -83,7 +82,7 @@ class _LivePageState extends State<LivePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text('Please login to view this screen'),
+                      Text(StringValue.loginForView),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
@@ -92,7 +91,7 @@ class _LivePageState extends State<LivePage> {
                                 builder: (context) => UserPreferencesScreen()),
                           );
                         },
-                        child: Text('Login'),
+                        child: Text(StringValue.logIn),
                       ),
                     ],
                   ),
