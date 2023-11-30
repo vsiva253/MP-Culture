@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:marquee/marquee.dart';
 import 'package:mpc/data/models/academies_model.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
@@ -49,29 +50,42 @@ class _AcademiesInformationScreenState
                     ),
                   ),
                   Container(
+                    height: 25,
                     padding: const EdgeInsets.only(
                         top: 3, bottom: 3, left: 2, right: 2),
                     color: Color(0xFFE91E63),
                     width: MediaQuery.of(context).size.width,
-                    child: const Align(
+                    child: Align(
                       alignment: Alignment.center,
-                      child: Text(
-                        "MP Culture department presents an Audience Capturing Application",
-                        maxLines: 1,
-                        style: TextStyle(
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
+                      child: Marquee(
+                        text:
+                            "MP Culture department presents an Audience Capturing Application",
+                        scrollAxis: Axis.horizontal,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        blankSpace: 20.0,
+                        velocity: 100.0,
+                        pauseAfterRound: const Duration(seconds: 1),
+                        startPadding: 10.0,
+                        accelerationDuration: const Duration(seconds: 1),
+                        accelerationCurve: Curves.linear,
+                        decelerationDuration: const Duration(milliseconds: 500),
+                        decelerationCurve: Curves.easeOut,
+                        style: const TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                   ),
+
                   SizedBox(
                     height: 25,
                   ),
                   Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 16, right: 10),
+                        padding: const EdgeInsets.only(left: 16, right: 20),
                         child: Container(
                           // height: MediaQuery.of(context).size.height / 8.14,
                           child: Image.asset(
@@ -99,7 +113,7 @@ class _AcademiesInformationScreenState
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 10),
+                        const EdgeInsets.only(left: 16, right: 16, top: 20),
                     child: Row(
                       children: [
                         Icon(
@@ -122,6 +136,7 @@ class _AcademiesInformationScreenState
                       ],
                     ),
                   ),
+
                   const Padding(
                     padding: EdgeInsets.only(left: 40, right: 16),
                     child: Align(
@@ -321,7 +336,7 @@ class _AcademiesInformationScreenState
                   EventListCard(
                     eventList: homeViewModel.byAcaedmiecProgramList,
                     program: "अकादमी के कार्यक्रम",
-                    ShowProgram: false,
+                    showProgram: false,
                   ),
                   // Align(
                   //   alignment: Alignment.centerLeft,

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/data/models/category_model.dart';
 import 'package:mpc/screens/categoryList/category_list_view.dart';
 import 'package:mpc/screens/eventlist/category_academiec_event_list.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
-import 'package:provider/provider.dart';
 
 class WidgetsClass {
   static Widget TextW(String title, String value) {
@@ -31,7 +29,7 @@ class WidgetsClass {
     return Expanded(
       child: SizedBox(
         width: 52,
-        height: 69,
+        // height: 69,
         child: GestureDetector(
           onTap: () {
             name == "All Category" || name == "सभी श्रेणियाँ"
@@ -73,7 +71,7 @@ class WidgetsClass {
                   children: [
                     Center(
                       child: Padding(
-                        padding: EdgeInsets.all(6),
+                        padding: const EdgeInsets.all(3),
                         child: Image.asset(
                           imagePath,
                           height: 34,
@@ -85,15 +83,14 @@ class WidgetsClass {
                   ],
                 ),
               ),
-              Expanded(child: SizedBox()),
               Expanded(
                 child: Center(
                   child: Padding(
-                    padding: EdgeInsets.only(left: 1, right: 1),
+                    padding: const EdgeInsets.only(left: 1, right: 1),
                     child: Text(
                       name,
-                      style: TextStyle(
-                        fontSize: 8,
+                      style: const TextStyle(
+                        fontSize: 12,
                         letterSpacing: 0.9,
                         fontWeight: FontWeight.w500,
                       ),

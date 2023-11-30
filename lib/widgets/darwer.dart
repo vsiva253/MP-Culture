@@ -1,17 +1,21 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/components/theme_data.dart';
+import 'package:mpc/screens/categoryList/category_list_view.dart';
+import 'package:mpc/screens/eventlist/event_list.dart';
 
 import 'package:mpc/screens/settings.dart';
 import 'package:mpc/screens/user/auth_status.dart';
-import 'package:mpc/screens/user/user_preferences.dart';
-import 'package:mpc/screens/user/user_preferences_notifier.dart';
+import 'package:mpc/values/string_values.dart';
+import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatefulWidget {
+  const CustomDrawer({super.key});
+
   @override
   _CustomDrawerState createState() => _CustomDrawerState();
 }
@@ -25,15 +29,29 @@ class _CustomDrawerState extends State<CustomDrawer> {
     });
   }
 
+  void getData() {
+    context.read<HomeViewModel>().fetchTodayPrograms(context);
+    context.read<HomeViewModel>().fetchUpComingPrograms(context);
+    context.read<HomeViewModel>().fetchArchivedPrograms(context);
+    context.read<HomeViewModel>().fetchAllCategories(context);
+  }
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final homeViewModel = context.watch<HomeViewModel>();
     final themeProvider = Provider.of<ThemeProvider>(context);
     final theme = themeProvider.getTheme(); // Get the current theme
 
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.zero),
+      decoration: const BoxDecoration(borderRadius: BorderRadius.zero),
       child: Drawer(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.zero),
+        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
         width: MediaQuery.of(context).size.width * 0.675,
         backgroundColor: theme.drawerTheme.backgroundColor,
         child: Stack(
@@ -106,14 +124,34 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           isSelected: selectedItem == 'आज के कार्यक्र',
                           onTap: () {
                             setSelectedItem('आज के कार्यक्र');
+                            Navigator.push(
+                                context,
+                                FadePageRoute(
+                                    builder: (BuildContext context) =>
+                                        EventListView(
+                                          eventList:
+                                              homeViewModel.todayPrograms,
+                                          program: StringValue.todayProgram,
+                                          ShowProgram: true,
+                                        )));
                           },
                         ),
                         CustomDrawerItem(
                           image: 'assets/logo/light.png',
                           text: 'upcoming_program'.tr(),
-                          isSelected: selectedItem == 'आज के कार्यक्रम',
+                          isSelected: selectedItem == 'आगामी के कार्यक्रम',
                           onTap: () {
-                            setSelectedItem('आज के कार्यक्रम');
+                            setSelectedItem('आगामी के कार्यक्रम');
+                            Navigator.push(
+                                context,
+                                FadePageRoute(
+                                    builder: (BuildContext context) =>
+                                        EventListView(
+                                          eventList:
+                                              homeViewModel.upConingPrograms,
+                                          program: StringValue.upcomingProgram,
+                                          ShowProgram: true,
+                                        )));
                           },
                         ),
                         CustomDrawerItem(
@@ -122,6 +160,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           isSelected: selectedItem == 'विगत कार्यक्रम',
                           onTap: () {
                             setSelectedItem('विगत कार्यक्रम');
+                            Navigator.push(
+                                context,
+                                FadePageRoute(
+                                    builder: (BuildContext context) =>
+                                        EventListView(
+                                          eventList:
+                                              homeViewModel.archivedPrograms,
+                                          program: StringValue.archivedProgram,
+                                          ShowProgram: true,
+                                        )));
                           },
                         ),
                         CustomDrawerItem(
@@ -130,6 +178,12 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           isSelected: selectedItem == 'कला विधायें',
                           onTap: () {
                             setSelectedItem('कला विधायें');
+                            Navigator.push(
+                                context,
+                                FadePageRoute(
+                                  builder: (context) => CategorysListView(
+                                      categoryList: homeViewModel.category),
+                                ));
                           },
                         ),
                         CustomDrawerItem(

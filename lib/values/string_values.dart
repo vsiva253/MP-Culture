@@ -48,6 +48,21 @@ class StringValue {
   static String updateAccount = "update_account".tr();
   static String register = "registration".tr();
   static String cancel = "cancel".tr();
+  static String close = "close".tr();
+  static String copy = "copy".tr();
+  static String contactWithUs = "contact_wit_us".tr();
+  static String emailCopyDone = "email_copy_done".tr();
+  static String loginForView = "login_for_view".tr();
+  static String loginForProgram = "login_for_view_program".tr();
+  //--------------- url no need to tranlate -------------------------//
+  static const String privicyUrl =
+      "https://jusmarktech.in/Mp_culture_app_privacy_policy.html";
+  static const String artistRegisterUrl =
+      "https://jusmarktech.in/mpculturedept/artistregistration.php";
+  static const String contactEmail = "proculturemp@gmail.com";
+
+  //----------.....----- Update function ------------.....-------------//
+
   static void updateValues() {
     welcome = "welcome".tr();
     fullName = "full_name".tr();
@@ -95,6 +110,11 @@ class StringValue {
     updateSave = "save_update".tr();
     updateAccount = "update_account".tr();
     register = "registration".tr();
-    cancel = "cancel".tr();
+    close = "close".tr();
+    copy = "copy".tr();
+    contactWithUs = "contact_wit_us".tr();
+    emailCopyDone = "email_copy_done".tr();
+    loginForView = "login_for_view".tr();
+    loginForProgram = "login_for_view_program".tr();
   }
 }

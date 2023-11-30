@@ -29,12 +29,13 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-    StringValue.updateValues();
+
     final userViewModel = Provider.of<UserViewModel>(context);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08), // Set the color of the status bar
       // Set the color of the navigation bar (if present)
     ));
+    StringValue.updateValues();
     return Scaffold(
       body: Stack(
         children: [
@@ -69,7 +70,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                       child: Align(
                         alignment: Alignment.centerRight,
                         child: DropdownButton<String>(
-                          value: themeProvider.selectedLanguage,
+                          value: themeProvider.isEnglish ? "English" : "Hindi",
                           onChanged: (String? newValue) {
                             setState(() {
                               themeProvider.selectedLanguage = newValue!;
@@ -354,14 +355,11 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                                               FadePageRoute(
                                                   builder: (context) =>
                                                       const LoginScreen()));
-                                          // Register logic here585858
-                                          print(
-                                              'Registered: SMS - ${userPreferences.smsSelected}, Email - ${userPreferences.emailSelected}, Both - ${userPreferences.bothSelected}');
                                         }
                                       : null,
                                   child: Text(
                                     StringValue.register,
-                                    style: TextStyle(color: Colors.white),
+                                    style: const TextStyle(color: Colors.white),
                                   ),
                                 ),
                               ),
@@ -386,10 +384,12 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                                             builder: (context) =>
                                                 CustomBottomBar(
                                                   selectedIndex: 0,
-                                                ))); // Close the screen
+                                                )));
+                                    // Close the screen
                                   },
-                                  child: Text(StringValue.cancel,
-                                      style: TextStyle(color: Colors.white)),
+                                  child: Text("cancel".tr(),
+                                      style:
+                                          const TextStyle(color: Colors.white)),
                                 ),
                               ),
                             ],

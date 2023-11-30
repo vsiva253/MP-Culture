@@ -47,5 +47,11 @@
   "save_update": "Save Update",
   "update_account": "Update Account",
   "registration": "Registration",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "close": "Close",
+  "copy": "Copy",
+  "contact_wit_us": "Contact With Us",
+  "email_copy_done": "Email Copied!",
+  "login_for_view": "Please login to view this screen.",
+  "login_for_view_program": "Please login to view Programs."
 }
