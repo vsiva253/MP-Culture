@@ -45,7 +45,7 @@ class _ImageSliderState extends State<ImageSlider> {
                   ),
                   child: url != null
                       ? Image.network(
-                          url ?? "NA",
+                          url,
                           fit: BoxFit.cover,
                         )
                       : Image.asset(
