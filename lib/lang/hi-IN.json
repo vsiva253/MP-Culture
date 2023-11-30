@@ -53,6 +53,13 @@
   "contact_wit_us": "हमारे साथ संपर्कल के लिए|",
   "email_copy_done": "ईमेल कॉपी किया गया|",
   "login_for_view": "कृपया इस स्क्रीन को देखने के लिए लॉगिन करें|",
-  "login_for_view_program": "कृपया इस कार्यक्रम को देखने के लिए लॉगिन करें|"
+  "login_for_view_program": "कृपया इस कार्यक्रम को देखने के लिए लॉगिन करें|",
+  "art_forms": "कला प्राकर",
+  "venue": "वेणु",
+  "artist_datetime": "कला का समय",
+  "artist_description": "कला के बारे में",
+  "gallery_not": "गैलरी उपलभ्द नही है",
+  "more_info": "अधिक जानकारी"
+  
  
 }

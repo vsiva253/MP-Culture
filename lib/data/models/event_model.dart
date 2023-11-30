@@ -16,10 +16,10 @@ class EventData {
   final String? district;
   final String? city;
   final String? pincode;
-  final String? profileImg1;
-  final String? profileImg2;
-  final String? profileImg3;
-  final String? profileImg4;
+  final String? profileImg;
+  final String? bannerImg;
+  final String? bannerImg1;
+  final String? attachmentEmailImg;
   final String? dateOfEmail;
   final String? about;
   final String? departmentBy;
@@ -46,10 +46,10 @@ class EventData {
     this.district,
     this.city,
     this.pincode,
-    this.profileImg1,
-    this.profileImg2,
-    this.profileImg3,
-    this.profileImg4,
+    this.profileImg,
+    this.bannerImg,
+    this.bannerImg1,
+    this.attachmentEmailImg,
     this.dateOfEmail,
     this.about,
     this.departmentBy,
@@ -81,10 +81,10 @@ class EventData {
       district: json['district'],
       city: json['city'],
       pincode: json['pincode'],
-      profileImg1: json['profile_img1'],
-      profileImg2: json['profile_img2'],
-      profileImg3: json['profile_img3'],
-      profileImg4: json['profile_img4'],
+      profileImg: json['profile_img'],
+      bannerImg: json['banner_img'],
+      bannerImg1: json['banner_img1'],
+      attachmentEmailImg: json['attachment_email_img'],
       dateOfEmail: json['date_of_email'],
       about: json['about'],
       departmentBy: json['department_by'],

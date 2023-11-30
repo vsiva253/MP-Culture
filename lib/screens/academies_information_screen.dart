@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:marquee/marquee.dart';
 import 'package:mpc/data/models/academies_model.dart';
@@ -22,7 +23,9 @@ class _AcademiesInformationScreenState
   @override
   void initState() {
     super.initState();
-    context.read<HomeViewModel>().fetchSingleAcademiec(context, widget.acd.id!);
+    context
+        .read<HomeViewModel>()
+        .fetchSingleAcademiec(context, widget.acd.id ?? "NA");
   }
 
   @override
@@ -125,7 +128,7 @@ class _AcademiesInformationScreenState
                           width: 5,
                         ),
                         Text(
-                          homeViewModel.singleAacademies.deptAddress!,
+                          homeViewModel.singleAacademies.deptAddress ?? "NA",
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: TextStyle(
@@ -154,15 +157,14 @@ class _AcademiesInformationScreenState
                     color: Colors.grey.withOpacity(0.6),
                   ),
                   Container(
-                    padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 15),
+                    padding: const EdgeInsets.only(left: 16, right: 16, top: 5),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Align(
                           alignment: Alignment.centerLeft,
                           child: GradientText(
-                            "About",
+                            StringValue.about,
                             style: const TextStyle(
                                 fontSize: 24,
                                 color: Color(0xFF000000),
@@ -175,17 +177,21 @@ class _AcademiesInformationScreenState
                           ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 8,
                         ),
-                        Text(
-                          homeViewModel.singleAacademies.deptAbout!,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w400,
-                            color: Color(0xFF797494),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text(
+                            homeViewModel.singleAacademies.deptAbout ?? "NA",
+                            style: const TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF797494),
+                            ),
+                            maxLines: homeViewModel.isExpanded ? 1000 : 3,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                          maxLines: homeViewModel.isExpanded ? 1000 : 3,
-                          overflow: TextOverflow.ellipsis,
                         ),
                         GestureDetector(
                           child: Row(
@@ -224,7 +230,7 @@ class _AcademiesInformationScreenState
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             GradientText(
-                              "More Information",
+                              "more_info".tr(),
                               style: const TextStyle(
                                   fontSize: 20,
                                   color: Color(0xFF000000),
@@ -257,7 +263,7 @@ class _AcademiesInformationScreenState
 
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 10),
+                        const EdgeInsets.only(left: 21, right: 16, top: 10),
                     child: Column(
                       children: [
                         Row(
@@ -271,7 +277,8 @@ class _AcademiesInformationScreenState
                               width: 5,
                             ),
                             Text(
-                              homeViewModel.singleAacademies.deptContact!,
+                              homeViewModel.singleAacademies.deptContact ??
+                                  "NA",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -293,7 +300,8 @@ class _AcademiesInformationScreenState
                               width: 5,
                             ),
                             Text(
-                              homeViewModel.singleAacademies.deptWebsite!,
+                              homeViewModel.singleAacademies.deptWebsite ??
+                                  "NA",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -315,7 +323,7 @@ class _AcademiesInformationScreenState
                               width: 5,
                             ),
                             Text(
-                              homeViewModel.singleAacademies.deptEmail!,
+                              homeViewModel.singleAacademies.deptEmail ?? "NA",
                               style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.w400,
@@ -326,7 +334,7 @@ class _AcademiesInformationScreenState
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Divider(
@@ -338,6 +346,7 @@ class _AcademiesInformationScreenState
                     program: "अकादमी के कार्यक्रम",
                     showProgram: false,
                   ),
+                  const SizedBox(height: 20),
                   // Align(
                   //   alignment: Alignment.centerLeft,
                   //   child: Container(

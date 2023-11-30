@@ -33,12 +33,19 @@ class _EventCardState extends State<EventCard> {
             children: [
               Stack(
                 children: [
-                  Image.asset(
-                    'assets/Event.jpg',
-                    height: 182.86,
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  ),
+                  widget.event.profileImg != null
+                      ? Image.network(
+                          widget.event.profileImg ?? "NA",
+                          height: 180,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          'assets/Event.jpg',
+                          height: 180,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                   Positioned(
                     top: 0,
                     left: 106,

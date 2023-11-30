@@ -4,7 +4,7 @@ import 'package:mpc/components/theme_data.dart';
 import 'package:provider/provider.dart';
 
 class ImageSlider extends StatefulWidget {
-  final List<String> imageUrls;
+  final List<String?> imageUrls;
 
   const ImageSlider({super.key, required this.imageUrls});
   @override
@@ -43,10 +43,15 @@ class _ImageSliderState extends State<ImageSlider> {
                         ? Color(0xFF505050)
                         : Color(0xFFF0F0F0),
                   ),
-                  child: Image.network(
-                    url,
-                    fit: BoxFit.cover,
-                  ),
+                  child: url != null
+                      ? Image.network(
+                          url,
+                          fit: BoxFit.cover,
+                        )
+                      : Image.asset(
+                          'assets/EventHeader.jpg',
+                          fit: BoxFit.cover,
+                        ),
                 );
               },
             );

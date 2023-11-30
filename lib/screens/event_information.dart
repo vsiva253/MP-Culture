@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
+import 'package:mpc/widgets/homepage_widgets/image_sliding.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -23,6 +25,48 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
         .fetchSingleProgram(context, widget.eventData.id!);
   }
 
+  Widget textRow(String name, String value) {
+    return Row(
+      children: [
+        SizedBox(
+          child: Text(
+            name,
+            style: const TextStyle(
+                fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
+          ),
+        ),
+        const SizedBox(
+          width: 10,
+        ),
+        Text(
+          // widget.eventData.artists?[0].name ??
+          //     "NA", // "भारत की लोकभारत की लोक.....",
+          value,
+          maxLines: 5,
+          overflow: TextOverflow.ellipsis,
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: FontWeight.w400,
+            color: Colors.grey[700],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget showArtist(ArtistModel value) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 5),
+      child: Column(children: [
+        textRow("${StringValue.artistName}:", value.name ?? "NA"),
+        textRow("${'art_forms'.tr()}:", value.category ?? "NA"),
+        textRow("${'artist_datetime'.tr()}:", value.artistDatetime ?? "NA"),
+        textRow("${'artist_description'.tr()}:", value.description ?? "NA"),
+        const SizedBox(height: 20)
+      ]),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     StringValue.updateValues();
@@ -35,22 +79,23 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
         child: CustomAppBarSecondary(),
       ),
       body: homeViewModel.isLoading
-          ? const Center(
+          ? Center(
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
               child: Column(
                 children: [
                   Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: 228,
-                    child: Image.asset(
-                      'assets/EventHeader.jpg',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                      width: MediaQuery.of(context).size.width,
+                      height: 228,
+                      child: ImageSlider(imageUrls: [
+                        widget.eventData.bannerImg,
+                        widget.eventData.bannerImg1,
+                      ])),
                   Container(
+                    margin: const EdgeInsets.only(left: 16, right: 15),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         // Padding(
                         //   padding: const EdgeInsets.only(
@@ -84,6 +129,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         //           ),
                         //         ),
                         //       ),
+
                         //     ),
                         //   ),
                         // ),
@@ -94,13 +140,12 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             fontFamily: 'Hind',
                             fontSize: 24.0,
                             fontWeight: FontWeight.w500,
-                            height: 1.0,
-                            letterSpacing: -1,
+                            height: 1.5,
                           ),
                           colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
                         ),
                         const SizedBox(
-                          height: 15,
+                          height: 20,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 16),
@@ -116,7 +161,6 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                     fontSize: 24.0,
                                     fontWeight: FontWeight.w500,
                                     height: 1.5,
-                                    letterSpacing: -1,
                                   ),
                                   colors: const [
                                     Color(0xFFC33764),
@@ -124,8 +168,8 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                   ],
                                 ),
                               ),
-                              const SizedBox(
-                                height: 5,
+                              SizedBox(
+                                height: 6,
                               ),
                               Column(
                                 children: [
@@ -148,9 +192,6 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(
-                                    height: 2,
-                                  ),
                                   Row(
                                     children: [
                                       Icon(
@@ -170,19 +211,13 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(
-                                    height: 3,
-                                  ),
-                                  const Padding(
-                                    padding: EdgeInsets.only(left: 25),
-                                    child: Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text("View on Maps",
-                                          style: TextStyle(
-                                              fontSize: 14,
-                                              fontWeight: FontWeight.w500,
-                                              color: Color(0xFFA01B8A))),
-                                    ),
+                                  const Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text("View on Maps",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color(0xFFA01B8A))),
                                   ),
                                 ],
                               )
@@ -245,13 +280,13 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               left: 16, right: 16, top: 10),
                           child: Row(
                             children: [
-                              const SizedBox(
+                              SizedBox(
                                 width: 70,
                                 child: Text(
-                                  "कलाकार:",
-                                  style: TextStyle(
+                                  "${"kalakar".tr()}:",
+                                  style: const TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
                               ),
@@ -279,11 +314,11 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             children: [
                               Container(
                                 width: 70,
-                                child: const Text(
+                                child: Text(
                                   "कला प्रकार:",
                                   style: TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
                               ),
@@ -311,11 +346,11 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             children: [
                               Container(
                                 width: 70,
-                                child: const Text(
+                                child: Text(
                                   "प्रवेश :",
                                   style: TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
                               ),
@@ -342,11 +377,11 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             children: [
                               Container(
                                 width: 70,
-                                child: const Text(
+                                child: Text(
                                   "वेणु:",
                                   style: TextStyle(
                                       fontSize: 15,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
                               ),
@@ -537,18 +572,22 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         const SizedBox(
                           height: 1.50,
                         ),
-                        Text(
-                          data.about ?? "NA",
-                          style: const TextStyle(
-                              fontSize: 16, // Set text size
-                              fontWeight: FontWeight.w400,
-                              color: Color(0xFF797494) // Set font weight
-                              ),
+                        Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.only(left: 5),
+                          child: Text(
+                            data.about ?? "NA",
+                            style: const TextStyle(
+                                fontSize: 16, // Set text size
+                                fontWeight: FontWeight.w400,
+                                color: Color(0xFF797494) // Set font weight
+                                ),
 
-                          maxLines: homeViewModel.isExpanded
-                              ? 1000
-                              : 3, // Show only three lines if not expanded
-                          overflow: TextOverflow.ellipsis,
+                            maxLines: homeViewModel.isExpanded
+                                ? 1000
+                                : 3, // Show only three lines if not expanded
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                         GestureDetector(
                           child: Row(
@@ -578,7 +617,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(
-                            StringValue.artistName,
+                            'kalakar'.tr(),
                             style: const TextStyle(
                                 fontSize: 24,
                                 fontWeight: FontWeight.w500,
@@ -589,36 +628,14 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                           padding: const EdgeInsets.only(
                               left: 0, right: 16, top: 10),
                           child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
+                            scrollDirection: Axis.vertical,
+                            child: Column(
                               children: List.generate(
                                   widget.eventData.artists?.length ?? 0,
                                   (index) {
-                                var data = widget.eventData.artists?[index];
-                                return Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 158,
-                                        width: 158,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                        ),
-                                        child: Image.asset("assets/Artist.jpg",
-                                            fit: BoxFit.cover),
-                                      ),
-                                      Text(
-                                        data?.name ?? "NA",
-                                        style: const TextStyle(
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color(0xFF000000)),
-                                      )
-                                    ],
-                                  ),
-                                );
+                                ArtistModel? data =
+                                    widget.eventData.artists?[index];
+                                return showArtist(data ?? ArtistModel());
                               }),
                             ),
                           ),
@@ -641,35 +658,39 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                 color: Color(0xFF000000)),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 0, right: 16, top: 10),
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: List.generate(
-                                6,
-                                (index) => Padding(
-                                  padding: const EdgeInsets.only(right: 16),
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        height: 158,
-                                        width: 158,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                        ),
-                                        child: Image.asset("assets/Artist.jpg",
-                                            fit: BoxFit.cover),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        Container(
+                            alignment: Alignment.centerLeft,
+                            padding: const EdgeInsets.only(left: 5),
+                            child: Text("gallery_not".tr())),
+                        // Padding(
+                        //   padding: const EdgeInsets.only(
+                        //       left: 0, right: 16, top: 10),
+                        //   child: SingleChildScrollView(
+                        //     scrollDirection: Axis.horizontal,
+                        //     child: Row(
+                        //       children: List.generate(
+                        //         6,
+                        //         (index) => Padding(
+                        //           padding: const EdgeInsets.only(right: 16),
+                        //           child: Column(
+                        //             children: [
+                        //               Container(
+                        //                 height: 158,
+                        //                 width: 158,
+                        //                 decoration: BoxDecoration(
+                        //                   borderRadius:
+                        //                       BorderRadius.circular(4),
+                        //                 ),
+                        //                 child: Image.asset("assets/Artist.jpg",
+                        //                     fit: BoxFit.cover),
+                        //               ),
+                        //             ],
+                        //           ),
+                        //         ),
+                        //       ),
+                        //     ),
+                        //   ),
+                        // ),
                         const SizedBox(height: 23)
                       ],
                     ),

@@ -21,7 +21,7 @@
   "date": "Date",
   "time": "Time",
   "organizer": "Organizer",
-  "kalakar": "Kalakar",
+  "kalakar": "Artists",
   "about_the_programme": "About the Programme",
   "artist_name": "Artist Name",
   "entry": "Entry",
@@ -53,5 +53,11 @@
   "contact_wit_us": "Contact With Us",
   "email_copy_done": "Email Copied!",
   "login_for_view": "Please login to view this screen.",
-  "login_for_view_program": "Please login to view Programs."
+  "login_for_view_program": "Please login to view Programs.",
+  "art_forms": "Art Forms",
+  "venue": "Venue",
+  "artist_datetime": "Artist performers time",
+  "artist_description": "Description",
+  "gallery_not": "Gallerys are empity",
+  "more_info": "More Information"
 }
