@@ -25,8 +25,8 @@ class _EventCardState extends State<EventCard> {
             ));
       },
       child: SizedBox(
-        height: 368,
-        width: 174,
+        height: 398,
+        width: MediaQuery.of(context).size.width / 2,
         child: Card(
           elevation: 1,
           child: Column(
@@ -52,7 +52,7 @@ class _EventCardState extends State<EventCard> {
                     right: 0,
                     child: Container(
                       padding: const EdgeInsets.only(left: 1, top: 1),
-                      height: 10,
+                      height: 12,
                       width: double.infinity,
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
@@ -60,7 +60,7 @@ class _EventCardState extends State<EventCard> {
                             Color(0xFFC33764),
                             Color(0xFF1D2671),
                           ],
-                          begin: Alignment.topLeft,
+                          begin: Alignment.bottomLeft,
                           end: Alignment.bottomRight,
                         ),
                       ),
@@ -72,18 +72,18 @@ class _EventCardState extends State<EventCard> {
                             color: Color(0xFFFFFFFF),
                             fontFamily: 'HIND',
                             fontWeight: FontWeight.w500,
-                            fontSize: 5,
+                            fontSize: 6,
                           ),
                         ),
                       ),
                     ),
                   ),
                   Positioned(
-                    top: 9,
+                    top: 12,
                     left: 106,
                     right: 0,
                     child: Container(
-                      height: 9,
+                      height: 12,
                       width: double.infinity,
                       decoration: const BoxDecoration(
                         gradient: LinearGradient(
@@ -91,7 +91,7 @@ class _EventCardState extends State<EventCard> {
                             Color(0xFFC33764),
                             Color(0xFF714ACF),
                           ],
-                          begin: Alignment.topLeft,
+                          begin: Alignment.bottomLeft,
                           end: Alignment.bottomRight,
                         ),
                       ),
@@ -103,7 +103,7 @@ class _EventCardState extends State<EventCard> {
                             color: Color(0xFFFFFFFF),
                             fontFamily: 'HIND',
                             fontWeight: FontWeight.w500,
-                            fontSize: 5,
+                            fontSize: 6,
                           ),
                         ),
                       ),
@@ -121,17 +121,21 @@ class _EventCardState extends State<EventCard> {
                         Color(0xFF1D2671),
                       ],
                       begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
+                      end: Alignment.centerRight,
                     ),
                   ),
                   child: Column(children: [
-                    SizedBox(
-                        height: 20,
+                    Container(
                         width: double.infinity,
+                        decoration: BoxDecoration(
+                            border: Border(
+                                bottom: BorderSide(
+                                    color: const Color(0xFFFFFFFF)
+                                        .withOpacity(0.2)))),
                         child: Center(
                             child: Padding(
-                          padding:
-                              const EdgeInsets.only(top: 2, left: 8, right: 8),
+                          padding: const EdgeInsets.only(
+                              top: 3, bottom: 3, right: 0),
                           child: Text(
                             widget.event.programName ?? "NA",
                             maxLines: 1,
@@ -141,20 +145,19 @@ class _EventCardState extends State<EventCard> {
                                 fontSize: 15,
                                 fontWeight: FontWeight.w500,
                                 fontFamily: 'Hind',
-                                letterSpacing: -1),
+                                letterSpacing: 0),
                           ),
                         ))),
-                    const Divider(
-                      color: Colors.grey,
-                      thickness: 0.4,
-                    ),
+                    // const Divider(
+                    //   color: Colors.grey,
+                    //   thickness: 0.3,
+                    // ),
                     Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.only(left: 8.5, right: 8.5),
+                      padding:
+                          const EdgeInsets.only(left: 8.5, right: 8.5, top: 3),
                       child: Column(
                         children: [
                           SizedBox(
-                            width: double.infinity,
                             child: Column(
                               children: [
                                 Row(
@@ -165,27 +168,29 @@ class _EventCardState extends State<EventCard> {
                                           color: Color(0xFFFFFFFF),
                                           fontFamily: 'HIND',
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 11),
+                                          fontSize: 14),
                                     ),
-                                    Text(
-                                      // 'भारत की लोकभारत...',
-                                      widget.event.artists != null
-                                          ? "${widget.event.artists?[0].name}"
-                                          : "NA",
-                                      style: TextStyle(
-                                        color: const Color(0xFFFFFFFF)
-                                            .withOpacity(0.8),
-                                        fontFamily: 'HIND',
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: 10,
+                                    Expanded(
+                                      child: Text(
+                                        // 'भारत की लोकभारत...',
+                                        widget.event.artists != null
+                                            ? "${widget.event.artists?[0].name}"
+                                            : "NA",
+                                        style: TextStyle(
+                                          color: const Color(0xFFFFFFFF)
+                                              .withOpacity(0.8),
+                                          fontFamily: 'HIND',
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 13,
+                                        ),
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                       ),
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ],
                                 ),
                                 const SizedBox(
-                                  height: 5,
+                                  height: 2,
                                 ),
                                 Row(
                                   children: [
@@ -195,7 +200,7 @@ class _EventCardState extends State<EventCard> {
                                           color: Color(0xFFFFFFFF),
                                           fontFamily: 'HIND',
                                           fontWeight: FontWeight.w500,
-                                          fontSize: 11),
+                                          fontSize: 14),
                                     ),
                                     Text(
                                       widget.event.entryType ?? "NA",
@@ -204,7 +209,7 @@ class _EventCardState extends State<EventCard> {
                                             .withOpacity(0.8),
                                         fontFamily: 'HIND',
                                         fontWeight: FontWeight.w500,
-                                        fontSize: 10,
+                                        fontSize: 13,
                                       ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,
@@ -228,7 +233,7 @@ class _EventCardState extends State<EventCard> {
                                   color: Color(0xFFFFFFFF),
                                   fontFamily: 'HIND',
                                   fontWeight: FontWeight.w500,
-                                  fontSize: 13),
+                                  fontSize: 14),
                             )),
                           ),
                           Text(
@@ -239,14 +244,12 @@ class _EventCardState extends State<EventCard> {
                               color: const Color(0xFFFFFFFF).withOpacity(0.7),
                               fontFamily: 'HIND',
                               fontWeight: FontWeight.w500,
-                              fontSize: 10,
+                              fontSize: 13,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 5,
                           ),
                           SizedBox(
                             height: 22,
+                            width: 100,
                             child: ElevatedButton(
                                 onPressed: () {},
                                 style: ButtonStyle(
@@ -267,27 +270,29 @@ class _EventCardState extends State<EventCard> {
                                       const Icon(
                                         Icons.location_on_outlined,
                                         color: Color(0xFFFFFFFF),
-                                        size: 6,
+                                        size: 10,
                                       ),
                                       const SizedBox(
                                         width: 3,
                                       ),
                                       Text(
                                         widget.event.district ?? "NA",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
                                         style: const TextStyle(
                                             color: Color(0xFFFFFFFF),
                                             fontWeight: FontWeight.w500,
-                                            fontSize: 7),
+                                            fontSize: 10),
                                       )
                                     ],
                                   ),
                                 )),
                           ),
                           const SizedBox(
-                            height: 5,
+                            height: 3,
                           ),
                           SizedBox(
-                            width: 80,
+                            width: 100,
                             height: 22,
                             child: ElevatedButton(
                               onPressed: () {
@@ -312,18 +317,14 @@ class _EventCardState extends State<EventCard> {
                                           side: BorderSide(
                                               color: const Color(0xFFFFFFFF)
                                                   .withOpacity(0.2))))),
-                              child: const Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'Show More',
-                                    style: TextStyle(
-                                        color: Color(0xFFFFFFFF),
-                                        fontSize: 5,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
+                              child: Text(
+                                'Show More',
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    color: Color(0xFFFFFFFF),
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w500),
                               ),
                             ),
                           ),

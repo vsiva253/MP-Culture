@@ -117,7 +117,6 @@ class _HomePageState extends State<HomePage> {
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Container(
-                                      height: 19,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,

@@ -79,7 +79,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
         child: CustomAppBarSecondary(),
       ),
       body: homeViewModel.isLoading
-          ? const Center(
+          ? Center(
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
@@ -89,8 +89,8 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                       width: MediaQuery.of(context).size.width,
                       height: 228,
                       child: ImageSlider(imageUrls: [
-                        widget.eventData.bannerImg ?? "NA",
-                        widget.eventData.bannerImg1 ?? "NA",
+                        widget.eventData.bannerImg,
+                        widget.eventData.bannerImg1,
                       ])),
                   Container(
                     margin: const EdgeInsets.only(left: 16, right: 15),
@@ -133,109 +133,96 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         //     ),
                         //   ),
                         // ),
-                        // GradientText(
-                        //   data.programCategory ??
-                        //       "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
-                        //   style: const TextStyle(
-                        //     fontFamily: 'Hind',
-                        //     fontSize: 24.0,
-                        //     fontWeight: FontWeight.w500,
-                        //     height: 1.5,
-                        //   ),
-                        //   colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
-                        // ),
-                        // const SizedBox(
-                        //   height: 20,
-                        // ),
-                        Container(
-                          height: 34,
-                          alignment: Alignment.center,
-                          width: MediaQuery.of(context).size.width * 0.4,
-                          margin: const EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFCE6ED1),
-                            borderRadius: BorderRadius.circular(8),
+                        GradientText(
+                          data.programCategory ??
+                              "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
+                          style: const TextStyle(
+                            fontFamily: 'Hind',
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w500,
+                            height: 1.5,
                           ),
-                          child: Text(
-                            data.programCategory ?? "NA",
-                            style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w500),
-                          ),
+                          colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
                         ),
-                        const SizedBox(height: 10),
-                        Column(
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: GradientText(
-                                data.programName ??
-                                    "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
-                                style: const TextStyle(
-                                  fontFamily: 'Hind',
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.w500,
-                                  height: 1.5,
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16),
+                          child: Column(
+                            children: [
+                              Align(
+                                alignment: Alignment.centerLeft,
+                                child: GradientText(
+                                  data.programName ??
+                                      "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
+                                  style: const TextStyle(
+                                    fontFamily: 'Hind',
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.w500,
+                                    height: 1.5,
+                                  ),
+                                  colors: const [
+                                    Color(0xFFC33764),
+                                    Color(0xFF1D2671)
+                                  ],
                                 ),
-                                colors: const [
-                                  Color(0xFFC33764),
-                                  Color(0xFF1D2671)
-                                ],
                               ),
-                            ),
-                            const SizedBox(height: 6),
-                            Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.calendar_month_outlined,
-                                      color: Colors.grey[600],
-                                      size: 20,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "${data.startingDate ?? "NA"} at ${data.startingTime ?? "NA"}",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.grey[600]),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Icon(
-                                      Icons.location_on_outlined,
-                                      color: Colors.grey[600],
-                                      size: 20,
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "${data.city ?? "NA"},${data.district ?? "NA"}",
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.grey[600]),
-                                    ),
-                                  ],
-                                ),
-                                const Align(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text("View on Maps",
-                                      style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w500,
-                                          color: Color(0xFFA01B8A))),
-                                ),
-                              ],
-                            )
-                          ],
+                              SizedBox(
+                                height: 6,
+                              ),
+                              Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.calendar_month_outlined,
+                                        color: Colors.grey[600],
+                                        size: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "${data.startingDate ?? "NA"} at ${data.startingTime ?? "NA"}",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.grey[600]),
+                                      ),
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.location_on_outlined,
+                                        color: Colors.grey[600],
+                                        size: 20,
+                                      ),
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "${data.city ?? "NA"},${data.district ?? "NA"}",
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: Colors.grey[600]),
+                                      ),
+                                    ],
+                                  ),
+                                  const Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text("View on Maps",
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Color(0xFFA01B8A))),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -263,7 +250,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500),
                             ),
-                            Expanded(child: SizedBox()),
+                            const Expanded(child: SizedBox()),
                             Container(
                               height:
                                   MediaQuery.of(context).size.height / 35.61,
@@ -276,13 +263,13 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             )
                           ]),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Container(
@@ -326,16 +313,16 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                           child: Row(
                             children: [
                               Container(
-                                width: 78,
+                                width: 70,
                                 child: Text(
-                                  "${"art_forms".tr()}:",
-                                  style: const TextStyle(
+                                  "कला प्रकार:",
+                                  style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Text(
@@ -360,8 +347,8 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               Container(
                                 width: 70,
                                 child: Text(
-                                  "${"entry".tr()}:",
-                                  style: const TextStyle(
+                                  "प्रवेश :",
+                                  style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black),
@@ -391,8 +378,8 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               Container(
                                 width: 70,
                                 child: Text(
-                                  "${"venue".tr()}:",
-                                  style: const TextStyle(
+                                  "वेणु:",
+                                  style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black),
@@ -420,7 +407,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 1.50,
                   ),
                   Divider(
