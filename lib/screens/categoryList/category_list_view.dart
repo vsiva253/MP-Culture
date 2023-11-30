@@ -37,13 +37,12 @@ class CategorysListView extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: GradientText(
-                    StringValue
-                        .allCategory, //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
+                    StringValue.allCategory,
                     style: const TextStyle(
                       fontFamily: 'Hind',
                       fontSize: 18.0,
                       fontWeight: FontWeight.w600,
-                      height: 1,
+                      height: 2,
                     ),
                     colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
                   ),
@@ -63,20 +62,23 @@ class CategorysListView extends StatelessWidget {
                       var itemsToDisplay =
                           categoryList.sublist(startIndex, endIndex);
 
-                      return Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          for (var item in itemsToDisplay)
-                            WidgetsClass.buildItem(
-                              'Image1',
-                              themeProvider.isEnglish
-                                  ? item.category ?? "NA"
-                                  : item.categoryHindi ?? "NA",
-                              'assets/homepage/1.png',
-                              context,
-                              [],
-                            ),
-                        ],
+                      return SizedBox(
+                        height: 80,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            for (var item in itemsToDisplay)
+                              WidgetsClass.buildItem(
+                                'Image1',
+                                themeProvider.isEnglish
+                                    ? item.category ?? "NA"
+                                    : item.categoryHindi ?? "NA",
+                                'assets/homepage/1.png',
+                                context,
+                                [],
+                              ),
+                          ],
+                        ),
                       );
                     },
                   ),

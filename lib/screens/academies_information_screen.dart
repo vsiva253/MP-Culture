@@ -321,7 +321,7 @@ class _AcademiesInformationScreenState
                   EventListCard(
                     eventList: homeViewModel.byAcaedmiecProgramList,
                     program: "अकादमी के कार्यक्रम",
-                    ShowProgram: false,
+                    showProgram: false,
                   ),
                   // Align(
                   //   alignment: Alignment.centerLeft,

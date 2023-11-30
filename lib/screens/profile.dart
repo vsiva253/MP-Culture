@@ -70,8 +70,8 @@ class _ProfilePageState extends State<ProfilePage> {
         preferredSize: const Size.fromHeight(65),
         child: CustomAppBar(),
       ),
-      drawer: ClipRRect(
-          borderRadius: const BorderRadius.only(
+      drawer: const ClipRRect(
+          borderRadius: BorderRadius.only(
             topRight: Radius.circular(0),
             bottomRight: Radius.circular(0),
           ),
@@ -209,7 +209,7 @@ class _ProfilePageState extends State<ProfilePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Please login to view this screen'),
+                  Text(StringValue.loginForView),
                   ElevatedButton(
                     onPressed: () {
                       Navigator.push(
@@ -219,7 +219,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       );
                     },
-                    child: Text('Login'),
+                    child: Text(StringValue.logIn),
                   ),
                 ],
               ),

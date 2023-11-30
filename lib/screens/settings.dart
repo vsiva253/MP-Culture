@@ -1,14 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:mpc/components/theme_data.dart';
+import 'package:mpc/screens/user/user_preferences.dart';
+import 'package:mpc/screens/webViewPage/web_view.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/custom_container.dart';
+import 'package:mpc/widgets/custom_snackbar.dart';
 import 'package:mpc/widgets/darwer.dart';
 import 'package:provider/provider.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
@@ -37,6 +42,60 @@ class _SettingsState extends State<Settings> {
     // Initialize it with a default image path or any other valid initialization.
   }
 
+  void _showDialog(BuildContext context) {
+    StringValue.updateValues();
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(StringValue.contactWithUs),
+          content: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "${StringValue.email} :",
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  const SizedBox(width: 5),
+                  const Text(
+                    StringValue.contactEmail,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Clipboard.setData(
+                    const ClipboardData(text: StringValue.contactEmail));
+                Navigator.of(context).pop();
+                CustomSnackbar.show(context, StringValue.emailCopyDone);
+              },
+              child: Text(StringValue.copy),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(StringValue.close),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   void _changeLanguage(bool value) {
     // final locale = isEnglish ? Locale('en', 'US') : Locale('hi', 'IN');
     // AppLocalizations.of(context)!.load(locale);
@@ -55,6 +114,7 @@ class _SettingsState extends State<Settings> {
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     final userViewModel = Provider.of<UserViewModel>(context);
     var userData = userViewModel.userModel;
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -128,40 +188,56 @@ class _SettingsState extends State<Settings> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.all(18),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Center(
-                                child: Text(
-                                  userData.name ?? 'Name',
-                                  style: TextStyle(
-                                    fontFamily: 'inter',
-                                    fontSize: 18.0,
-                                    fontWeight: FontWeight.w600,
-                                    height: 1,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 5,
-                              ),
-                              Center(
-                                child: Text(
-                                  userData.email ?? 'Email',
-                                  style: TextStyle(
-                                    fontFamily: 'inter',
-                                    fontSize: 14.0,
-                                    fontWeight: FontWeight.w400,
-                                    height: 1,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Expanded(child: SizedBox()),
+                            padding: EdgeInsets.all(18),
+                            child: userViewModel.userLoginData!.isSuccess
+                                ? Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                        child: Text(
+                                          userData.name ?? 'Name',
+                                          style: const TextStyle(
+                                            fontFamily: 'inter',
+                                            fontSize: 18.0,
+                                            fontWeight: FontWeight.w600,
+                                            height: 1,
+                                          ),
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Center(
+                                        child: Text(
+                                          userData.email ?? 'Email',
+                                          style: const TextStyle(
+                                            fontFamily: 'inter',
+                                            fontSize: 14.0,
+                                            fontWeight: FontWeight.w400,
+                                            height: 1,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : TextButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const UserPreferencesScreen()),
+                                      );
+                                    },
+                                    child: Text(
+                                      StringValue.logIn,
+                                      style: const TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ))),
+                        const Expanded(child: SizedBox()),
                         Padding(
                           padding: EdgeInsets.only(right: 2),
                           child: IconButton(
@@ -254,14 +330,23 @@ class _SettingsState extends State<Settings> {
                   text: 'privacy'.tr(),
                   icon: Icons.privacy_tip_outlined,
                   showForwardArrow: true,
-                  onArrowPressed: () {},
+                  onArrowPressed: () {
+                    Navigator.push(
+                        context,
+                        FadePageRoute(
+                            builder: (context) => const WebViewScreen(
+                                  url: StringValue.privicyUrl,
+                                )));
+                  },
                   initialValue: toggledStates['Privacy'] ?? false,
                 ),
                 CustomContainer(
                   text: 'support'.tr(),
                   icon: Icons.contact_support_outlined,
                   showForwardArrow: true,
-                  onArrowPressed: () {},
+                  onArrowPressed: () {
+                    _showDialog(context);
+                  },
                   initialValue: toggledStates['Support'] ?? false,
                 ),
               ],

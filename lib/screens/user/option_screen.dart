@@ -85,7 +85,7 @@ class _OptionScreenViewState extends State<OptionScreenView> {
                     ),
                     const SizedBox(height: 15),
                     DropdownButton<String>(
-                      value: themeProvider.selectedLanguage,
+                      value: themeProvider.isEnglish ? "English" : "Hindi",
                       onChanged: (String? newValue) {
                         setState(() {
                           themeProvider.selectedLanguage = newValue!;
@@ -118,7 +118,9 @@ class _OptionScreenViewState extends State<OptionScreenView> {
                         Navigator.push(
                             context,
                             FadePageRoute(
-                                builder: (context) => const WebViewScreen()));
+                                builder: (context) => const WebViewScreen(
+                                      url: StringValue.artistRegisterUrl,
+                                    )));
                       },
                       child: button(StringValue.registrationForArtist),
                     ),

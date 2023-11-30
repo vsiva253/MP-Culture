@@ -36,7 +36,7 @@
   "archived_program": "विगत कार्यक्रम",
   "arts_categories": "कला श्रेणियाँ",
   "log_out": "लॉग आउट",
-  "login": "लॉगिन",
+  "login": "लॉगिन करें",
   "have_account": "क्या आप पहले से पंजीकृत है?",
   "sign_up": "पंजीयन करे",
   "enter_otp": "OTP दर्ज करे",
@@ -47,6 +47,12 @@
   "save_update": "बदलाव सहेजें",
   "update_account": "अकाउंट में बदलाव",
   "registration": "पंजीयन करे",
-  "cancel": "रद करें"
+  "cancel": "रद करें",
+  "close": "बंद",
+  "copy": "कॉपी",
+  "contact_wit_us": "हमारे साथ संपर्कल के लिए|",
+  "email_copy_done": "ईमेल कॉपी किया गया|",
+  "login_for_view": "कृपया इस स्क्रीन को देखने के लिए लॉगिन करें|",
+  "login_for_view_program": "कृपया इस कार्यक्रम को देखने के लिए लॉगिन करें|"
  
 }
