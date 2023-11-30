@@ -128,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                                                 fontFamily: 'Hind',
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.w600,
-                                                height: 1),
+                                                height: 2),
                                             colors: const [
                                               Color(0xFFC33764),
                                               Color(0xFF1D2671),
