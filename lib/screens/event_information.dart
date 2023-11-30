@@ -35,7 +35,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
         child: CustomAppBarSecondary(),
       ),
       body: homeViewModel.isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
@@ -94,12 +94,13 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             fontFamily: 'Hind',
                             fontSize: 24.0,
                             fontWeight: FontWeight.w500,
-                            height: 1.5,
+                            height: 1.0,
+                            letterSpacing: -1,
                           ),
                           colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 15,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 16),
@@ -115,6 +116,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                     fontSize: 24.0,
                                     fontWeight: FontWeight.w500,
                                     height: 1.5,
+                                    letterSpacing: -1,
                                   ),
                                   colors: const [
                                     Color(0xFFC33764),
@@ -122,8 +124,8 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                height: 6,
+                              const SizedBox(
+                                height: 5,
                               ),
                               Column(
                                 children: [
@@ -146,6 +148,9 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                       ),
                                     ],
                                   ),
+                                  const SizedBox(
+                                    height: 2,
+                                  ),
                                   Row(
                                     children: [
                                       Icon(
@@ -165,13 +170,19 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                       ),
                                     ],
                                   ),
-                                  const Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("View on Maps",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color(0xFFA01B8A))),
+                                  const SizedBox(
+                                    height: 3,
+                                  ),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 25),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text("View on Maps",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color(0xFFA01B8A))),
+                                    ),
                                   ),
                                 ],
                               )
@@ -204,7 +215,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                   fontSize: 20,
                                   fontWeight: FontWeight.w500),
                             ),
-                            Expanded(child: SizedBox()),
+                            const Expanded(child: SizedBox()),
                             Container(
                               height:
                                   MediaQuery.of(context).size.height / 35.61,
@@ -217,13 +228,13 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                 ),
                               ),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             )
                           ]),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 5,
                   ),
                   Container(
@@ -268,7 +279,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             children: [
                               Container(
                                 width: 70,
-                                child: Text(
+                                child: const Text(
                                   "कला प्रकार:",
                                   style: TextStyle(
                                       fontSize: 15,
@@ -276,7 +287,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                       color: Colors.black),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               Text(
@@ -300,7 +311,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             children: [
                               Container(
                                 width: 70,
-                                child: Text(
+                                child: const Text(
                                   "प्रवेश :",
                                   style: TextStyle(
                                       fontSize: 15,
@@ -331,7 +342,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             children: [
                               Container(
                                 width: 70,
-                                child: Text(
+                                child: const Text(
                                   "वेणु:",
                                   style: TextStyle(
                                       fontSize: 15,
@@ -361,7 +372,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                       ],
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 1.50,
                   ),
                   Divider(

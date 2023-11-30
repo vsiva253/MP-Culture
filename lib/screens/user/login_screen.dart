@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/components/theme_data.dart';
+import 'package:mpc/data/models/user_model.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/option_screen.dart';
 import 'package:mpc/services/auth_login.dart';
@@ -10,6 +11,7 @@ import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/custom_snackbar.dart';
 import 'package:provider/provider.dart';
+import 'package:sms_autofill/sms_autofill.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -22,6 +24,8 @@ class _LoginScreenState extends State<LoginScreen> {
   // TextEditingController mobileController = TextEditingController();
   // TextEditingController otpController = TextEditingController();
   bool showOtpField = false;
+  bool isOtpSent = false;
+
   Map<String, bool> toggledStates = {};
   // ValueNotifier to track login status
   ValueNotifier<bool> isLoggedInNotifier = ValueNotifier<bool>(false);
@@ -37,8 +41,18 @@ class _LoginScreenState extends State<LoginScreen> {
   // void initState() {
   //   super.initState();
   //   // Check if the user is already logged in
-  //   checkLoggedInUser();
+  //   _listenForCode();
   // }
+
+  Future<void> _listenForCode() async {
+    if (isOtpSent) {
+      SmsAutoFill().code.listen((String code) {
+        final loginModel = context.read<LoginSignupViewModel>();
+        loginModel.otpController.text = code;
+        print(loginModel.nameController.text);
+      });
+    }
+  }
 
   // void checkLoggedInUser() async {
   //   SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -60,6 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
       String mobileNumber, BuildContext context) async {
     setState(() {
       showOtpField = true;
+      isOtpSent = true;
     });
 
     context.read<LoginSignupViewModel>().loginClick(context);
