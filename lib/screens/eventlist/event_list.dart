@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/components/event_card.dart';
 import 'package:mpc/data/models/event_model.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 
@@ -16,6 +17,7 @@ class EventListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),

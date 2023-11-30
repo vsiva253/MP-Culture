@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
 
@@ -13,6 +14,7 @@ class _CalendarPageState extends State<CalendarPage> {
   int selectedTabIndex = 3;
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(65),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/login_screen.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:provider/provider.dart';
@@ -47,6 +48,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    StringValue.updateValues();
     final signupModel = context.watch<LoginSignupViewModel>();
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08),

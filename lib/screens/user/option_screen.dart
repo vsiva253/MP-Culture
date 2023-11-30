@@ -1,9 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/screens/user/login_screen.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
 import 'package:mpc/screens/webViewPage/web_view.dart';
+import 'package:mpc/values/string_values.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
+import 'package:provider/provider.dart';
 
 class OptionScreenView extends StatefulWidget {
   const OptionScreenView({super.key});
@@ -13,7 +17,13 @@ class OptionScreenView extends StatefulWidget {
 }
 
 class _OptionScreenViewState extends State<OptionScreenView> {
-  String selectedLanguage = 'English';
+  void _changeLanguage(bool value) {
+    if (value) {
+      context.setLocale(const Locale('en', 'US'));
+    } else {
+      context.setLocale(const Locale('hi', 'IN'));
+    }
+  }
 
   Widget button(String btnName) {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -48,6 +58,8 @@ class _OptionScreenViewState extends State<OptionScreenView> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    StringValue.updateValues();
     return Scaffold(
       body: SafeArea(
           child: Stack(
@@ -73,10 +85,12 @@ class _OptionScreenViewState extends State<OptionScreenView> {
                     ),
                     const SizedBox(height: 15),
                     DropdownButton<String>(
-                      value: selectedLanguage,
+                      value: themeProvider.selectedLanguage,
                       onChanged: (String? newValue) {
                         setState(() {
-                          selectedLanguage = newValue!;
+                          themeProvider.selectedLanguage = newValue!;
+                          themeProvider.toggleLanguage();
+                          _changeLanguage(themeProvider.isEnglish);
                         });
                       },
                       items: <String>['English', 'Hindi']
@@ -96,9 +110,7 @@ class _OptionScreenViewState extends State<OptionScreenView> {
                                 builder: (BuildContext context) =>
                                     UserPreferencesScreen()));
                       },
-                      child: button(selectedLanguage == 'English'
-                          ? "Registration for the programme"
-                          : "कार्यक्रम हेतु पंजीयन"),
+                      child: button(StringValue.registrationForProgram),
                     ),
                     const SizedBox(height: 30),
                     GestureDetector(
@@ -108,18 +120,14 @@ class _OptionScreenViewState extends State<OptionScreenView> {
                             FadePageRoute(
                                 builder: (context) => const WebViewScreen()));
                       },
-                      child: button(selectedLanguage == 'English'
-                          ? "Registration of artist"
-                          : "कलाकार का पंजीयन"),
+                      child: button(StringValue.registrationForArtist),
                     ),
                     const SizedBox(height: 20),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          selectedLanguage == 'English'
-                              ? 'Are you already registered?'
-                              : "क्या आप पहले से पंजीकृत है?",
+                          StringValue.haveAccount,
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w500,
@@ -137,9 +145,7 @@ class _OptionScreenViewState extends State<OptionScreenView> {
                                     builder: (context) => const LoginScreen()));
                           },
                           child: Text(
-                            selectedLanguage == 'English'
-                                ? 'Login'
-                                : "लॉग इन करें",
+                            StringValue.logIn,
                             style: const TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
