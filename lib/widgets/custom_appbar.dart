@@ -1,11 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:mpc/components/theme_data.dart';
+import 'package:mpc/viewmodels/user_view_modal.dart';
 
 import 'package:provider/provider.dart';
 
-class CustomAppBar extends StatelessWidget {
+class CustomAppBar extends StatefulWidget {
+  @override
+  State<CustomAppBar> createState() => _CustomAppBarState();
+}
+
+class _CustomAppBarState extends State<CustomAppBar> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserViewModel>().fetchAppbarData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userViewModel = context.watch<UserViewModel>();
     final themeProvider = Provider.of<ThemeProvider>(context);
     final theme = themeProvider.getTheme(); // Get the current theme
 
@@ -44,11 +57,22 @@ class CustomAppBar extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 1),
-                  child: Image.asset(
-                    'assets/logo/cm.png',
-                    width: 86.0,
-                    height: 46.0,
-                  ),
+                  child: userViewModel.logo != null
+                      ? Image.network(
+                          height: 46,
+                          userViewModel.logo ?? '',
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            return Image.asset(
+                              height: 46,
+                              'assets/logo/cm.png',
+                            );
+                          },
+                        )
+                      : Image.asset(
+                          'assets/logo/cm.png',
+                          height: 46,
+                        ),
                 ),
               ),
             ],
@@ -74,10 +98,22 @@ class CustomAppBar extends StatelessWidget {
             title: Center(
               child: Align(
                 alignment: Alignment.center,
-                child: Image.asset(
-                  'assets/logo/appbar.png',
-                  height: 46,
-                ),
+                child: userViewModel.centerLogo != null
+                    ? Image.network(
+                        height: 46,
+                        userViewModel.centerLogo ?? '',
+                        errorBuilder: (BuildContext context, Object error,
+                            StackTrace? stackTrace) {
+                          return Image.asset(
+                            height: 46,
+                            'assets/logo/appbar.png',
+                          );
+                        },
+                      )
+                    : Image.asset(
+                        'assets/logo/appbar.png',
+                        height: 46,
+                      ),
               ),
             ),
           ),
@@ -88,9 +124,21 @@ class CustomAppBar extends StatelessWidget {
 }
 //
 
-class CustomAppBarSecondary extends StatelessWidget {
+class CustomAppBarSecondary extends StatefulWidget {
+  @override
+  State<CustomAppBarSecondary> createState() => _CustomAppBarSecondaryState();
+}
+
+class _CustomAppBarSecondaryState extends State<CustomAppBarSecondary> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserViewModel>().fetchAppbarData();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final userViewModel = context.watch<UserViewModel>();
     final themeProvider = Provider.of<ThemeProvider>(context);
     final theme = themeProvider.getTheme(); // Get the current theme
 
@@ -129,11 +177,22 @@ class CustomAppBarSecondary extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: Padding(
                   padding: const EdgeInsets.only(right: 1),
-                  child: Image.asset(
-                    'assets/logo/cm.png',
-                    width: 86.0,
-                    height: 46.0,
-                  ),
+                  child: userViewModel.logo != null
+                      ? Image.network(
+                          height: 46,
+                          userViewModel.logo ?? '',
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            return Image.asset(
+                              height: 46,
+                              'assets/logo/cm.png',
+                            );
+                          },
+                        )
+                      : Image.asset(
+                          'assets/logo/cm.png',
+                          height: 46,
+                        ),
                 ),
               ),
             ],
@@ -159,10 +218,22 @@ class CustomAppBarSecondary extends StatelessWidget {
             title: Center(
               child: Align(
                 alignment: Alignment.center,
-                child: Image.asset(
-                  'assets/logo/appbar.png',
-                  height: 46,
-                ),
+                child: userViewModel.centerLogo != null
+                    ? Image.network(
+                        height: 46,
+                        userViewModel.centerLogo ?? '',
+                        errorBuilder: (BuildContext context, Object error,
+                            StackTrace? stackTrace) {
+                          return Image.asset(
+                            height: 46,
+                            'assets/logo/appbar.png',
+                          );
+                        },
+                      )
+                    : Image.asset(
+                        'assets/logo/appbar.png',
+                        height: 46,
+                      ),
               ),
             ),
           ),

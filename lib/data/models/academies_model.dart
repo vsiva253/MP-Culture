@@ -16,6 +16,9 @@ class DepartmentModel {
   final String? updatedAt;
   final String? date;
   final String? status;
+  final String? deptImage;
+  final String? academyBanner; // Added field
+  final String? academyNotice; // Added field
 
   DepartmentModel({
     this.id,
@@ -35,6 +38,9 @@ class DepartmentModel {
     this.updatedAt,
     this.date,
     this.status,
+    this.deptImage,
+    this.academyBanner, // Added field
+    this.academyNotice, // Added field
   });
 
   factory DepartmentModel.fromJson(Map<String, dynamic> json) {
@@ -56,6 +62,9 @@ class DepartmentModel {
       updatedAt: json['updated_at'] as String?,
       date: json['date'] as String?,
       status: json['status'] as String?,
+      deptImage: json['dept_image'] as String?,
+      academyBanner: json['academy_banner'] as String?, // Added field
+      academyNotice: json['academy_notice'] as String?, // Added field
     );
   }
 }

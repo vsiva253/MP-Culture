@@ -14,41 +14,37 @@ class RowWithCards extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     return Padding(
       padding: const EdgeInsets.only(left: 17, right: 15),
-      child: Container(
+      child: SizedBox(
         height: 70,
         // Height of the row
         child: Row(
           children: [
             WidgetsClass.buildItem(
-                'Image1',
                 themeProvider.isEnglish
                     ? categroy[0].category ?? "NA"
                     : categroy[0].categoryHindi ?? "NA",
-                'assets/homepage/6.png',
+                categroy[0].categoryIcon,
                 context,
                 categroy),
             WidgetsClass.buildItem(
-                'Image2',
                 themeProvider.isEnglish
                     ? categroy[1].category ?? "NA"
                     : categroy[1].categoryHindi ?? "NA",
-                'assets/homepage/2.png',
+                categroy[1].categoryIcon,
                 context,
                 categroy),
             WidgetsClass.buildItem(
-                'Image3',
                 themeProvider.isEnglish
                     ? categroy[2].category ?? "NA"
                     : categroy[2].categoryHindi ?? "NA",
-                'assets/homepage/3.png',
+                categroy[2].categoryIcon,
                 context,
                 categroy),
             WidgetsClass.buildItem(
-                'Image4',
                 themeProvider.isEnglish
                     ? categroy[3].category ?? "NA"
                     : categroy[3].categoryHindi ?? "NA",
-                'assets/homepage/4.png',
+                categroy[3].categoryIcon,
                 context,
                 categroy),
             // WidgetsClass.buildItem(
@@ -67,7 +63,7 @@ class RowWithCards extends StatelessWidget {
             //     'assets/homepage/6.png',
             //     context,
             //     categroy),
-            WidgetsClass.buildItem('Image7', StringValue.allCategory,
+            WidgetsClass.buildItem(StringValue.allCategory,
                 'assets/homepage/7.png', context, categroy),
           ],
         ),

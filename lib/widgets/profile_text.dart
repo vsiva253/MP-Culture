@@ -24,8 +24,8 @@ class WidgetsClass {
     );
   }
 
-  static Widget buildItem(String title, String name, String imagePath,
-      BuildContext context, List<CatrgoryModel>? list) {
+  static Widget buildItem(String name, String? imagePath, BuildContext context,
+      List<CatrgoryModel>? list) {
     return Expanded(
       child: SizedBox(
         width: 52,
@@ -71,14 +71,30 @@ class WidgetsClass {
                   children: [
                     Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(3),
-                        child: Image.asset(
-                          imagePath,
-                          height: 34,
-                          width: 34,
-                          fit: BoxFit.contain, // Set the desired image height
-                        ),
-                      ),
+                          padding: const EdgeInsets.all(3),
+                          child: imagePath != null
+                              ? Image.network(
+                                  imagePath,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (BuildContext context,
+                                      Object error, StackTrace? stackTrace) {
+                                    return Image.asset(
+                                      'assets/homepage/1.png',
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )
+                              : Image.network(
+                                  'assets/homepage/1.png',
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (BuildContext context,
+                                      Object error, StackTrace? stackTrace) {
+                                    return Image.asset(
+                                      'assets/homepage/1.png',
+                                      fit: BoxFit.cover,
+                                    );
+                                  },
+                                )),
                     ),
                   ],
                 ),
