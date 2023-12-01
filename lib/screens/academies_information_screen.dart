@@ -90,11 +90,18 @@ class _AcademiesInformationScreenState
                       Padding(
                         padding: const EdgeInsets.only(left: 16, right: 20),
                         child: Container(
-                          // height: MediaQuery.of(context).size.height / 8.14,
-                          child: Image.asset(
-                            "assets/academies_header.jpg",
-                            fit: BoxFit.fitWidth,
-                          ),
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              image: DecorationImage(
+                                  image: AssetImage(
+                                      "assets/academies_header.jpg"))),
+
+                          // child: Image.asset(
+                          //   ,
+                          //   fit: BoxFit.fitWidth,
+                          // ),
                         ),
                       ),
                       Expanded(

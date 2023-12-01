@@ -93,7 +93,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         widget.eventData.bannerImg1,
                       ])),
                   Container(
-                    margin: const EdgeInsets.only(left: 0, right: 15),
+                    margin: const EdgeInsets.only(left: 16, right: 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -161,7 +161,8 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w500,
+                                  letterSpacing: 0.5),
                             ),
                           ),
                         ),
@@ -180,11 +181,13 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                   fontSize: 28.0,
                                   fontWeight: FontWeight.w500,
                                   height: 1.5,
+                                  letterSpacing: -1,
                                 ),
                                 colors: const [
                                   Color(0xFFC33764),
                                   Color(0xFF1D2671)
                                 ],
+                                gradientDirection: GradientDirection.ltr,
                               ),
                             ),
                             const SizedBox(height: 6),
