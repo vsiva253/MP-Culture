@@ -69,11 +69,10 @@ class CategorysListView extends StatelessWidget {
                           children: [
                             for (var item in itemsToDisplay)
                               WidgetsClass.buildItem(
-                                'Image1',
                                 themeProvider.isEnglish
                                     ? item.category ?? "NA"
                                     : item.categoryHindi ?? "NA",
-                                'assets/homepage/1.png',
+                                item.categoryIcon,
                                 context,
                                 [],
                               ),

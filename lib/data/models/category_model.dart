@@ -9,6 +9,7 @@ class CatrgoryModel {
   final String? status;
   final String? cDiv;
   final String? cCompany;
+  final String? categoryIcon; // Add the missing field
 
   CatrgoryModel({
     this.id,
@@ -21,6 +22,7 @@ class CatrgoryModel {
     this.status,
     this.cDiv,
     this.cCompany,
+    this.categoryIcon, // Add the missing field
   });
 
   factory CatrgoryModel.fromJson(Map<String, dynamic> json) {
@@ -35,6 +37,7 @@ class CatrgoryModel {
       status: json['status'],
       cDiv: json['c_div'],
       cCompany: json['c_company'],
+      categoryIcon: json['category_icon'], // Add the missing field
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:mpc/data/models/academies_model.dart';
+import 'package:mpc/data/models/appbar_model.dart';
 import 'package:mpc/data/models/category_model.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/data/models/single_academiec_model.dart';
@@ -70,7 +71,7 @@ class ApiService {
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonData = json.decode(response.body);
-        return jsonData['about_us'];
+        return jsonData['about'];
       } else {
         throw Exception(
             'Failed to fetch about us content. Status code: ${response.statusCode}');
@@ -198,8 +199,7 @@ class ApiService {
         Uri.parse('https://service.codingbandar.com/Api/login'),
         body: {'mobile': mobile},
       );
-      print("status code ${response.statusCode}");
-      print("body ${response.body}");
+
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
         return responseData;
@@ -220,7 +220,6 @@ class ApiService {
         'otp': otp,
       },
     );
-    print("otp check body ${response.body}");
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
@@ -307,14 +306,32 @@ class ApiService {
         body: body,
       );
       if (response.statusCode == 200) {
-        print('Profile updated successfully.');
+        throw ('Profile updated successfully.');
       } else {
-        print('Failed to update profile. Status code: ${response.statusCode}');
+        throw ('Failed to update profile. Status code: ${response.statusCode}');
         // Handle error here
       }
     } catch (e) {
-      print('Error updating profile: $e');
+      throw ('Error updating profile: $e');
       // Handle error here
+    }
+  }
+
+  Future<List<ToolbarImagesModel>> getToolbarImages() async {
+    try {
+      final response = await http.get(Uri.parse('$baseUrl/Api/header_logo'),
+          headers: {'Authorization': 'Basic $basicAuth'});
+
+      if (response.statusCode == 200) {
+        final List<dynamic> dataList = json.decode(response.body);
+        final List<ToolbarImagesModel> toolbarImagesList =
+            dataList.map((json) => ToolbarImagesModel.fromJson(json)).toList();
+        return toolbarImagesList;
+      } else {
+        throw ('Failed to load data: ${response.statusCode}');
+      }
+    } catch (e) {
+      throw ('Failed to load data');
     }
   }
 }

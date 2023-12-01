@@ -27,27 +27,24 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
 
   Widget textRow(String name, String value) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        SizedBox(
-          child: Text(
-            name,
-            style: const TextStyle(
-                fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
-          ),
-        ),
-        const SizedBox(
-          width: 10,
-        ),
         Text(
-          // widget.eventData.artists?[0].name ??
-          //     "NA", // "भारत की लोकभारत की लोक.....",
-          value,
-          maxLines: 5,
-          overflow: TextOverflow.ellipsis,
-          style: TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w400,
-            color: Colors.grey[700],
+          name,
+          style: const TextStyle(
+              fontSize: 15, fontWeight: FontWeight.w500, color: Colors.black),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Text(
+            value,
+            maxLines: 5,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+              color: Colors.grey[700],
+            ),
           ),
         ),
       ],
@@ -88,6 +85,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                   Container(
                       width: MediaQuery.of(context).size.width,
                       height: 228,
+                      margin: const EdgeInsets.only(top: 20),
                       child: ImageSlider(imageUrls: [
                         widget.eventData.bannerImg,
                         widget.eventData.bannerImg1,
@@ -161,6 +159,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 14,
+                                  overflow: TextOverflow.ellipsis,
                                   fontWeight: FontWeight.w500,
                                   letterSpacing: 0.5),
                             ),

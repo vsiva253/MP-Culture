@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:mpc/data/models/appbar_model.dart';
 import 'package:mpc/data/models/user_login_model.dart';
 import 'package:mpc/data/models/user_model.dart';
 import 'package:mpc/data/services/api_service.dart';
@@ -16,8 +17,11 @@ class UserViewModel extends ChangeNotifier {
   LoginResponse? _savedLoginResponse;
   bool _isLoading = false;
   bool _isLogin = false;
+  String? _centerLogo = '';
+  String? _logo = '';
   bool _isSmaEnable = false;
   bool _isEmailEnable = false;
+  List<ToolbarImagesModel> _appbar = [];
 
   UserModel _userModel = UserModel();
   bool _isBoothEnable = false;
@@ -28,6 +32,9 @@ class UserViewModel extends ChangeNotifier {
   bool get isSmsEnalbe => _isSmaEnable;
   bool get isEmailEnable => _isEmailEnable;
   bool get isBothEnable => _isBoothEnable;
+  String? get centerLogo => _centerLogo;
+  String? get logo => _logo;
+  List<ToolbarImagesModel> get appbar => _appbar;
 
   LoginResponse? get userLoginData => _savedLoginResponse;
 
@@ -52,6 +59,35 @@ class UserViewModel extends ChangeNotifier {
       notifyListeners();
     } else {
       _isBoothEnable = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> fetchAppbarData() async {
+    if (appbar.isEmpty) {
+      try {
+        _isLoading = true;
+        final data = await apiService.getToolbarImages();
+        _appbar = data;
+        for (var e in data) {
+          if (e.types == "primary") {
+            print("Primary type ${e.headerLogo}\n");
+            _centerLogo = e.headerLogo;
+          } else {
+            if (e.types == "secondry" && e.status == "1" && e.isApp == "1") {
+              print("Secondry type ${e.headerLogo}\n");
+              _logo = e.headerLogo;
+            }
+          }
+        }
+      } catch (e) {
+        _isLoading = false;
+        throw ("Error fetching aboutUS: $e");
+      } finally {}
+      Future.delayed(const Duration(seconds: 1), () {
+        _isLoading = false;
+      });
+
       notifyListeners();
     }
   }
