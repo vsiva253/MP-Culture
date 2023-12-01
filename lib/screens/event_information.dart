@@ -93,7 +93,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         widget.eventData.bannerImg1,
                       ])),
                   Container(
-                    margin: const EdgeInsets.only(left: 16, right: 15),
+                    margin: const EdgeInsets.only(left: 0, right: 15),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
