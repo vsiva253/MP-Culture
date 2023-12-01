@@ -309,10 +309,10 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               SizedBox(
                                 child: Text(
                                   "${"kalakar".tr()}:",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.black),
+                                      color: Colors.grey[900]),
                                 ),
                               ),
                               const SizedBox(
@@ -340,10 +340,10 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               SizedBox(
                                 child: Text(
                                   "${"art_forms".tr()}:",
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
-                                      color: Colors.black),
+                                      color: Colors.grey[900]),
                                 ),
                               ),
                               const SizedBox(
@@ -370,10 +370,10 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             children: [
                               Text(
                                 "${"entry".tr()}:",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                                    color: Colors.grey[900]),
                               ),
                               const SizedBox(
                                 width: 10,
@@ -398,10 +398,10 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             children: [
                               Text(
                                 "${"venue".tr()}:",
-                                style: const TextStyle(
+                                style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w500,
-                                    color: Colors.black),
+                                    color: Colors.grey[900]),
                               ),
                               const SizedBox(
                                 width: 10,
