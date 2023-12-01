@@ -157,7 +157,6 @@ class _SettingsState extends State<Settings> {
                         fontFamily: 'Hind',
                         fontSize: 24.0,
                         fontWeight: FontWeight.w600,
-                        height: 1,
                       ),
                       colors: const [
                         Color(0xFFC33764),

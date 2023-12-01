@@ -5,6 +5,7 @@ import 'package:mpc/widgets/animation_page_route.dart';
 
 class EventCard extends StatefulWidget {
   final EventData event;
+
   const EventCard({Key? key, required this.event}) : super(key: key);
 
   @override
@@ -36,9 +37,19 @@ class _EventCardState extends State<EventCard> {
                   widget.event.profileImg != null
                       ? Image.network(
                           widget.event.profileImg ?? "NA",
-                          height: 180,
-                          width: double.infinity,
+                    height: 180,
+                    width: double.infinity,
                           fit: BoxFit.cover,
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+
+                            return Image.asset(
+                              'assets/Event.jpg',
+                              height: 180,
+                              width: double.infinity,
+                              fit: BoxFit.cover,
+                            );
+                          },
                         )
                       : Image.asset(
                           'assets/Event.jpg',

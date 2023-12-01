@@ -45,9 +45,16 @@ class _ImageSliderState extends State<ImageSlider> {
                   ),
                   child: url != null
                       ? Image.network(
-                          url,
-                          fit: BoxFit.cover,
-                        )
+                    url,
+                    fit: BoxFit.cover,
+                    errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                      return Image.asset(
+                        'assets/EventHeader.jpg',
+                        fit: BoxFit.cover,
+                      );
+                    },
+                  )
+
                       : Image.asset(
                           'assets/EventHeader.jpg',
                           fit: BoxFit.cover,

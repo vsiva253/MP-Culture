@@ -105,73 +105,92 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         //     child: Row(
                         //       children: List.generate(
                         //         6,
-                        //         (index) => Container(
-                        //           width: MediaQuery.of(context).size.width /
-                        //               5.096, // Adjust the width as needed
-                        //           height: MediaQuery.of(context).size.height /
-                        //               31.583,
+                        // (index) => Container(
+                        //   width: MediaQuery.of(context).size.width /
+                        //       5.096, // Adjust the width as needed
+                        //   height: MediaQuery.of(context).size.height /
+                        //       31.583,
 
-                        //           margin: const EdgeInsets.only(
-                        //               right:
-                        //                   16), // Add margin between containers
-                        //           decoration: BoxDecoration(
-                        //             color: const Color(0xFFCE6ED1),
-                        //             borderRadius: BorderRadius.circular(8),
-                        //           ),
-                        //           child: Center(
-                        //             child: Text(
-                        //               "MusicShow $index",
-                        //               style: const TextStyle(
-                        //                   color: Colors.white,
-                        //                   fontSize: 10,
-                        //                   fontWeight: FontWeight.w500),
-                        //             ),
-                        //           ),
-                        //         ),
+                        //   margin: const EdgeInsets.only(
+                        //       right:
+                        //           16), // Add margin between containers
+                        //   decoration: BoxDecoration(
+                        //     color: const Color(0xFFCE6ED1),
+                        //     borderRadius: BorderRadius.circular(8),
+                        //   ),
+                        //   child: Center(
+                        //     child: Text(
+                        //       "MusicShow $index",
+                        //       style: const TextStyle(
+                        //           color: Colors.white,
+                        //           fontSize: 10,
+                        //           fontWeight: FontWeight.w500),
+                        //     ),
+                        //   ),
+                        // ),
                         //       ),
 
                         //     ),
                         //   ),
                         // ),
-                        GradientText(
-                          data.programCategory ??
-                              "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
-                          style: const TextStyle(
-                            fontFamily: 'Hind',
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w500,
-                            height: 1.5,
+                        // GradientText(
+                        //   data.programCategory ??
+                        //       "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
+                        //   style: const TextStyle(
+                        //     fontFamily: 'Hind',
+                        //     fontSize: 24.0,
+                        //     fontWeight: FontWeight.w500,
+                        //     height: 1.5,
+                        //   ),
+                        //   colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
+                        // ),
+
+                        Container(
+                          width: MediaQuery.of(context).size.width * 0.4,
+                          height: 34,
+
+                          margin: const EdgeInsets.only(
+                              right: 16), // Add margin between containers
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFCE6ED1),
+                            borderRadius: BorderRadius.circular(8),
                           ),
-                          colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
+                          child: Center(
+                            child: Text(
+                              data.programCategory ?? "NA",
+                              style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ),
                         ),
                         const SizedBox(
-                          height: 20,
+                          height: 10,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 16),
-                          child: Column(
-                            children: [
-                              Align(
-                                alignment: Alignment.centerLeft,
-                                child: GradientText(
-                                  data.programName ??
-                                      "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
-                                  style: const TextStyle(
-                                    fontFamily: 'Hind',
-                                    fontSize: 24.0,
-                                    fontWeight: FontWeight.w500,
-                                    height: 1.5,
-                                  ),
-                                  colors: const [
-                                    Color(0xFFC33764),
-                                    Color(0xFF1D2671)
-                                  ],
+                        Column(
+                          children: [
+                            Align(
+                              alignment: Alignment.centerLeft,
+                              child: GradientText(
+                                data.programName ??
+                                    "NA", //वर्तमान मैं संचालित हो रहे कार्यक्रम
+                                style: const TextStyle(
+                                  fontFamily: 'Hind',
+                                  fontSize: 28.0,
+                                  fontWeight: FontWeight.w500,
+                                  height: 1.5,
                                 ),
+                                colors: const [
+                                  Color(0xFFC33764),
+                                  Color(0xFF1D2671)
+                                ],
                               ),
-                              SizedBox(
-                                height: 6,
-                              ),
-                              Column(
+                            ),
+                            const SizedBox(height: 6),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 5),
+                              child: Column(
                                 children: [
                                   Row(
                                     children: [
@@ -192,6 +211,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                       ),
                                     ],
                                   ),
+                                  const SizedBox(height: 3),
                                   Row(
                                     children: [
                                       Icon(
@@ -211,18 +231,22 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                       ),
                                     ],
                                   ),
-                                  const Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text("View on Maps",
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            color: Color(0xFFA01B8A))),
+                                  const SizedBox(height: 3),
+                                  const Padding(
+                                    padding: EdgeInsets.only(left: 20),
+                                    child: Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text("View on Maps",
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                              color: Color(0xFFA01B8A))),
+                                    ),
                                   ),
                                 ],
-                              )
-                            ],
-                          ),
+                              ),
+                            )
+                          ],
                         )
                       ],
                     ),
@@ -237,51 +261,49 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                     padding: const EdgeInsets.only(
                       left: 16,
                       right: 16,
-                      top: 10,
                     ),
-                    child: Container(
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "More Information",
-                              style: TextStyle(
-                                  color: Colors.grey[900],
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const Expanded(child: SizedBox()),
-                            Container(
-                              height:
-                                  MediaQuery.of(context).size.height / 35.61,
-                              width: 30,
-                              child: Center(
-                                child: Icon(
-                                  Icons.arrow_drop_down_outlined,
-                                  size: 25,
-                                  color: Colors.grey[600],
-                                ),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "More Information",
+                            style: TextStyle(
+                                color: Colors.grey[900],
+                                fontSize: 24,
+                                fontWeight: FontWeight.w500),
+                          ),
+                          const Expanded(child: SizedBox()),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height / 35.61,
+                            width: 30,
+                            child: Center(
+                              child: Icon(
+                                Icons.arrow_drop_down_outlined,
+                                size: 25,
+                                color: Colors.grey[600],
                               ),
                             ),
-                            const SizedBox(
-                              width: 5,
-                            )
-                          ]),
-                    ),
+                          ),
+                          const SizedBox(
+                            width: 5,
+                          )
+                        ]),
                   ),
                   const SizedBox(
                     height: 5,
                   ),
-                  Container(
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5),
                     child: Column(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(
-                              left: 16, right: 16, top: 10),
+                            left: 16,
+                            right: 16,
+                          ),
                           child: Row(
                             children: [
                               SizedBox(
-                                width: 70,
                                 child: Text(
                                   "${"kalakar".tr()}:",
                                   style: const TextStyle(
@@ -296,7 +318,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               Text(
                                 widget.eventData.artists?[0].name ??
                                     "NA", // "भारत की लोकभारत की लोक.....",
-                                maxLines: 1,
+                                maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 15,
@@ -312,11 +334,10 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               left: 16, right: 16, top: 2),
                           child: Row(
                             children: [
-                              Container(
-                                width: 70,
+                              SizedBox(
                                 child: Text(
-                                  "कला प्रकार:",
-                                  style: TextStyle(
+                                  "${"art_forms".tr()}:",
+                                  style: const TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
                                       color: Colors.black),
@@ -328,7 +349,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               Text(
                                 // "शिव केन्द्रित भक्ति गायन",
                                 data.programType ?? "NA",
-                                maxLines: 1,
+                                maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 15,
@@ -344,22 +365,19 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               left: 16, right: 16, top: 2),
                           child: Row(
                             children: [
-                              Container(
-                                width: 70,
-                                child: Text(
-                                  "प्रवेश :",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black),
-                                ),
+                              Text(
+                                "${"entry".tr()}:",
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
                               ),
                               const SizedBox(
                                 width: 10,
                               ),
                               Text(
                                 data.entryType ?? "NA",
-                                maxLines: 1,
+                                maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                   fontSize: 15,
@@ -375,15 +393,12 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               left: 16, right: 16, top: 2),
                           child: Row(
                             children: [
-                              Container(
-                                width: 70,
-                                child: Text(
-                                  "वेणु:",
-                                  style: TextStyle(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.black),
-                                ),
+                              Text(
+                                "${"venue".tr()}:",
+                                style: const TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
                               ),
                               const SizedBox(
                                 width: 10,
@@ -524,7 +539,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                   //                       ),
                   //                       Text(
                   //                         "सुश्री नवधा",
-                  //                         maxLines: 1,
+                  //                         maxLines:  5,
                   //                         overflow: TextOverflow.ellipsis,
                   //                         style: TextStyle(
                   //                           fontSize: 18,
@@ -534,7 +549,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                   //                       ),
                   //                       Text(
                   //                         "सुश्री नवधा त्रिवेणी कला",
-                  //                         maxLines: 1,
+                  //                         maxLines:  5,
                   //                         overflow: TextOverflow.ellipsis,
                   //                         style: TextStyle(
                   //                           fontSize: 10,
@@ -554,8 +569,10 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                   //   ),
                   // ),
                   Container(
-                    padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 15),
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                    ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
@@ -626,7 +643,9 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(
-                              left: 0, right: 16, top: 10),
+                            left: 0,
+                            right: 16,
+                          ),
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
                             child: Column(
