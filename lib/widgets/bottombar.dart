@@ -32,7 +32,7 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
       case 1:
         return const AcademiesPage();
       case 2:
-        return const LivePage();
+        return LivePage();
       case 3:
         return const CalendarPage();
       case 4:

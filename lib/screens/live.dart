@@ -21,6 +21,7 @@ class _LivePageState extends State<LivePage> {
 
   void getData() {
     context.read<HomeViewModel>().fetchOnGoingPrograms(context);
+
     context.read<UserViewModel>().userLogin(context);
   }
 
