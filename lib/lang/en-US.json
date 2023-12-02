@@ -59,5 +59,13 @@
   "artist_datetime": "Artist performers time",
   "artist_description": "Description",
   "gallery_not": "Gallerys are empity",
-  "more_info": "More Information"
+  "more_info": "More Information",
+  "home":"Home",
+  "academies":"Academies",
+  "live":"Live",
+  "calendar":"Calendar",
+  "profile":"Profile",
+  "add":"Add",
+  "read_more":"Read more",
+  "read_less":"Read less"
 }

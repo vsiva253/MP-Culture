@@ -41,6 +41,7 @@ class _AcademiesInformationScreenState
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const SizedBox(height: 15),
             SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 228,
@@ -229,7 +230,8 @@ class _AcademiesInformationScreenState
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          homeViewModel.isExpanded ? 'Read Less' : 'Read More',
+                          homeViewModel.isExpanded  ? 'read_less'.tr()
+                              : 'read_more'.tr(),
                           style: const TextStyle(color: Color(0xFF952766)),
                         ),
                       ],

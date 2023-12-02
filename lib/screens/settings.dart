@@ -276,6 +276,13 @@ class _SettingsState extends State<Settings> {
                       //   toggledStates['Email Notifications'] = value;
                       // });
                       userViewModel.toggleEmail();
+                      Future.delayed(const Duration(seconds: 1), () {
+                        context.read<UserViewModel>().notificationEnable(
+                            context,
+                            sms: userViewModel.isSmsEnalbe,
+                            email: userViewModel.isEmailEnable,
+                            data: userData);
+                      });
                     },
                     initialValue: userViewModel.isEmailEnable,
                   ),
@@ -283,14 +290,18 @@ class _SettingsState extends State<Settings> {
                 CustomContainer(
                   text: 'sms_notifications'.tr(),
                   icon: Icons.notifications,
-                  onArrowPressed: () {
-                    print('Arrow for Item 1 pressed');
-                  },
-                  onToggleChanged: (value) {
+                  onArrowPressed: () {},
+                  onToggleChanged: (value) async {
                     // setState(() {
                     //   toggledStates['SMS Notifications'] = value;
                     // });
                     userViewModel.toggleSms();
+                    Future.delayed(const Duration(seconds: 1), () {
+                      context.read<UserViewModel>().notificationEnable(context,
+                          sms: userViewModel.isSmsEnalbe,
+                          email: userViewModel.isEmailEnable,
+                          data: userData);
+                    });
                   },
                   initialValue: userViewModel.isSmsEnalbe,
                 ),
