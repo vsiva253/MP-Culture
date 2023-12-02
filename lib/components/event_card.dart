@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/screens/event_information.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventCard extends StatefulWidget {
   final EventData event;
+  final bool isLive;
+  // final bool fromLive;
 
-  const EventCard({Key? key, required this.event}) : super(key: key);
+  const EventCard({Key? key, required this.event, required this.isLive})
+      : super(key: key);
 
   @override
   State<EventCard> createState() => _EventCardState();
@@ -16,14 +20,32 @@ class _EventCardState extends State<EventCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
+      onTap: () async {
+        if (widget.isLive) {
+          if (widget.event.programLink != null) {
+            if (!await launchUrl(Uri.parse(widget.event.programLink!))) {
+              throw Exception('Could not launch ');
+            }
+          } else {
+            Navigator.push(
+              context,
+              FadePageRoute(
+                builder: (context) => EventInformationScreen(
+                  eventData: widget.event,
+                ),
+              ),
+            );
+          }
+        } else {
+          Navigator.push(
             context,
             FadePageRoute(
               builder: (context) => EventInformationScreen(
                 eventData: widget.event,
               ),
-            ));
+            ),
+          );
+        }
       },
       child: SizedBox(
         height: 398,
@@ -37,12 +59,11 @@ class _EventCardState extends State<EventCard> {
                   widget.event.profileImg != null
                       ? Image.network(
                           widget.event.profileImg ?? "NA",
-                    height: 180,
-                    width: double.infinity,
+                          height: 180,
+                          width: double.infinity,
                           fit: BoxFit.cover,
                           errorBuilder: (BuildContext context, Object error,
                               StackTrace? stackTrace) {
-
                             return Image.asset(
                               'assets/Event.jpg',
                               height: 180,
@@ -317,18 +338,21 @@ class _EventCardState extends State<EventCard> {
                                     ));
                               },
                               style: ButtonStyle(
-                                  elevation: const MaterialStatePropertyAll(0),
-                                  backgroundColor: MaterialStatePropertyAll(
-                                      Colors.black.withOpacity(0.0)),
-                                  shape: MaterialStateProperty.all<
-                                          RoundedRectangleBorder>(
-                                      RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(
-                                              color: const Color(0xFFFFFFFF)
-                                                  .withOpacity(0.2))))),
-                              child: Text(
+                                elevation: const MaterialStatePropertyAll(0),
+                                backgroundColor: MaterialStatePropertyAll(
+                                    Colors.black.withOpacity(0.0)),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                    side: BorderSide(
+                                      color: const Color(0xFFFFFFFF)
+                                          .withOpacity(0.2),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              child: const Text(
                                 'Show More',
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,

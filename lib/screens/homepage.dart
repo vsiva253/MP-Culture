@@ -184,6 +184,7 @@ class _HomePageState extends State<HomePage> {
                                 eventList: homeViewModel.todayPrograms,
                                 program: "today_program".tr(),
                                 showProgram: false,
+                                isLive: false,
                               ),
                               const SizedBox(
                                 height: 20,
@@ -196,6 +197,7 @@ class _HomePageState extends State<HomePage> {
                                             true
                                         ? false
                                         : true,
+                                isLive: false,
                               ),
                               const SizedBox(
                                 height: 20,
@@ -204,6 +206,7 @@ class _HomePageState extends State<HomePage> {
                                 eventList: homeViewModel.upConingPrograms,
                                 program: "upcoming_program".tr(),
                                 showProgram: false,
+                                isLive: false,
                               ),
                               const SizedBox(
                                 height: 20,
@@ -212,6 +215,7 @@ class _HomePageState extends State<HomePage> {
                                 eventList: homeViewModel.archivedPrograms,
                                 program: "archived_program".tr(),
                                 showProgram: false,
+                                isLive: false,
                               ),
                               const SizedBox(
                                 height: 20,

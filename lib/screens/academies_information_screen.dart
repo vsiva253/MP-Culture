@@ -230,7 +230,8 @@ class _AcademiesInformationScreenState
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         Text(
-                          homeViewModel.isExpanded  ? 'read_less'.tr()
+                          homeViewModel.isExpanded
+                              ? 'read_less'.tr()
                               : 'read_more'.tr(),
                           style: const TextStyle(color: Color(0xFF952766)),
                         ),
@@ -370,6 +371,7 @@ class _AcademiesInformationScreenState
               eventList: homeViewModel.byAcaedmiecProgramList,
               program: "अकादमी के कार्यक्रम",
               showProgram: false,
+              isLive: false,
             ),
             const SizedBox(height: 20),
             // Align(
