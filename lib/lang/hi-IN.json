@@ -59,7 +59,15 @@
   "artist_datetime": "कला का समय",
   "artist_description": "कला के बारे में",
   "gallery_not": "गैलरी उपलभ्द नही है",
-  "more_info": "अधिक जानकारी"
+  "more_info": "अधिक जानकारी",
+  "home":"होम",
+  "academies":"अकादमियां",
+  "live":"लाइव",
+  "calendar":"कैलेंडर",
+  "profile":"प्रोफ़ाइल",
+  "add":"जोड़ें",
+  "read_more":"और पढ़ें",
+  "read_less":"बंद करें"
   
  
 }

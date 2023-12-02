@@ -27,10 +27,17 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
   }
 
   @override
+  void initState() {
+    super.initState();
+    context.read<UserViewModel>().getEmailEnable();
+    context.read<UserViewModel>().getSmsEnable();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
-
     final userViewModel = Provider.of<UserViewModel>(context);
+
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08), // Set the color of the status bar
       // Set the color of the navigation bar (if present)
