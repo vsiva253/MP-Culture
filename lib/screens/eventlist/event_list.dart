@@ -74,6 +74,7 @@ class EventListView extends StatelessWidget {
                                   Expanded(
                                     child: EventCard(
                                       event: eventList![firstEventIndex],
+                                      isLive: false,
                                     ),
                                   ),
                                   const SizedBox(
@@ -82,7 +83,9 @@ class EventListView extends StatelessWidget {
                                   Expanded(
                                     child: secondEventIndex < eventList!.length
                                         ? EventCard(
-                                            event: eventList![secondEventIndex])
+                                            event: eventList![secondEventIndex],
+                                            isLive: false,
+                                          )
                                         : const SizedBox(), // Check if the second item exists
                                   ),
                                 ],

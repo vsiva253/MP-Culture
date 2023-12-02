@@ -93,6 +93,7 @@ class _ByCategoryEventListViewState extends State<ByCategoryEventListView> {
                                             event: homeViewModel
                                                     .byCategoreyProgramList[
                                                 firstEventIndex],
+                                            isLive: false,
                                           ),
                                         ),
                                         const SizedBox(
@@ -106,7 +107,9 @@ class _ByCategoryEventListViewState extends State<ByCategoryEventListView> {
                                               ? EventCard(
                                                   event: homeViewModel
                                                           .byCategoreyProgramList[
-                                                      secondEventIndex])
+                                                      secondEventIndex],
+                                                  isLive: false,
+                                                )
                                               : const SizedBox(), // Check if the second item exists
                                         ),
                                       ],
