@@ -317,6 +317,7 @@ class CustomDrawerItem extends StatelessWidget {
                         ),
                         child: Image.asset(
                           image,
+                          fit: BoxFit.cover,
                           width: 24,
                           height: 24,
                           color: isSelected

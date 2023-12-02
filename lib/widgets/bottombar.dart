@@ -160,12 +160,19 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
         gradient: LinearGradient(
           colors: [Color(0xFF1D2671), Color(0xFFC33764)],
           stops: [0.0, 1.0],
+          begin: FractionalOffset.topCenter,
+          end: FractionalOffset.bottomCenter,
           transform: GradientRotation(122.32 * 3.1415927 / 180),
         ),
       ),
-      child: Image.asset(
-        imagePath,
-        color: Colors.white, // Use Image.asset instead of Icon
+      child: Center(
+        child: Image.asset(
+          imagePath,
+          color: Colors.white,
+          height: 25,
+          width: 25,
+          fit: BoxFit.cover, // Use Image.asset instead of Icon
+        ),
       ),
     );
   }

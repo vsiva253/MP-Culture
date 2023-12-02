@@ -96,9 +96,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final appcastURL =
-        'https://culture-mp-version-ccontrol.onrender.com/appcast.xml';
-    final cfg = AppcastConfiguration(url: appcastURL, supportedOS: ['android']);
+    // final appcastURL =
+    //     'https://culture-mp-version-ccontrol.onrender.com/appcast.xml';
+    // final cfg = AppcastConfiguration(url: appcastURL, supportedOS: ['android']);
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isLoggedInNotifier =
         Provider.of<AuthProvider>(context).isLoggedInNotifier;
@@ -131,7 +131,7 @@ class _MyAppState extends State<MyApp> {
                   // User is logged in, navigate to the home screen
                   return UpgradeAlert(
                       upgrader: Upgrader(
-                        appcastConfig: cfg,
+                        // appcastConfig: cfg,
                         canDismissDialog: false,
                         showIgnore: false,
                         showLater: false,
@@ -141,11 +141,13 @@ class _MyAppState extends State<MyApp> {
                 } else {
                   return UpgradeAlert(
                       upgrader: Upgrader(
-                        appcast: Appcast(),
-                        appcastConfig: cfg,
+                        // appcast: Appcast(),
+                        // appcastConfig: cfg,
                         canDismissDialog: false,
                         showIgnore: false,
                         showLater: false,
+
+                        // debugLogging: true
 
                         // debugDisplayOnce: true,
                         durationUntilAlertAgain: Duration(seconds: 1),
