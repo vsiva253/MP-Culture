@@ -41,7 +41,8 @@ class _LivePageState extends State<LivePage> {
         preferredSize: Size.fromHeight(65),
         child: CustomAppBar(),
       ),
-      drawer: ClipRRect(borderRadius: BorderRadius.zero, child: CustomDrawer()),
+      drawer: const ClipRRect(
+          borderRadius: BorderRadius.zero, child: CustomDrawer()),
       body: homeViewModel.isLoading
           ? const Center(
               child: CircularProgressIndicator(),
@@ -72,6 +73,7 @@ class _LivePageState extends State<LivePage> {
                                 eventList: homeViewModel.onGoingPrograms,
                                 program: "live_program".tr(),
                                 showProgram: false,
+                                isLive: true,
                               ),
                             ]),
                       ),

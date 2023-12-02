@@ -84,12 +84,13 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
         preferredSize: const Size.fromHeight(65),
         child: CustomAppBarSecondary(),
       ),
-      drawer: ClipRRect(
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(0),
-            bottomRight: Radius.circular(0),
-          ),
-          child: CustomDrawer()),
+      drawer: const ClipRRect(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(0),
+          bottomRight: Radius.circular(0),
+        ),
+        child: CustomDrawer(),
+      ),
       body: Stack(
         children: [
           Opacity(

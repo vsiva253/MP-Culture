@@ -53,6 +53,7 @@ dependencies:
   webview_flutter: ^4.4.2
   upgrader: ^8.3.0
   sms_autofill: ^2.3.0
+  url_launcher: ^6.2.1
 
 dev_dependencies:
   flutter_test:

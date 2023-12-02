@@ -10,12 +10,14 @@ import 'package:simple_gradient_text/simple_gradient_text.dart';
 class EventListCard extends StatelessWidget {
   final String program;
   final bool showProgram;
+  final bool isLive;
   final List<EventData> eventList;
   const EventListCard(
       {super.key,
       required this.eventList,
       required this.program,
-      required this.showProgram});
+      required this.showProgram,
+      required this.isLive});
 
   @override
   Widget build(BuildContext context) {
@@ -86,6 +88,7 @@ class EventListCard extends StatelessWidget {
                         final event = eventList[index];
                         return EventCard(
                           event: event,
+                          isLive: isLive,
                         );
                       },
                     ),
