@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/components/theme_data.dart';
-import 'package:mpc/data/models/user_model.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/option_screen.dart';
 import 'package:mpc/services/auth_login.dart';
@@ -227,9 +226,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                     children: [
                                       Expanded(
                                         flex: 7,
-                                        child: TextField(
+                                        child: TextFormField(
                                           controller:
                                               loginModel.mobileController,
+                                          keyboardType: TextInputType.phone,
                                           decoration: InputDecoration(
                                             hintText: StringValue.mobileNo,
                                             hintStyle: TextStyle(
@@ -255,6 +255,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                           onChanged: (value) {
                                             // Check if the entered number is 10 digits, then automatically send OTP
                                             if (value.length == 10) {
+                                              FocusScope.of(context)
+                                                  .requestFocus(FocusNode());
+                                              FocusScope.of(context)
+                                                  .requestFocus(otpFocusNode);
                                               _sendAutomaticOTP(value, context);
                                             }
                                           },
@@ -299,6 +303,9 @@ class _LoginScreenState extends State<LoginScreen> {
                                           child: TextField(
                                             controller:
                                                 loginModel.otpController,
+                                            keyboardType: TextInputType.number,
+                                            textInputAction:
+                                                TextInputAction.done,
                                             decoration: InputDecoration(
                                               hintText: StringValue.enterOtp,
                                               hintStyle: TextStyle(

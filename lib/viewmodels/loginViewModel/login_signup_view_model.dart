@@ -31,39 +31,48 @@ class LoginSignupViewModel extends ChangeNotifier {
 
   UserModel get userModel => _userModel;
   bool get isLoading => _isLoading;
+  // diloge loader
+  Future<void> _showLoadingDialog(BuildContext context, String title) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Row(
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(width: 16),
+              Text(title),
+            ],
+          ),
+        );
+      },
+    );
+  }
 
   // User login click
   Future<void> loginClick(BuildContext context) async {
-    CustomSnackbar.show(context, "Sending OTP...");
-    print("call for otp");
     try {
-      print(" try call for otp");
-      _isLoading = true;
+      _showLoadingDialog(context, "OTP Sending...");
       await apiService.login(mobileController.text);
       CustomSnackbar.show(context, 'OTP Sent Successfully');
-      _isLoading = false;
-      print("done call for otp");
     } catch (e) {
-      print("failed call for otp");
-      _isLoading = false;
-      CustomSnackbar.show(context, 'Error fetching User Profile: $e');
+      CustomSnackbar.show(context, 'Something Wrong');
     } finally {
-      _isLoading = false;
+      Navigator.of(context).pop();
       notifyListeners();
     }
   }
 
   // veryfied OTP
   Future<bool> otpCheck(BuildContext context) async {
-    CustomSnackbar.show(context, "OTP Veryfing....");
     try {
-      _isLoading = true;
+      _showLoadingDialog(context, "OTP Veryfing....");
       UserModel? user =
           await apiService.verifyOTP(mobileController.text, otpController.text);
-      CustomSnackbar.show(context, "OTP verified successfully!");
-      _isLoading = false;
-      CustomSnackbar.show(context, 'Login Success');
+      Future.delayed(const Duration(seconds: 1));
       if (user != null) {
+        Navigator.of(context).pop();
         Navigator.pushAndRemoveUntil(
           context,
           FadePageRoute(
@@ -73,6 +82,7 @@ class LoginSignupViewModel extends ChangeNotifier {
         );
         return true;
       } else {
+        Navigator.of(context).pop();
         Navigator.push(
           context,
           FadePageRoute(
@@ -81,12 +91,9 @@ class LoginSignupViewModel extends ChangeNotifier {
         return false;
       }
     } catch (e) {
-      print("failed call for verfy otp $e");
-      _isLoading = false;
-      CustomSnackbar.show(context, 'Error: invalid otp $e');
+      CustomSnackbar.show(context, 'Error: invalid otp ');
       return false;
     } finally {
-      _isLoading = false;
       notifyListeners();
     }
   }
@@ -122,38 +129,84 @@ class LoginSignupViewModel extends ChangeNotifier {
   }
 
   // user signup api
-  Future<bool> userSignUp(BuildContext context) async {
+  Future<bool> userSignUp(
+    BuildContext context, {
+    required bool isSmsEnable,
+    required bool isEmailEnable,
+  }) async {
     if (_validateFields(context)) {
+      _showLoadingDialog(context, "Registring....");
       try {
         _isLoading = true;
-        await apiService.signUp(
-            nameController.text,
-            emailController.text,
-            mobileController.text,
-            passwordController.text,
-            confirmPasswordController.text);
-        _isLoading = false;
+        UserModel user = await apiService.signUp(
+          nameController.text,
+          emailController.text,
+          mobileController.text,
+          passwordController.text,
+          confirmPasswordController.text,
+        );
+        Future.delayed(const Duration(seconds: 1), () {
+          if (user.id != null) {
+            updateUserProfile(
+              context,
+              id: user.id!,
+              name: user.name ?? "NA",
+              email: user.email ?? "NA",
+              mobile: user.mobile ?? "NA",
+              isSmsEnalbe: isSmsEnable,
+              isEmailEnalbe: isEmailEnable,
+            );
+          }
+        });
+        Navigator.of(context).pop();
         Navigator.pushAndRemoveUntil(
           context,
           FadePageRoute(
-              builder: (BuildContext context) =>
-                  CustomBottomBar(selectedIndex: 0)),
+            builder: (BuildContext context) =>
+                CustomBottomBar(selectedIndex: 0),
+          ),
           (Route<dynamic> route) => false,
         );
 
         return true;
-      } catch (e) {
-        _isLoading = false;
-        CustomSnackbar.show(context, 'Error: Failed to Register $e');
+      } catch (error) {
+        Navigator.of(context).pop();
+        CustomSnackbar.show(context, 'Error: Failed to Register $error');
         return false;
       } finally {
-        _isLoading = false;
         notifyListeners();
       }
     } else {
       // Handle validation error here
       CustomSnackbar.show(context, 'Please fill in all the required fields.');
       return false;
+    }
+  }
+
+  // update notification
+  Future<void> updateUserProfile(
+    BuildContext context, {
+    required String id,
+    required String name,
+    required String email,
+    required String mobile,
+    required bool isSmsEnalbe,
+    required bool isEmailEnalbe,
+  }) async {
+    try {
+      await apiService.updateProfile(
+          id: id,
+          name: name,
+          mobile: mobile,
+          email: email,
+          sex: "NA",
+          address: "NA",
+          state: "NA",
+          dob: "NA",
+          smsEnable: isSmsEnalbe ? 1 : 0,
+          emailEnable: isEmailEnalbe ? 1 : 0);
+    } catch (e) {
+      throw ('Error: $e');
     }
   }
 }

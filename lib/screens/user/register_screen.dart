@@ -4,6 +4,7 @@ import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/login_screen.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
+import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:provider/provider.dart';
 
@@ -45,11 +46,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
   //     showCustomSnackbar(context, 'Registration Failed! Try Again :)');
   //   }
   // }
+  @override
+  void initState() {
+    super.initState();
+    context.read<UserViewModel>().getEmailEnable();
+    context.read<UserViewModel>().getSmsEnable();
+  }
 
   @override
   Widget build(BuildContext context) {
     StringValue.updateValues();
     final signupModel = context.watch<LoginSignupViewModel>();
+    final userViewModel = Provider.of<UserViewModel>(context);
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08),
     ));
@@ -194,6 +202,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           child: TextField(
                                             controller:
                                                 signupModel.mobileController,
+                                            keyboardType: TextInputType.phone,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             decoration: InputDecoration(
                                               hintText: 'Mobile No.',
                                               hintStyle: TextStyle(
@@ -265,6 +276,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           child: TextField(
                                             controller:
                                                 signupModel.emailController,
+                                            keyboardType:
+                                                TextInputType.emailAddress,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             decoration: InputDecoration(
                                               hintText: 'Email',
                                               hintStyle: TextStyle(
@@ -325,6 +340,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           child: TextField(
                                             controller:
                                                 signupModel.nameController,
+                                            keyboardType: TextInputType.text,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             decoration: InputDecoration(
                                               hintText: 'Full Name',
                                               hintStyle: TextStyle(
@@ -385,6 +403,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           child: TextField(
                                             controller:
                                                 signupModel.passwordController,
+                                            textInputAction:
+                                                TextInputAction.next,
                                             obscureText: true,
                                             decoration: InputDecoration(
                                               hintText: 'Password',
@@ -446,6 +466,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           child: TextField(
                                             controller: signupModel
                                                 .confirmPasswordController,
+                                            textInputAction:
+                                                TextInputAction.done,
                                             obscureText: true,
                                             decoration: InputDecoration(
                                               hintText: 'Confirm Password',
@@ -521,7 +543,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                         child: GestureDetector(
                                           onTap: () async {
                                             bool isSignUp = await signupModel
-                                                .userSignUp(context);
+                                                .userSignUp(context,
+                                                    isEmailEnable: userViewModel
+                                                        .isEmailEnable,
+                                                    isSmsEnable: userViewModel
+                                                        .isSmsEnalbe);
                                             Provider.of<AuthProvider>(context,
                                                     listen: false)
                                                 .setLoggedInStatus(isSignUp);

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/components/theme_data.dart';
 
@@ -120,17 +121,17 @@ class _CustomBottomBarState extends State<CustomBottomBar> {
   String _getTabLabel(int index) {
     switch (index) {
       case 0:
-        return 'Home';
+        return 'home'.tr();
       case 1:
-        return 'Academies';
+        return 'academies'.tr();
       case 2:
-        return 'Live';
+        return 'live'.tr();
       case 3:
-        return 'Calendar';
+        return 'calendar'.tr();
       case 4:
-        return 'Profile';
+        return 'profile'.tr();
       default:
-        return 'Add';
+        return 'add'.tr();
     }
   }
 

@@ -67,26 +67,24 @@ class UserViewModel extends ChangeNotifier {
     if (appbar.isEmpty) {
       try {
         _isLoading = true;
+
         final data = await apiService.getToolbarImages();
         _appbar = data;
-        for (var e in data) {
+
+        await Future.wait(data.map((e) async {
           if (e.types == "primary") {
-            print("Primary type ${e.headerLogo}\n");
             _centerLogo = e.headerLogo;
-          } else {
-            if (e.types == "secondry" && e.status == "1" && e.isApp == "1") {
-              print("Secondry type ${e.headerLogo}\n");
-              _logo = e.headerLogo;
-            }
+          } else if (e.types == "secondry" &&
+              (e.status == "1" && e.isApp == "1")) {
+            _logo = e.headerLogo;
           }
-        }
-      } catch (e) {
+        }));
+      } catch (error) {
         _isLoading = false;
-        throw ("Error fetching aboutUS: $e");
-      } finally {}
-      Future.delayed(const Duration(seconds: 1), () {
+        throw ("Error fetching toolbar images: $error");
+      } finally {
         _isLoading = false;
-      });
+      }
 
       notifyListeners();
     }
@@ -100,7 +98,6 @@ class UserViewModel extends ChangeNotifier {
   }
 
   void toggleSms() async {
-    print("print");
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isSmsEnable', !_isSmaEnable);
     getSmsEnable();
@@ -112,7 +109,6 @@ class UserViewModel extends ChangeNotifier {
   }
 
   void toggleEmail() async {
-    print("print");
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('isEmailEnable', !_isEmailEnable);
     getEmailEnable();
@@ -229,6 +225,29 @@ class UserViewModel extends ChangeNotifier {
       Navigator.pop(context);
     } catch (e) {
       print('Error: $e');
+    }
+  }
+
+  Future<void> notificationEnable(BuildContext context,
+      {required bool sms, required bool email, required UserModel data}) async {
+    if (data.id != null) {
+      print("notification uptating sma $sms , email $email");
+      try {
+        await apiService.updateProfile(
+          id: data.id!,
+          name: data.name ?? "NA",
+          mobile: data.mobile ?? "NA",
+          email: data.email ?? "NA",
+          sex: data.sex ?? "NA",
+          address: data.address ?? "NA",
+          state: data.state ?? "NA",
+          dob: data.dob ?? "NA",
+          smsEnable: sms ? 1 : 0,
+          emailEnable: email ? 1 : 0,
+        );
+      } catch (e) {
+        throw ('Error: $e');
+      }
     }
   }
 }

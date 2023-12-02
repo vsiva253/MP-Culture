@@ -161,8 +161,8 @@ class _HomePageState extends State<HomePage> {
                                         children: [
                                           Text(
                                             homeViewModel.isExpanded
-                                                ? 'Read Less'
-                                                : 'Read More',
+                                                ? 'read_less'.tr()
+                                                : 'read_more'.tr(),
                                             style: const TextStyle(
                                                 color: Color(0xFF797494)),
                                           ),
