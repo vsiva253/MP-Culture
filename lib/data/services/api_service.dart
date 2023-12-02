@@ -274,7 +274,7 @@ class ApiService {
   }
 
   // update profile
-  Future<void> updateProfile({
+  Future<bool> updateProfile({
     required String id,
     required String name,
     String email = 'NA',
@@ -305,12 +305,11 @@ class ApiService {
         headers: {'Authorization': 'Basic $basicAuth'},
         body: body,
       );
-      if (response.statusCode == 200) {
-        throw ('Profile updated successfully.');
-      } else {
-        throw ('Failed to update profile. Status code: ${response.statusCode}');
-        // Handle error here
+
+      if (response.statusCode != 200) {
+        return false;
       }
+      return true;
     } catch (e) {
       throw ('Error updating profile: $e');
       // Handle error here
