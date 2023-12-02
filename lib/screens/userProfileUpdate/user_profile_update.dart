@@ -54,6 +54,8 @@ class _ProfilUpdateViewState extends State<ProfilUpdateView> {
   void initState() {
     super.initState();
     setUserData(widget.user);
+    context.read<UserViewModel>().getEmailEnable();
+    context.read<UserViewModel>().getSmsEnable();
     _avatarImage = File(
         'assets/homepage/4.png'); // Initialize it with a default image path or any other valid initialization.
   }

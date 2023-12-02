@@ -63,6 +63,24 @@ class UserViewModel extends ChangeNotifier {
     }
   }
 
+  Future<void> _showLoadingDialog(BuildContext context, String title) async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Row(
+            children: [
+              const CircularProgressIndicator(),
+              const SizedBox(width: 16),
+              Text(title),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Future<void> fetchAppbarData() async {
     if (appbar.isEmpty) {
       try {
@@ -209,7 +227,8 @@ class UserViewModel extends ChangeNotifier {
     String dob = 'NA',
   }) async {
     try {
-      await apiService.updateProfile(
+      _showLoadingDialog(context, "Saving Update....");
+      bool _isDone = await apiService.updateProfile(
           id: id,
           name: name,
           mobile: mobile,
@@ -220,18 +239,23 @@ class UserViewModel extends ChangeNotifier {
           dob: dob,
           smsEnable: _smsEnable(),
           emailEnable: _emailEnable());
-      clearUser();
-      fetchUserProfil(context);
+
+      Future.delayed(const Duration(seconds: 1), () {
+        if (_isDone) {
+          clearUser();
+          fetchUserProfil(context);
+          Navigator.pop(context);
+        }
+      });
       Navigator.pop(context);
     } catch (e) {
-      print('Error: $e');
+      Navigator.pop(context);
     }
   }
 
   Future<void> notificationEnable(BuildContext context,
       {required bool sms, required bool email, required UserModel data}) async {
     if (data.id != null) {
-      print("notification uptating sma $sms , email $email");
       try {
         await apiService.updateProfile(
           id: data.id!,
