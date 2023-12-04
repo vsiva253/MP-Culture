@@ -8,6 +8,7 @@ import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
+import 'package:mpc/widgets/custom_snackbar.dart';
 import 'package:provider/provider.dart';
 
 class UserPreferencesScreen extends StatefulWidget {
@@ -363,7 +364,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                                                   builder: (context) =>
                                                       const LoginScreen()));
                                         }
-                                      : null,
+                                      : _snackbar,
                                   child: Text(
                                     StringValue.register,
                                     style: const TextStyle(color: Colors.white),
@@ -412,5 +413,9 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
         ],
       ),
     );
+  }
+
+  void _snackbar() {
+    showCustomSnackbar(context, "Select Notification First.");
   }
 }

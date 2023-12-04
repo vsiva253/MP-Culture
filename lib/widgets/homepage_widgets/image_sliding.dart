@@ -35,32 +35,33 @@ class _ImageSliderState extends State<ImageSlider> {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                    height: 210, // Set the height here
-                    width: MediaQuery.of(context).size.width,
-                    margin: const EdgeInsets.symmetric(horizontal: 5.0),
-                    decoration: BoxDecoration(
-                      color: themeProvider.isDarkMode
-                          ? Color(0xFF505050)
-                          : Color(0xFFF0F0F0),
-                    ),
-                    child: url != null
-                        ? Image.network(
-                            url,
-                            fit: BoxFit.cover,
-                            errorBuilder: (BuildContext context, Object error,
-                                StackTrace? stackTrace) {
-                              // return Image.asset(
-                              //   'assets/EventHeader.jpg',
-                              //   fit: BoxFit.cover,
-                              // );
-                              return const SizedBox();
-                            },
-                          )
-                        // : Image.asset(
-                        //     'assets/EventHeader.jpg',
-                        //     fit: BoxFit.cover,
-                        //   ),
-                        : const SizedBox());
+                  height: 210, // Set the height here
+                  width: MediaQuery.of(context).size.width,
+                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  decoration: BoxDecoration(
+                    color: themeProvider.isDarkMode
+                        ? Color(0xFF505050)
+                        : Color(0xFFF0F0F0),
+                  ),
+                  child: url != null
+                      ? Image.network(
+                          url,
+                          fit: BoxFit.cover,
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            // return Image.asset(
+                            //   'assets/EventHeader.jpg',
+                            //   fit: BoxFit.cover,
+                            // );
+                            return const SizedBox();
+                          },
+                        )
+                      // : Image.asset(
+                      //     'assets/EventHeader.jpg',
+                      //     fit: BoxFit.cover,
+                      //   ),
+                      : const SizedBox(),
+                );
               },
             );
           }).toList(),
