@@ -123,35 +123,29 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 25),
-                                  child: SizedBox(
-                                    height: 100,
-                                    width: 100,
-                                    child: Center(
-                                      child: CircleAvatar(
-                                        radius: 60,
-                                        backgroundColor: Colors.grey[400],
-                                        backgroundImage: (userData
-                                                    .profileimage !=
-                                                null)
-                                            ? NetworkImage(
-                                                    userData.profileimage!)
-                                                as ImageProvider<Object>?
-                                            : (_avatarImage != null)
-                                                ? FileImage(_avatarImage)
-                                                    as ImageProvider<Object>?
-                                                : null,
-                                        child: _showCameraIcon
-                                            ? Positioned(
-                                                bottom: 0,
-                                                right: 0,
-                                                child: IconButton(
-                                                  icon: const Icon(
-                                                      Icons.camera_alt),
-                                                  onPressed: _getImage,
-                                                ),
-                                              )
-                                            : null,
-                                      ),
+                                  child: Center(
+                                    child: CircleAvatar(
+                                      radius: 50,
+                                      backgroundColor: Colors.grey[400],
+                                      backgroundImage: (userData.profileimage !=
+                                              null)
+                                          ? NetworkImage(userData.profileimage!)
+                                              as ImageProvider<Object>?
+                                          : (_avatarImage != null)
+                                              ? FileImage(_avatarImage)
+                                                  as ImageProvider<Object>?
+                                              : null,
+                                      child: _showCameraIcon
+                                          ? Positioned(
+                                              bottom: 0,
+                                              right: 0,
+                                              child: IconButton(
+                                                icon: const Icon(
+                                                    Icons.camera_alt),
+                                                onPressed: _getImage,
+                                              ),
+                                            )
+                                          : null,
                                     ),
                                   ),
                                 ),

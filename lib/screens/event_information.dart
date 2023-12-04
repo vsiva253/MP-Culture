@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
+import 'package:mpc/widgets/bottombar.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/homepage_widgets/image_sliding.dart';
 import 'package:provider/provider.dart';
@@ -71,6 +72,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
 
     var data = homeViewModel.singleProgram;
     return Scaffold(
+      // bottomNavigationBar: CustomBottomBar(selectedIndex: ),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
         child: CustomAppBarSecondary(),

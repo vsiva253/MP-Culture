@@ -80,7 +80,7 @@ class _EventCardState extends State<EventCard> {
                         ),
                   Positioned(
                     top: 0,
-                    left: 106,
+                    left: 90,
                     right: 0,
                     child: Container(
                       padding: const EdgeInsets.only(left: 1, top: 1),
@@ -96,8 +96,7 @@ class _EventCardState extends State<EventCard> {
                           end: Alignment.bottomRight,
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 2),
+                      child: Center(
                         child: Text(
                           '${widget.event.startingDate} - ${widget.event.endDate}',
                           style: const TextStyle(
@@ -111,8 +110,8 @@ class _EventCardState extends State<EventCard> {
                     ),
                   ),
                   Positioned(
-                    top: 12,
-                    left: 106,
+                    top: 12.2,
+                    left: 90,
                     right: 0,
                     child: Container(
                       height: 12,
@@ -127,8 +126,7 @@ class _EventCardState extends State<EventCard> {
                           end: Alignment.bottomRight,
                         ),
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 2, top: 1),
+                      child: Center(
                         child: Text(
                           '${widget.event.startingTime} - ${widget.event.endTime}',
                           style: const TextStyle(
