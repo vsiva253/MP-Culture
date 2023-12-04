@@ -70,7 +70,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
     StringValue.updateValues();
     final homeViewModel = context.watch<HomeViewModel>();
 
-    var data = homeViewModel.singleProgram;
+    var data = widget.eventData;
     return Scaffold(
       // bottomNavigationBar: CustomBottomBar(selectedIndex: ),
       appBar: PreferredSize(
@@ -78,7 +78,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
         child: CustomAppBarSecondary(),
       ),
       body: homeViewModel.isLoading
-          ? Center(
+          ? const Center(
               child: CircularProgressIndicator(),
             )
           : SingleChildScrollView(
@@ -410,7 +410,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               Flexible(
                                 child: Text(
                                   // "शैव ज्ञान परंपरा से उद्भूत कलाओं पर एकाग्र साप्ताहित श्रंखला अनादि के अन्तर्गत इस रविवार शिव केन्द्रित भक्ति गायन की प्रस्तुति ।",
-                                  data.venu ?? "NA",
+                                  data.venue ?? "NA",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(

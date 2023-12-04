@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/screens/user/login_screen.dart';
+import 'package:mpc/screens/user/option_screen.dart';
 import 'package:mpc/screens/user/user_preferences_notifier.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
@@ -64,7 +65,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsets.only(top: 55, left: 82, right: 90),
+                          const EdgeInsets.only(top: 25, left: 82, right: 90),
                       child: Center(
                         child: Image.asset(
                           'assets/logo/mpc.png',
@@ -362,7 +363,7 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                                               context,
                                               FadePageRoute(
                                                   builder: (context) =>
-                                                      const LoginScreen()));
+                                                      const OptionScreenView()));
                                         }
                                       : _snackbar,
                                   child: Text(
@@ -387,15 +388,15 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                                   onPressed: () {
                                     // Cancel logic here
                                     Navigator.push(
-                                        context,
-                                        FadePageRoute(
-                                            builder: (context) =>
-                                                CustomBottomBar(
-                                                  selectedIndex: 0,
-                                                )));
+                                      context,
+                                      FadePageRoute(
+                                        builder: (context) =>
+                                            const LoginScreen(),
+                                      ),
+                                    );
                                     // Close the screen
                                   },
-                                  child: Text("cancel".tr(),
+                                  child: Text("login".tr(),
                                       style:
                                           const TextStyle(color: Colors.white)),
                                 ),
@@ -405,6 +406,23 @@ class _UserPreferencesScreenState extends State<UserPreferencesScreen> {
                         );
                       },
                     ),
+                    const SizedBox(height: 12),
+                    // const Text("Skip"),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            FadePageRoute(
+                                builder: (context) => CustomBottomBar(
+                                      selectedIndex: 0,
+                                    )));
+                      },
+                      child: const Text(
+                        "Skip",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
                   ],
                 ),
               ),

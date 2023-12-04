@@ -38,6 +38,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
   @override
   void initState() {
+    context.read<UserViewModel>().userLogin(context);
     getData();
     super.initState();
   }
@@ -46,6 +47,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
   Widget build(BuildContext context) {
     final homeViewModel = context.watch<HomeViewModel>();
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final userViewModel = Provider.of<UserViewModel>(context);
     final theme = themeProvider.getTheme(); // Get the current theme
 
     return Container(
@@ -200,39 +202,45 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             });
                           },
                         ),
-                        CustomDrawerItem(
-                          image: 'assets/logo/logout.png',
-                          text: 'log_out'.tr(),
-                          isSelected: selectedItem == 'Log Out',
-                          onTap: () {
-                            setSelectedItem('Log Out');
-                            showDialog<String>(
-                              context: context,
-                              builder: (BuildContext context) => AlertDialog(
-                                contentPadding: const EdgeInsets.all(10),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                title: const Text('Want to Logout?'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: const Text('Cancel'),
-                                  ),
-                                  TextButton(
-                                    onPressed: () async {
-                                      await AuthProvider().logout(context);
-                                      context.read<UserViewModel>().clearUser();
-                                    },
-                                    child: const Text('OK'),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                        userViewModel.userLoginData!.isSuccess
+                            ? CustomDrawerItem(
+                                image: 'assets/logo/logout.png',
+                                text: 'log_out'.tr(),
+                                isSelected: selectedItem == 'Log Out',
+                                onTap: () {
+                                  setSelectedItem('Log Out');
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      contentPadding: const EdgeInsets.all(10),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      title: const Text('Want to Logout?'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text('Cancel'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () async {
+                                            await AuthProvider()
+                                                .logout(context);
+                                            context
+                                                .read<UserViewModel>()
+                                                .clearUser();
+                                          },
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              )
+                            : const SizedBox()
                       ],
                     ),
                   ],

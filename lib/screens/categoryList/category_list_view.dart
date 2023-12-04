@@ -175,7 +175,7 @@ class _CategorysListViewState extends State<CategorysListView> {
             ),
             Column(children: [
               Padding(
-                padding: const EdgeInsets.only(left: 20, top: 20),
+                padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: GradientText(
@@ -192,7 +192,7 @@ class _CategorysListViewState extends State<CategorysListView> {
               ),
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 5),
                   child: ListView.builder(
                     itemCount: (widget.categoryList.length / 4).ceil(),
                     itemBuilder: (context, index) {

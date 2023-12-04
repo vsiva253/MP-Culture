@@ -79,11 +79,14 @@ class _HomePageState extends State<HomePage> {
                               child: Column(children: [
                                 GestureDetector(
                                   onTap: getData,
-                                  child: const Text(
-                                    "Retry",
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.w500),
+                                  child: const Padding(
+                                    padding: EdgeInsets.all(28.0),
+                                    child: Text(
+                                      "Retry",
+                                      style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w500),
+                                    ),
                                   ),
                                 )
                               ]),
@@ -97,11 +100,14 @@ class _HomePageState extends State<HomePage> {
                                       categroy: homeViewModel.category)
                                   : GestureDetector(
                                       onTap: getData,
-                                      child: const Text(
-                                        "Retry",
-                                        style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500),
+                                      child: const Padding(
+                                        padding: EdgeInsets.all(28.0),
+                                        child: Text(
+                                          "Retry",
+                                          style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500),
+                                        ),
                                       ),
                                     ),
                               const SizedBox(

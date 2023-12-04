@@ -329,13 +329,13 @@ class _SettingsState extends State<Settings> {
                   },
                   initialValue: themeProvider.isEnglish,
                 ),
-                CustomContainer(
-                  text: 'password'.tr(),
-                  icon: Icons.lock_outline,
-                  showForwardArrow: true,
-                  onArrowPressed: () {},
-                  initialValue: toggledStates['Password'] ?? false,
-                ),
+                // CustomContainer(
+                //   text: 'password'.tr(),
+                //   icon: Icons.lock_outline,
+                //   showForwardArrow: true,
+                //   onArrowPressed: () {},
+                //   initialValue: toggledStates['Password'] ?? false,
+                // ),
                 CustomContainer(
                   text: 'privacy'.tr(),
                   icon: Icons.privacy_tip_outlined,

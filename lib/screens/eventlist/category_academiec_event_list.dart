@@ -185,7 +185,7 @@ class _ByCategoryEventListViewState extends State<ByCategoryEventListView> {
                   ),
                   Column(children: [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20, top: 20),
+                      padding: const EdgeInsets.only(left: 16, right: 16),
                       child: Align(
                         alignment: Alignment.centerLeft,
                         child: GradientText(
@@ -195,7 +195,7 @@ class _ByCategoryEventListViewState extends State<ByCategoryEventListView> {
                             fontFamily: 'Hind',
                             fontSize: 18.0,
                             fontWeight: FontWeight.w600,
-                            height: 1,
+                            height: 2,
                           ),
                           colors: const [Color(0xFFC33764), Color(0xFF1D2671)],
                         ),
