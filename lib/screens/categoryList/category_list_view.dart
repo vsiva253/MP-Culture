@@ -33,7 +33,7 @@ class CategorysListView extends StatelessWidget {
             ),
             Column(children: [
               Padding(
-                padding: const EdgeInsets.only(left: 20, top: 20),
+                padding: const EdgeInsets.only(left: 16, right: 16),
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: GradientText(
@@ -50,7 +50,7 @@ class CategorysListView extends StatelessWidget {
               ),
               Expanded(
                 child: Container(
-                  padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                  padding: const EdgeInsets.only(left: 16, right: 16, top: 5),
                   child: ListView.builder(
                     itemCount: (categoryList.length / 4).ceil(),
                     itemBuilder: (context, index) {

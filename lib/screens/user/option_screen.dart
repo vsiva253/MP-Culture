@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/screens/user/login_screen.dart';
+import 'package:mpc/screens/user/register_screen.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
 import 'package:mpc/screens/webViewPage/web_view.dart';
 import 'package:mpc/values/string_values.dart';
@@ -25,15 +26,12 @@ class _OptionScreenViewState extends State<OptionScreenView> {
     }
   }
 
-  Widget button(String btnName) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Color(0xFFE52f08),
-    ));
+  Widget button(String btnName, Color color) {
     return Container(
       height: 70,
       width: MediaQuery.of(context).size.width / 2 * 1.5,
       decoration: BoxDecoration(
-        color: const Color(0xFFE52f08),
+        color: color,
         borderRadius: BorderRadius.circular(5),
         boxShadow: [
           BoxShadow(
@@ -108,9 +106,12 @@ class _OptionScreenViewState extends State<OptionScreenView> {
                             context,
                             FadePageRoute(
                                 builder: (BuildContext context) =>
-                                    UserPreferencesScreen()));
+                                    const RegisterScreen()));
                       },
-                      child: button(StringValue.registrationForProgram),
+                      child: button(
+                        StringValue.registrationForProgram,
+                        const Color(0xFFE52f08),
+                      ),
                     ),
                     const SizedBox(height: 30),
                     GestureDetector(
@@ -122,7 +123,10 @@ class _OptionScreenViewState extends State<OptionScreenView> {
                                       url: StringValue.artistRegisterUrl,
                                     )));
                       },
-                      child: button(StringValue.registrationForArtist),
+                      child: button(
+                        StringValue.registrationForArtist,
+                        Color.fromARGB(255, 148, 34, 224),
+                      ),
                     ),
                     const SizedBox(height: 20),
                     Row(

@@ -67,7 +67,10 @@
   "profile":"प्रोफ़ाइल",
   "add":"जोड़ें",
   "read_more":"और पढ़ें",
-  "read_less":"बंद करें"
+  "read_less":"बंद करें",
+  "sign_up_here":"यहाँ साइन अप करें!",
+  "audience_registration":"दर्शक पंजीकरण",
+  "caonfirm_password*":"पासवर्ड की पुष्टि करें"
   
  
 }

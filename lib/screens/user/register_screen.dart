@@ -1,11 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/screens/user/login_screen.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
+import 'package:mpc/widgets/bottombar.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -17,6 +20,15 @@ class RegisterScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<RegisterScreen> {
   String selectedLanguage = 'English';
+
+  void _changeLanguage(bool value) {
+    if (value) {
+      context.setLocale(const Locale('en', 'US'));
+    } else {
+      context.setLocale(const Locale('hi', 'IN'));
+    }
+  }
+
   // TextEditingController mobileController = TextEditingController();
   // TextEditingController emailController = TextEditingController();
   // TextEditingController nameController = TextEditingController();
@@ -58,6 +70,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
     StringValue.updateValues();
     final signupModel = context.watch<LoginSignupViewModel>();
     final userViewModel = Provider.of<UserViewModel>(context);
+    final themeProvider = Provider.of<ThemeProvider>(context);
+
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       statusBarColor: Color(0xFFE52f08),
     ));
@@ -100,19 +114,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           Expanded(
                               flex: 5,
                               child: Text(
-                                selectedLanguage == 'English'
-                                    ? 'Sign Up Here !'
-                                    : 'यहाँ साइन अप करें!',
+                                'sign_up_here'.tr(),
                                 style: const TextStyle(
                                     fontWeight: FontWeight.w600),
                               )),
                           Expanded(
                             flex: 2,
                             child: DropdownButton<String>(
-                              value: selectedLanguage,
+                              value:
+                                  themeProvider.isEnglish ? "English" : "Hindi",
                               onChanged: (String? newValue) {
                                 setState(() {
-                                  selectedLanguage = newValue!;
+                                  themeProvider.selectedLanguage = newValue!;
+                                  themeProvider.toggleLanguage();
+                                  _changeLanguage(themeProvider.isEnglish);
                                 });
                               },
                               items: <String>[
@@ -138,9 +153,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              selectedLanguage == 'English'
-                                  ? 'Audience Registration'
-                                  : "दर्शक पंजीकरण",
+                              'audience_registration'.tr(),
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -174,10 +187,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
-                                        selectedLanguage == 'English'
-                                            ? "Mobile Number*"
-                                            : "मोबाइल नंबर*",
+                                    child: Text("${'mobile_number'.tr()}*",
                                         style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
@@ -206,7 +216,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             textInputAction:
                                                 TextInputAction.next,
                                             decoration: InputDecoration(
-                                              hintText: 'Mobile No.',
+                                              hintText: 'mobile_number'.tr(),
                                               hintStyle: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
@@ -248,10 +258,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
-                                        selectedLanguage == 'English'
-                                            ? "Email*"
-                                            : "ईमेल*",
+                                    child: Text("${'email'.tr()}*",
                                         style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
@@ -281,7 +288,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             textInputAction:
                                                 TextInputAction.next,
                                             decoration: InputDecoration(
-                                              hintText: 'Email',
+                                              hintText: 'email'.tr(),
                                               hintStyle: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
@@ -312,10 +319,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
-                                        selectedLanguage == 'English'
-                                            ? "Full Name*"
-                                            : "पूरा नाम*",
+                                    child: Text("${'full_name'.tr()}*",
                                         style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
@@ -344,7 +348,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             textInputAction:
                                                 TextInputAction.next,
                                             decoration: InputDecoration(
-                                              hintText: 'Full Name',
+                                              hintText: 'full_name'.tr(),
                                               hintStyle: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
@@ -375,10 +379,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
-                                        selectedLanguage == 'English'
-                                            ? "Password*"
-                                            : "पासवर्ड*",
+                                    child: Text("${'password'.tr()}*",
                                         style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
@@ -407,7 +408,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 TextInputAction.next,
                                             obscureText: true,
                                             decoration: InputDecoration(
-                                              hintText: 'Password',
+                                              hintText: 'password'.tr(),
                                               hintStyle: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
@@ -438,10 +439,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   ),
                                   Align(
                                     alignment: Alignment.centerLeft,
-                                    child: Text(
-                                        selectedLanguage == 'English'
-                                            ? "Confirm Password*"
-                                            : "पासवर्ड की पुष्टि करें*",
+                                    child: Text("${'caonfirm_password'.tr()}*",
                                         style: const TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
@@ -470,7 +468,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                                 TextInputAction.done,
                                             obscureText: true,
                                             decoration: InputDecoration(
-                                              hintText: 'Confirm Password',
+                                              hintText:
+                                                  'caonfirm_password'.tr(),
                                               hintStyle: TextStyle(
                                                 fontSize: 16,
                                                 fontWeight: FontWeight.w500,
@@ -562,9 +561,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                selectedLanguage == 'English'
-                                                    ? 'Register'
-                                                    : "पंजीकरण करे",
+                                                'sign_up'.tr(),
                                                 style: const TextStyle(
                                                   fontSize: 16,
                                                   fontWeight: FontWeight.w600,
@@ -580,23 +577,35 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                       ),
                                       Expanded(
                                         flex: 1,
-                                        child: Container(
-                                          width: double.maxFinite,
-                                          height: 40,
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                            color: const Color(0xFFE52f08),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              selectedLanguage == 'English'
-                                                  ? 'Cancel'
-                                                  : "रद्द करें",
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.white,
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.pushAndRemoveUntil(
+                                              context,
+                                              FadePageRoute(
+                                                builder: (context) =>
+                                                    CustomBottomBar(
+                                                  selectedIndex: 0,
+                                                ),
+                                              ),
+                                              (Route<dynamic> route) => false,
+                                            );
+                                          },
+                                          child: Container(
+                                            width: double.maxFinite,
+                                            height: 40,
+                                            decoration: BoxDecoration(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                              color: const Color(0xFFE52f08),
+                                            ),
+                                            child: Center(
+                                              child: Text(
+                                                'cancel'.tr(),
+                                                style: const TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.white,
+                                                ),
                                               ),
                                             ),
                                           ),
@@ -622,9 +631,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           MainAxisAlignment.center,
                                       children: [
                                         Text(
-                                          selectedLanguage == 'English'
-                                              ? 'Already have an account?'
-                                              : "पहले से ही खाता है?",
+                                          'have_account'.tr(),
                                           style: TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w500,
@@ -635,9 +642,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                           width: 5,
                                         ),
                                         Text(
-                                          selectedLanguage == 'English'
-                                              ? 'Login'
-                                              : "लॉग इन करें",
+                                          'login'.tr(),
                                           style: const TextStyle(
                                             fontSize: 14,
                                             fontWeight: FontWeight.w600,
