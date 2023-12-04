@@ -87,7 +87,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     // Add a delay of 3 seconds before hiding the splash screen
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(milliseconds: 6600), () {
       setState(() {
         _showSplash = false;
       });
@@ -172,8 +172,9 @@ class SplashScreen extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: Image.asset(
-          'assets/logo/mpc.png',
-          height: 120,
+          'assets/splash_screen.gif',
+          height: 250,
+          width: 250,
         ), // Replace with your splash image
       ),
     );
