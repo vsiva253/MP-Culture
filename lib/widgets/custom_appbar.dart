@@ -56,24 +56,25 @@ class _CustomAppBarState extends State<CustomAppBar> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 1),
-                  child: userViewModel.logo != null
-                      ? Image.network(
-                          height: 46,
-                          userViewModel.logo ?? '',
-                          errorBuilder: (BuildContext context, Object error,
-                              StackTrace? stackTrace) {
-                            return Image.asset(
-                              height: 46,
-                              'assets/logo/cm.png',
-                            );
-                          },
-                        )
-                      : Image.asset(
-                          'assets/logo/cm.png',
-                          height: 46,
-                        ),
-                ),
+                    padding: const EdgeInsets.only(right: 1),
+                    child: userViewModel.logo != null
+                        ? Image.network(
+                            height: 46,
+                            userViewModel.logo ?? '',
+                            errorBuilder: (BuildContext context, Object error,
+                                StackTrace? stackTrace) {
+                              // return Image.asset(
+                              //   height: 46,
+                              //   'assets/logo/cm.png',
+                              // );
+                              return const SizedBox();
+                            },
+                          )
+                        // : Image.asset(
+                        //     'assets/logo/cm.png',
+                        //     height: 46,
+                        //   ),
+                        : const SizedBox()),
               ),
             ],
             leading: Builder(
@@ -97,24 +98,25 @@ class _CustomAppBarState extends State<CustomAppBar> {
             // Set the AppBar background to transparent
             title: Center(
               child: Align(
-                alignment: Alignment.center,
-                child: userViewModel.centerLogo != null
-                    ? Image.network(
-                        height: 46,
-                        userViewModel.centerLogo ?? '',
-                        errorBuilder: (BuildContext context, Object error,
-                            StackTrace? stackTrace) {
-                          return Image.asset(
-                            height: 46,
-                            'assets/logo/appbar.png',
-                          );
-                        },
-                      )
-                    : Image.asset(
-                        'assets/logo/appbar.png',
-                        height: 46,
-                      ),
-              ),
+                  alignment: Alignment.center,
+                  child: userViewModel.centerLogo != null
+                      ? Image.network(
+                          height: 46,
+                          userViewModel.centerLogo ?? '',
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            // return Image.asset(
+                            //   height: 46,
+                            //   'assets/logo/appbar.png',
+                            // );
+                            return const SizedBox();
+                          },
+                        )
+                      // : Image.asset(
+                      //     'assets/logo/appbar.png',
+                      //     height: 46,
+                      //   ),
+                      : const SizedBox()),
             ),
           ),
         ),
