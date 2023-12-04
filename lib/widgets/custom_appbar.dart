@@ -56,7 +56,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                    padding: const EdgeInsets.only(right: 1),
+                    padding: const EdgeInsets.only(right: 10),
                     child: userViewModel.logo != null
                         ? Image.network(
                             height: 46,
@@ -178,7 +178,7 @@ class _CustomAppBarSecondaryState extends State<CustomAppBarSecondary> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                    padding: const EdgeInsets.only(right: 1),
+                    padding: const EdgeInsets.only(right: 10),
                     child: userViewModel.logo != null
                         ? Image.network(
                             height: 46,

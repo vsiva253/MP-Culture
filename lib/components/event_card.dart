@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/screens/event_information.dart';
@@ -194,9 +195,9 @@ class _EventCardState extends State<EventCard> {
                               children: [
                                 Row(
                                   children: [
-                                    const Text(
-                                      'कलाकार: ',
-                                      style: TextStyle(
+                                    Text(
+                                      "${'kalakar'.tr()}: ",
+                                      style: const TextStyle(
                                           color: Color(0xFFFFFFFF),
                                           fontFamily: 'HIND',
                                           fontWeight: FontWeight.w500,
@@ -226,9 +227,9 @@ class _EventCardState extends State<EventCard> {
                                 ),
                                 Row(
                                   children: [
-                                    const Text(
-                                      'प्रवेश: ',
-                                      style: TextStyle(
+                                    Text(
+                                      "${'entry'.tr()}: ",
+                                      style: const TextStyle(
                                           color: Color(0xFFFFFFFF),
                                           fontFamily: 'HIND',
                                           fontWeight: FontWeight.w500,
@@ -258,10 +259,10 @@ class _EventCardState extends State<EventCard> {
                             padding:
                                 const EdgeInsets.only(left: 17.5, right: 17.5),
                             width: double.infinity,
-                            child: const Center(
+                            child: Center(
                                 child: Text(
-                              'आयोजक ',
-                              style: TextStyle(
+                              'organizer'.tr(),
+                              style: const TextStyle(
                                   color: Color(0xFFFFFFFF),
                                   fontFamily: 'HIND',
                                   fontWeight: FontWeight.w500,
@@ -281,7 +282,7 @@ class _EventCardState extends State<EventCard> {
                           ),
                           SizedBox(
                             height: 22,
-                            width: 100,
+                            width: 140,
                             child: ElevatedButton(
                                 onPressed: () {},
                                 style: ButtonStyle(
@@ -307,14 +308,17 @@ class _EventCardState extends State<EventCard> {
                                       const SizedBox(
                                         width: 3,
                                       ),
-                                      Text(
-                                        widget.event.district ?? "NA",
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                        style: const TextStyle(
-                                            color: Color(0xFFFFFFFF),
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 10),
+                                      Expanded(
+                                        child: Text(
+                                          widget.event.city ?? "NA",
+                                          // "ugfiuhsdiofhj hiohdioashj d",
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                              color: Color(0xFFFFFFFF),
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 10),
+                                        ),
                                       )
                                     ],
                                   ),
@@ -324,7 +328,7 @@ class _EventCardState extends State<EventCard> {
                             height: 3,
                           ),
                           SizedBox(
-                            width: 100,
+                            width: 140,
                             height: 22,
                             child: ElevatedButton(
                               onPressed: () {

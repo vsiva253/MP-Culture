@@ -145,42 +145,6 @@ class _AcademiesPageState extends State<AcademiesPage> {
                                           ),
                                           child: Row(
                                             children: [
-                                              const SizedBox(
-                                                width: 10,
-                                              ),
-                                              Expanded(
-                                                flex: 4,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      eventName,
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 24,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                      ),
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                    Text(
-                                                      eventDescription,
-                                                      style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w500,
-                                                      ),
-                                                      maxLines: 2,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const SizedBox(width: 10),
                                               Expanded(
                                                   flex: 2,
                                                   child: data.deptImage != null
@@ -207,6 +171,30 @@ class _AcademiesPageState extends State<AcademiesPage> {
                                                       //     width: 64,
                                                       //   ),
                                                       : const SizedBox()),
+                                              const SizedBox(
+                                                width: 15,
+                                              ),
+                                              Expanded(
+                                                flex: 4,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      eventName,
+                                                      maxLines: 3,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.w700,
+                                                      ),
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
                                               const SizedBox(
                                                 width: 30,
                                               ),
