@@ -182,29 +182,31 @@ class _AcademiesPageState extends State<AcademiesPage> {
                                               ),
                                               const SizedBox(width: 10),
                                               Expanded(
-                                                flex: 2,
-                                                child: data.deptImage != null
-                                                    ? Image.network(
-                                                        data.deptImage ?? "NA",
-                                                        fit: BoxFit.cover,
-                                                        errorBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                Object error,
-                                                                StackTrace?
-                                                                    stackTrace) {
-                                                          return Image.asset(
-                                                            'assets/school.png',
-                                                            fit: BoxFit.cover,
-                                                          );
-                                                        },
-                                                      )
-                                                    : Image.asset(
-                                                        'assets/school.png',
-                                                        height: 64,
-                                                        width: 64,
-                                                      ),
-                                              ),
+                                                  flex: 2,
+                                                  child: data.deptImage != null
+                                                      ? Image.network(
+                                                          data.deptImage ??
+                                                              "NA",
+                                                          fit: BoxFit.cover,
+                                                          errorBuilder:
+                                                              (BuildContext
+                                                                      context,
+                                                                  Object error,
+                                                                  StackTrace?
+                                                                      stackTrace) {
+                                                            // return Image.asset(
+                                                            //   'assets/school.png',
+                                                            //   fit: BoxFit.cover,
+                                                            // );
+                                                            return const SizedBox();
+                                                          },
+                                                        )
+                                                      // : Image.asset(
+                                                      //     'assets/school.png',
+                                                      //     height: 64,
+                                                      //     width: 64,
+                                                      //   ),
+                                                      : const SizedBox()),
                                               const SizedBox(
                                                 width: 30,
                                               ),

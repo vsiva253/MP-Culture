@@ -43,25 +43,26 @@ class _AcademiesInformationScreenState
           children: [
             const SizedBox(height: 15),
             SizedBox(
-              width: MediaQuery.of(context).size.width,
-              height: 228,
-              child: data.academyBanner != null
-                  ? Image.network(
-                      widget.acd.deptImage ?? "NA",
-                      fit: BoxFit.cover,
-                      errorBuilder: (BuildContext context, Object error,
-                          StackTrace? stackTrace) {
-                        return Image.asset(
-                          'assets/EventHeader.jpg',
-                          fit: BoxFit.cover,
-                        );
-                      },
-                    )
-                  : Image.asset(
-                      'assets/EventHeader.jpg',
-                      fit: BoxFit.cover,
-                    ),
-            ),
+                width: MediaQuery.of(context).size.width,
+                height: 228,
+                child: data.academyBanner != null
+                    ? Image.network(
+                        widget.acd.deptImage ?? "NA",
+                        fit: BoxFit.cover,
+                        errorBuilder: (BuildContext context, Object error,
+                            StackTrace? stackTrace) {
+                          // return Image.asset(
+                          //   'assets/EventHeader.jpg',
+                          //   fit: BoxFit.cover,
+                          // );
+                          return const SizedBox();
+                        },
+                      )
+                    // : Image.asset(
+                    //     'assets/EventHeader.jpg',
+                    //     fit: BoxFit.cover,
+                    //   ),
+                    : const SizedBox()),
             Container(
               height: 25,
               padding:
@@ -98,38 +99,39 @@ class _AcademiesInformationScreenState
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 16, right: 20),
-                  child: widget.acd.deptImage != null
-                      ? SizedBox(
-                          height: 80,
-                          width: 80,
-                          child: Image.network(
-                            widget.acd.deptImage ?? "NA",
-                            fit: BoxFit.cover,
-                            errorBuilder: (BuildContext context, Object error,
-                                StackTrace? stackTrace) {
-                              return Image.asset(
-                                "assets/academies_header.jpg",
-                                fit: BoxFit.cover,
-                              );
-                            },
-                          ),
-                        )
-                      : Container(
-                          height: 80,
-                          width: 80,
-                          decoration: const BoxDecoration(
-                              shape: BoxShape.circle,
-                              image: DecorationImage(
-                                  image: AssetImage(
-                                      "assets/academies_header.jpg"))),
+                    padding: const EdgeInsets.only(left: 16, right: 20),
+                    child: widget.acd.deptImage != null
+                        ? SizedBox(
+                            height: 80,
+                            width: 80,
+                            child: Image.network(
+                              widget.acd.deptImage ?? "NA",
+                              fit: BoxFit.cover,
+                              errorBuilder: (BuildContext context, Object error,
+                                  StackTrace? stackTrace) {
+                                // return Image.asset(
+                                //   "assets/academies_header.jpg",
+                                //   fit: BoxFit.cover,
+                                // );
+                                return const SizedBox();
+                              },
+                            ),
+                          )
+                        // : Container(
+                        //     height: 80,
+                        //     width: 80,
+                        //     decoration: const BoxDecoration(
+                        //         shape: BoxShape.circle,
+                        //         image: DecorationImage(
+                        //             image: AssetImage(
+                        //                 "assets/academies_header.jpg"))),
 
-                          // child: Image.asset(
-                          //   ,
-                          //   fit: BoxFit.fitWidth,
-                          // ),
-                        ),
-                ),
+                        //     // child: Image.asset(
+                        //     //   ,
+                        //     //   fit: BoxFit.fitWidth,
+                        //     // ),
+                        //   ),
+                        : const SizedBox()),
                 Expanded(
                   child: GradientText(
                     widget.acd.deptName ?? "NA",
