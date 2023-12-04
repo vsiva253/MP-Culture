@@ -12,8 +12,6 @@ import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/viewmodels/loginViewModel/login_signup_view_model.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/bottombar.dart';
-import 'package:url_launcher/link.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:provider/provider.dart';
 //import flutter localization
 // import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,7 +19,7 @@ import 'package:mpc/data/services/api_service.dart';
 
 void main() async {
   // Create a GlobalKey<NavigatorState>
-  GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  // GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
