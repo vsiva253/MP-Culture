@@ -178,24 +178,25 @@ class _CustomAppBarSecondaryState extends State<CustomAppBarSecondary> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 1),
-                  child: userViewModel.logo != null
-                      ? Image.network(
-                          height: 46,
-                          userViewModel.logo ?? '',
-                          errorBuilder: (BuildContext context, Object error,
-                              StackTrace? stackTrace) {
-                            return Image.asset(
-                              height: 46,
-                              'assets/logo/cm.png',
-                            );
-                          },
-                        )
-                      : Image.asset(
-                          'assets/logo/cm.png',
-                          height: 46,
-                        ),
-                ),
+                    padding: const EdgeInsets.only(right: 1),
+                    child: userViewModel.logo != null
+                        ? Image.network(
+                            height: 46,
+                            userViewModel.logo ?? '',
+                            errorBuilder: (BuildContext context, Object error,
+                                StackTrace? stackTrace) {
+                              // return Image.asset(
+                              //   height: 46,
+                              //   'assets/logo/cm.png',
+                              // );
+                              return const SizedBox();
+                            },
+                          )
+                        // : Image.asset(
+                        //     'assets/logo/cm.png',
+                        //     height: 46,
+                        //   ),
+                        : const SizedBox()),
               ),
             ],
             leading: Builder(
