@@ -133,7 +133,7 @@ class _MyAppState extends State<MyApp> {
                         canDismissDialog: false,
                         showIgnore: false,
                         showLater: false,
-                        durationUntilAlertAgain: Duration(seconds: 1),
+                        durationUntilAlertAgain: const Duration(seconds: 1),
                       ),
                       child: CustomBottomBar(selectedIndex: 0));
                 } else {
@@ -148,7 +148,7 @@ class _MyAppState extends State<MyApp> {
                         // debugLogging: true
 
                         // debugDisplayOnce: true,
-                        durationUntilAlertAgain: Duration(seconds: 1),
+                        durationUntilAlertAgain: const Duration(seconds: 1),
                         // dialogStyle: UpgradeDialogStyle.cupertino,
                         // onUpdate: () {
                         //   launchUrl(Uri.parse(
@@ -156,7 +156,7 @@ class _MyAppState extends State<MyApp> {
                         //   return true;
                         // }
                       ),
-                      child: UserPreferencesScreen());
+                      child: const UserPreferencesScreen());
                 }
               },
             ),

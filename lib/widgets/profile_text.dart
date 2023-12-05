@@ -72,29 +72,40 @@ class WidgetsClass {
                     Center(
                       child: Padding(
                           padding: const EdgeInsets.all(3),
-                          child: imagePath != null
-                              ? Image.network(
-                                  imagePath,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (BuildContext context,
-                                      Object error, StackTrace? stackTrace) {
-                                    return Image.asset(
-                                      'assets/homepage/1.png',
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                )
-                              : Image.network(
-                                  'assets/homepage/1.png',
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (BuildContext context,
-                                      Object error, StackTrace? stackTrace) {
-                                    return Image.asset(
-                                      'assets/homepage/1.png',
-                                      fit: BoxFit.cover,
-                                    );
-                                  },
-                                )),
+                          child:
+                              name == "All Category" || name == "सभी श्रेणियाँ"
+                                  ? Center(
+                                      child: Image.asset(
+                                        'assets/homepage/7.png',
+                                        height: 40,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    )
+                                  : imagePath != null
+                                      ? Image.network(
+                                          imagePath,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (BuildContext context,
+                                              Object error,
+                                              StackTrace? stackTrace) {
+                                            return Image.asset(
+                                              'assets/homepage/1.png',
+                                              fit: BoxFit.cover,
+                                            );
+                                          },
+                                        )
+                                      : Image.network(
+                                          'assets/homepage/1.png',
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (BuildContext context,
+                                              Object error,
+                                              StackTrace? stackTrace) {
+                                            return Image.asset(
+                                              'assets/homepage/1.png',
+                                              fit: BoxFit.cover,
+                                            );
+                                          },
+                                        )),
                     ),
                   ],
                 ),
