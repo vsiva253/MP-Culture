@@ -1,9 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:mpc/components/theme_data.dart';
-import 'package:mpc/screens/categoryList/category_list_view.dart';
 import 'package:mpc/screens/eventlist/event_list.dart';
-
 import 'package:mpc/screens/settings.dart';
 import 'package:mpc/screens/user/auth_status.dart';
 import 'package:mpc/values/string_values.dart';
@@ -11,6 +9,7 @@ import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:mpc/widgets/bottombar.dart';
+import 'package:mpc/widgets/profile_text.dart';
 import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -180,12 +179,91 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           isSelected: selectedItem == 'कला विधायें',
                           onTap: () {
                             setSelectedItem('कला विधायें');
-                            Navigator.push(
-                                context,
-                                FadePageRoute(
-                                  builder: (context) => CategorysListView(
-                                      categoryList: homeViewModel.category),
-                                ));
+                            // Navigator.push(
+                            //     context,
+                            //     FadePageRoute(
+                            //       builder: (context) => CategorysListView(
+                            //           categoryList: homeViewModel.category),
+                            //     ));
+                            Navigator.of(context).pop();
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                if (homeViewModel.category.isEmpty) {
+                                  return AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(5.0),
+                                    ),
+                                    title: Text('arts_categories'.tr()),
+                                    content:
+                                        const Text('No categories available.'),
+                                  );
+                                }
+
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(5.0),
+                                  ),
+                                  title: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('arts_categories'.tr()),
+                                      GestureDetector(
+                                        onTap: () {
+                                          Navigator.of(context)
+                                              .pop(); // Close the dialog
+                                        },
+                                        child: const Icon(Icons.close),
+                                      ),
+                                    ],
+                                  ),
+                                  content: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.65,
+                                    width: 320,
+                                    padding: const EdgeInsets.only(
+                                        left: 16, right: 16, top: 5),
+                                    child: ListView.builder(
+                                      itemCount:
+                                          ((homeViewModel.category.length) / 3)
+                                              .ceil(),
+                                      itemBuilder: (context, index) {
+                                        var startIndex = index * 3;
+                                        var endIndex = (startIndex + 3) <
+                                                homeViewModel.category.length
+                                            ? (startIndex + 3)
+                                            : homeViewModel.category.length;
+
+                                        var itemsToDisplay = homeViewModel
+                                            .category
+                                            .sublist(startIndex, endIndex);
+
+                                        return SizedBox(
+                                          height: 80,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              for (var item in itemsToDisplay)
+                                                WidgetsClass.buildItem(
+                                                  themeProvider.isEnglish
+                                                      ? item.category ?? "NA"
+                                                      : item.categoryHindi ??
+                                                          "NA",
+                                                  item.categoryIcon,
+                                                  context,
+                                                  [],
+                                                ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
                           },
                         ),
                         CustomDrawerItem(
