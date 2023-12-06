@@ -431,7 +431,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Text(
-                                        StringValue.haveAccount,
+                                        'register_please'.tr(),
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w500,
@@ -445,7 +445,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                       ),
                                       Text(
                                         // StringValue.signUp,
-                                        "login".tr(),
+                                        'register_please2'.tr(),
                                         style: TextStyle(
                                           fontSize: 14,
                                           fontWeight: FontWeight.w600,

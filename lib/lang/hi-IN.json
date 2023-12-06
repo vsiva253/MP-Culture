@@ -60,17 +60,18 @@
   "artist_description": "कला के बारे में",
   "gallery_not": "गैलरी उपलभ्द नही है",
   "more_info": "अधिक जानकारी",
-  "home":"होम",
-  "academies":"अकादमियां",
-  "live":"लाइव",
-  "calendar":"कैलेंडर",
-  "profile":"प्रोफ़ाइल",
-  "add":"जोड़ें",
-  "read_more":"और पढ़ें",
-  "read_less":"बंद करें",
-  "sign_up_here":"यहाँ साइन अप करें!",
-  "audience_registration":"दर्शक पंजीकरण",
-  "caonfirm_password*":"पासवर्ड की पुष्टि करें"
-  
- 
+  "home": "होम",
+  "academies": "अकादमियां",
+  "live": "लाइव",
+  "calendar": "कैलेंडर",
+  "profile": "प्रोफ़ाइल",
+  "add": "जोड़ें",
+  "read_more": "और पढ़ें",
+  "read_less": "बंद करें",
+  "sign_up_here": "यहाँ साइन अप करें!",
+  "audience_registration": "दर्शक पंजीकरण",
+  "caonfirm_password*": "पासवर्ड की पुष्टि करें",
+
+  "register_please": "रजिस्टर नहीं किया है? अब रजिस्टर करें!",
+  "register_please2": "अब रजिस्टर करें!"
 }

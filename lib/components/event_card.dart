@@ -298,26 +298,30 @@ class _EventCardState extends State<EventCard> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      const Icon(
-                                        Icons.location_on_outlined,
-                                        color: Color(0xFFFFFFFF),
-                                        size: 10,
-                                      ),
-                                      const SizedBox(
-                                        width: 3,
+                                      Expanded(child: SizedBox()),
+                                      Center(
+                                        child: Icon(
+                                          Icons.location_on_outlined,
+                                          color: Color(0xFFFFFFFF),
+                                          size: 10,
+                                        ),
                                       ),
                                       Expanded(
-                                        child: Text(
-                                          widget.event.city ?? "NA",
-                                          // "ugfiuhsdiofhj hiohdioashj d",
-                                          maxLines: 1,
-                                          overflow: TextOverflow.ellipsis,
-                                          style: const TextStyle(
-                                              color: Color(0xFFFFFFFF),
-                                              fontWeight: FontWeight.w500,
-                                              fontSize: 10),
+                                        flex: 3,
+                                        child: Center(
+                                          child: Text(
+                                            widget.event.city ?? "NA",
+                                            // "ugfiuhsdiofhj hiohdioashj d",
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                            style: const TextStyle(
+                                                color: Color(0xFFFFFFFF),
+                                                fontWeight: FontWeight.w500,
+                                                fontSize: 10),
+                                          ),
                                         ),
-                                      )
+                                      ),
+                                      Expanded(child: SizedBox())
                                     ],
                                   ),
                                 )),

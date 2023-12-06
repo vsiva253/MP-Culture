@@ -56,7 +56,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               Align(
                 alignment: Alignment.centerRight,
                 child: Padding(
-                    padding: const EdgeInsets.only(right: 10),
+                    padding: const EdgeInsets.only(right: 5, left: 0),
                     child: userViewModel.logo != null
                         ? Image.network(
                             height: 46,
@@ -99,24 +99,27 @@ class _CustomAppBarState extends State<CustomAppBar> {
             title: Center(
               child: Align(
                   alignment: Alignment.center,
-                  child: userViewModel.centerLogo != null
-                      ? Image.network(
-                          height: 46,
-                          userViewModel.centerLogo ?? '',
-                          errorBuilder: (BuildContext context, Object error,
-                              StackTrace? stackTrace) {
-                            // return Image.asset(
-                            //   height: 46,
-                            //   'assets/logo/appbar.png',
-                            // );
-                            return const SizedBox();
-                          },
-                        )
-                      // : Image.asset(
-                      //     'assets/logo/appbar.png',
-                      //     height: 46,
-                      //   ),
-                      : const SizedBox()),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10),
+                    child: userViewModel.centerLogo != null
+                        ? Image.network(
+                            height: 46,
+                            userViewModel.centerLogo ?? '',
+                            errorBuilder: (BuildContext context, Object error,
+                                StackTrace? stackTrace) {
+                              // return Image.asset(
+                              //   height: 46,
+                              //   'assets/logo/appbar.png',
+                              // );
+                              return const SizedBox();
+                            },
+                          )
+                        // : Image.asset(
+                        //     'assets/logo/appbar.png',
+                        //     height: 46,
+                        //   ),
+                        : const SizedBox(),
+                  )),
             ),
           ),
         ),
