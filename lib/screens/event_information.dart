@@ -26,6 +26,12 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
         .fetchSingleProgram(context, widget.eventData.id!);
   }
 
+  String formatDateString(String dateString) {
+    DateTime dateTime = DateTime.parse(dateString);
+    final formatter = DateFormat('dd MMM yyyy');
+    return formatter.format(dateTime);
+  }
+
   Widget textRow(String name, String value) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -207,7 +213,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                         width: 5,
                                       ),
                                       Text(
-                                        "${data.startingDate ?? "NA"} at ${data.startingTime ?? "NA"}",
+                                        "${formatDateString(data.startingDate ?? "NA")} at ${data.startingTime ?? "NA"}",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
