@@ -63,12 +63,18 @@ class _EventCardState extends State<EventCard> {
     }
   }
 
+  bool isYouTubeLink(String? programLink) {
+    Uri uri = Uri.parse(programLink ?? "NA");
+    return uri.host == 'www.youtube.com' || uri.host == 'youtube.com';
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
         if (widget.isLive) {
-          if (widget.event.programLink != null) {
+          if (widget.event.programLink != null &&
+              isYouTubeLink(widget.event.programLink)) {
             if (!await launchUrl(Uri.parse(widget.event.programLink!))) {
               throw Exception('Could not launch ');
             }
@@ -323,7 +329,9 @@ class _EventCardState extends State<EventCard> {
                                       ),
                                     ),
                                     widget.event.programLink != null &&
-                                            widget.isLive
+                                            widget.isLive &&
+                                            isYouTubeLink(
+                                                widget.event.programLink)
                                         ? Lottie.asset(
                                             'assets/live/live_dot.json', // Replace with the path to your Lottie animation file
                                             width: 30,
