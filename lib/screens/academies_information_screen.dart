@@ -20,6 +20,8 @@ class AcademiesInformationScreen extends StatefulWidget {
 
 class _AcademiesInformationScreenState
     extends State<AcademiesInformationScreen> {
+  double hightOfSlider = 228;
+
   @override
   void initState() {
     super.initState();
@@ -44,7 +46,7 @@ class _AcademiesInformationScreenState
             const SizedBox(height: 15),
             SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: 228,
+                height: data.academyBanner != null ? hightOfSlider : 0,
                 child: data.academyBanner != null
                     ? Image.network(
                         widget.acd.deptImage ?? "NA",
@@ -55,6 +57,9 @@ class _AcademiesInformationScreenState
                           //   'assets/EventHeader.jpg',
                           //   fit: BoxFit.cover,
                           // );
+                          setState(() {
+                            hightOfSlider = 0;
+                          });
                           return const SizedBox();
                         },
                       )

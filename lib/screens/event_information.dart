@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
-import 'package:mpc/widgets/bottombar.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/homepage_widgets/image_sliding.dart';
 import 'package:provider/provider.dart';
