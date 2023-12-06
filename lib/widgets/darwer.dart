@@ -215,7 +215,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                         AlertDialog(
                                       contentPadding: const EdgeInsets.all(10),
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
+                                        borderRadius: BorderRadius.circular(5),
                                       ),
                                       title: const Text('Want to Logout?'),
                                       actions: <Widget>[
