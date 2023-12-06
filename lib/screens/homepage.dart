@@ -78,7 +78,11 @@ class _HomePageState extends State<HomePage> {
                             child: Center(
                               child: Column(children: [
                                 GestureDetector(
-                                  onTap: getData,
+                                  onTap: () {
+                                    setState(() {
+                                      getData();
+                                    });
+                                  },
                                   child: const Padding(
                                     padding: EdgeInsets.all(28.0),
                                     child: Text(
@@ -99,7 +103,11 @@ class _HomePageState extends State<HomePage> {
                                   ? RowWithCards(
                                       categroy: homeViewModel.category)
                                   : GestureDetector(
-                                      onTap: getData,
+                                      onTap: () {
+                                        setState(() {
+                                          getData();
+                                        });
+                                      },
                                       child: const Padding(
                                         padding: EdgeInsets.all(28.0),
                                         child: Text(

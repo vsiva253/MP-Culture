@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:mpc/components/theme_data.dart';
 import 'package:mpc/data/models/category_model.dart';
-import 'package:mpc/screens/categoryList/category_list_view.dart';
 import 'package:mpc/screens/eventlist/category_academiec_event_list.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
+import 'package:provider/provider.dart';
 
 class WidgetsClass {
   static Widget TextW(String title, String value) {
@@ -26,6 +27,7 @@ class WidgetsClass {
 
   static Widget buildItem(String name, String? imagePath, BuildContext context,
       List<CatrgoryModel>? list) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Expanded(
       child: SizedBox(
         width: 52,
@@ -33,12 +35,75 @@ class WidgetsClass {
         child: GestureDetector(
           onTap: () {
             name == "All Category" || name == "सभी श्रेणियाँ"
-                ? Navigator.push(
-                    context,
-                    FadePageRoute(
-                      builder: (context) =>
-                          CategorysListView(categoryList: list ?? []),
-                    ))
+                ? showDialog(
+                    context: context,
+                    builder: (context) {
+                      if (list == null || list.isEmpty) {
+                        return AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                          ),
+                          title: Text(name),
+                          content: const Text('No categories available.'),
+                        );
+                      }
+
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(name),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).pop(); // Close the dialog
+                              },
+                              child: const Icon(Icons.close),
+                            ),
+                          ],
+                        ),
+                        content: Container(
+                          height: MediaQuery.of(context).size.height * 0.65,
+                          width: 320,
+                          padding: const EdgeInsets.only(
+                              left: 16, right: 16, top: 5),
+                          child: ListView.builder(
+                            itemCount: ((list.length) / 3).ceil(),
+                            itemBuilder: (context, index) {
+                              var startIndex = index * 3;
+                              var endIndex = (startIndex + 3) < list.length
+                                  ? (startIndex + 3)
+                                  : list.length;
+
+                              var itemsToDisplay =
+                                  list.sublist(startIndex, endIndex);
+
+                              return SizedBox(
+                                height: 80,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    for (var item in itemsToDisplay)
+                                      WidgetsClass.buildItem(
+                                        themeProvider.isEnglish
+                                            ? item.category ?? "NA"
+                                            : item.categoryHindi ?? "NA",
+                                        item.categoryIcon,
+                                        context,
+                                        [],
+                                      ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      );
+                    },
+                  )
                 : Navigator.push(
                     context,
                     FadePageRoute(
@@ -56,14 +121,14 @@ class WidgetsClass {
                   borderRadius: BorderRadius.circular(4),
                   boxShadow: [
                     BoxShadow(
-                      color: Color(0xFF952766).withOpacity(0.15),
+                      color: const Color(0xFF952766).withOpacity(0.15),
                       spreadRadius: 0,
                       blurRadius: 10,
-                      offset: Offset(1, 1), // changes position of shadow
+                      offset: const Offset(1, 1), // changes position of shadow
                     ),
                   ],
                   border: Border.all(
-                    color: Color(0xFF952766).withOpacity(0.1),
+                    color: const Color(0xFF952766).withOpacity(0.1),
                     width: 1,
                   ),
                 ),

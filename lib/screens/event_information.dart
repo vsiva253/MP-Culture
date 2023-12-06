@@ -309,7 +309,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                             children: [
                               SizedBox(
                                 child: Text(
-                                  "${"kalakar".tr()}:",
+                                  "${"organizer".tr()}:",
                                   style: TextStyle(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
@@ -320,7 +320,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                 width: 10,
                               ),
                               Text(
-                                widget.eventData.artists?[0].name ??
+                                widget.eventData.departmentBy ??
                                     "NA", // "भारत की लोकभारत की लोक.....",
                                 maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
