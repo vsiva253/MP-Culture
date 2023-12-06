@@ -97,26 +97,29 @@ class _CustomAppBarState extends State<CustomAppBar> {
                 : theme.primaryColor.withOpacity(0.5),
             // Set the AppBar background to transparent
             title: Center(
-              child: Align(
-                  alignment: Alignment.center,
-                  child: userViewModel.centerLogo != null
-                      ? Image.network(
-                          height: 46,
-                          userViewModel.centerLogo ?? '',
-                          errorBuilder: (BuildContext context, Object error,
-                              StackTrace? stackTrace) {
-                            // return Image.asset(
-                            //   height: 46,
-                            //   'assets/logo/appbar.png',
-                            // );
-                            return const SizedBox();
-                          },
-                        )
-                      // : Image.asset(
-                      //     'assets/logo/appbar.png',
-                      //     height: 46,
-                      //   ),
-                      : const SizedBox()),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Align(
+                    alignment: Alignment.center,
+                    child: userViewModel.centerLogo != null
+                        ? Image.network(
+                            height: 46,
+                            userViewModel.centerLogo ?? '',
+                            errorBuilder: (BuildContext context, Object error,
+                                StackTrace? stackTrace) {
+                              // return Image.asset(
+                              //   height: 46,
+                              //   'assets/logo/appbar.png',
+                              // );
+                              return const SizedBox();
+                            },
+                          )
+                        // : Image.asset(
+                        //     'assets/logo/appbar.png',
+                        //     height: 46,
+                        //   ),
+                        : const SizedBox()),
+              ),
             ),
           ),
         ),
@@ -177,27 +180,26 @@ class _CustomAppBarSecondaryState extends State<CustomAppBarSecondary> {
             actions: [
               Align(
                 alignment: Alignment.centerRight,
-                child: Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: userViewModel.logo != null
-                        ? Image.network(
-                            height: 46,
-                            userViewModel.logo ?? '',
-                            errorBuilder: (BuildContext context, Object error,
-                                StackTrace? stackTrace) {
-                              // return Image.asset(
-                              //   height: 46,
-                              //   'assets/logo/cm.png',
-                              // );
-                              return const SizedBox();
-                            },
-                          )
-                        // : Image.asset(
-                        //     'assets/logo/cm.png',
-                        //     height: 46,
-                        //   ),
-                        : const SizedBox()),
+                child: userViewModel.logo != null
+                    ? Image.network(
+                        height: 46,
+                        userViewModel.logo ?? '',
+                        errorBuilder: (BuildContext context, Object error,
+                            StackTrace? stackTrace) {
+                          // return Image.asset(
+                          //   height: 46,
+                          //   'assets/logo/cm.png',
+                          // );
+                          return const SizedBox();
+                        },
+                      )
+                    // : Image.asset(
+                    //     'assets/logo/cm.png',
+                    //     height: 46,
+                    //   ),
+                    : const SizedBox(),
               ),
+              const SizedBox(width: 10),
             ],
             leading: Builder(
               builder: (context) => Padding(
@@ -219,24 +221,27 @@ class _CustomAppBarSecondaryState extends State<CustomAppBarSecondary> {
                 : theme.primaryColor.withOpacity(0.5),
             // Set the AppBar background to transparent
             title: Center(
-              child: Align(
-                alignment: Alignment.center,
-                child: userViewModel.centerLogo != null
-                    ? Image.network(
-                        height: 46,
-                        userViewModel.centerLogo ?? '',
-                        errorBuilder: (BuildContext context, Object error,
-                            StackTrace? stackTrace) {
-                          return Image.asset(
-                            height: 46,
-                            'assets/logo/appbar.png',
-                          );
-                        },
-                      )
-                    : Image.asset(
-                        'assets/logo/appbar.png',
-                        height: 46,
-                      ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Align(
+                  alignment: Alignment.center,
+                  child: userViewModel.centerLogo != null
+                      ? Image.network(
+                          height: 46,
+                          userViewModel.centerLogo ?? '',
+                          errorBuilder: (BuildContext context, Object error,
+                              StackTrace? stackTrace) {
+                            return Image.asset(
+                              height: 46,
+                              'assets/logo/appbar.png',
+                            );
+                          },
+                        )
+                      : Image.asset(
+                          'assets/logo/appbar.png',
+                          height: 46,
+                        ),
+                ),
               ),
             ),
           ),
