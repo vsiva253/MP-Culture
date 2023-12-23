@@ -38,6 +38,9 @@ class LoginSignupViewModel extends ChangeNotifier {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           content: Row(
             children: [
               const CircularProgressIndicator(),

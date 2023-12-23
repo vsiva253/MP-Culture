@@ -211,7 +211,7 @@ class _HomePageState extends State<HomePage> {
                                             true
                                         ? false
                                         : true,
-                                isLive: false,
+                                isLive: true,
                               ),
                               const SizedBox(
                                 height: 20,

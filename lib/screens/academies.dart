@@ -60,7 +60,7 @@ class _AcademiesPageState extends State<AcademiesPage> {
                   ),
                   Container(
                     padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 30),
+                        const EdgeInsets.only(left: 16, right: 16, top: 10),
                     child: homeViewModel.academiesList.isEmpty
                         ? SizedBox(
                             height: 600,
@@ -108,8 +108,8 @@ class _AcademiesPageState extends State<AcademiesPage> {
                                   var data = homeViewModel.academiesList[index];
                                   String eventName =
                                       data.deptName!; //'संस्कृति संचालनालय';
-                                  String eventDescription =
-                                      data.deptDesignation!;
+                                  // String eventDescription =
+                                  //     data.deptDesignation??"NA";
                                   //'माननीय राष्ट्रपति श्रीमती द्रौपदी मुर्मू 3 अगस्त, 2023 को सुबह 11:30 बजे भोपाल स्थित........';
 
                                   // Generate random color

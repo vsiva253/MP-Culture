@@ -48,6 +48,9 @@ class _SettingsState extends State<Settings> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(5.0),
+          ),
           title: Text(StringValue.contactWithUs),
           content: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
-import 'package:mpc/widgets/bottombar.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/homepage_widgets/image_sliding.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +23,12 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
     context
         .read<HomeViewModel>()
         .fetchSingleProgram(context, widget.eventData.id!);
+  }
+
+  String formatDateString(String dateString) {
+    DateTime dateTime = DateTime.parse(dateString);
+    final formatter = DateFormat('dd MMM yyyy');
+    return formatter.format(dateTime);
   }
 
   Widget textRow(String name, String value) {
@@ -207,7 +212,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                         width: 5,
                                       ),
                                       Text(
-                                        "${data.startingDate ?? "NA"} at ${data.startingTime ?? "NA"}",
+                                        "${formatDateString(data.startingDate ?? "NA")} at ${data.startingTime ?? "NA"}",
                                         style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w400,
