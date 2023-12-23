@@ -99,7 +99,7 @@ class UserViewModel extends ChangeNotifier {
         }));
       } catch (error) {
         _isLoading = false;
-        throw ("Error fetching toolbar images: $error");
+        // throw ("Error fetching toolbar images: $error");
       } finally {
         _isLoading = false;
       }

@@ -67,7 +67,11 @@ class _AcademiesPageState extends State<AcademiesPage> {
                             child: Center(
                               child: Column(children: [
                                 GestureDetector(
-                                  onTap: getData,
+                                  onTap: () {
+                                    setState(() {
+                                      getData();
+                                    });
+                                  },
                                   child: const Text(
                                     "Retry",
                                     style: TextStyle(
@@ -109,12 +113,12 @@ class _AcademiesPageState extends State<AcademiesPage> {
                                   //'माननीय राष्ट्रपति श्रीमती द्रौपदी मुर्मू 3 अगस्त, 2023 को सुबह 11:30 बजे भोपाल स्थित........';
 
                                   // Generate random color
-                                  List<Color> colorList = const [
-                                    Color(0xFF9750DB),
-                                    Color(0xFFD94D33),
-                                    Color(0xFF029CE2),
-                                    Color(0xFFFFB425),
-                                    Color(0xFFD361BA),
+                                  List<Color> colorList = [
+                                    const Color(0xFF9750DB).withOpacity(0.15),
+                                    const Color(0xFFD94D33).withOpacity(0.15),
+                                    const Color(0xFF029CE2).withOpacity(0.15),
+                                    const Color(0xFFFFB425).withOpacity(0.15),
+                                    const Color(0xFFD361BA).withOpacity(0.15),
                                   ];
 
                                   // Randomly choose a color from the list
@@ -179,19 +183,36 @@ class _AcademiesPageState extends State<AcademiesPage> {
                                                 child: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
                                                   children: [
-                                                    Text(
+                                                    // Text(
+                                                    //   eventName,
+                                                    //   maxLines: 3,
+                                                    //   style: const TextStyle(
+                                                    //     color: Colors.white,
+                                                    //     fontSize: 20,
+                                                    //     fontWeight:
+                                                    //         FontWeight.w700,
+                                                    //   ),
+                                                    //   overflow:
+                                                    //       TextOverflow.ellipsis,
+                                                    // ),
+                                                    GradientText(
                                                       eventName,
                                                       maxLines: 3,
                                                       style: const TextStyle(
-                                                        color: Colors.white,
-                                                        fontSize: 20,
-                                                        fontWeight:
-                                                            FontWeight.w700,
-                                                      ),
+                                                          fontFamily: 'Poppins',
+                                                          fontSize: 20,
+                                                          fontWeight:
+                                                              FontWeight.w600),
+                                                      colors: const [
+                                                        Color(0xFFC33764),
+                                                        Color(0xFF1D2671),
+                                                      ],
                                                       overflow:
                                                           TextOverflow.ellipsis,
-                                                    ),
+                                                    )
                                                   ],
                                                 ),
                                               ),

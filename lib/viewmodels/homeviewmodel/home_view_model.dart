@@ -6,6 +6,7 @@ import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/data/models/single_academiec_model.dart';
 import 'package:mpc/data/models/single_event_model.dart';
 import 'package:mpc/data/services/api_service.dart';
+import 'package:mpc/widgets/custom_snackbar.dart';
 
 class HomeViewModel with ChangeNotifier {
   final ApiService apiService;
@@ -89,8 +90,8 @@ class HomeViewModel with ChangeNotifier {
         _todayPrograms = programs;
       } catch (e) {
         _isLoading = false;
-        // // CustomSnackbar.show(context, 'Error fetching today\'s programs');
-        throw ("Error fetching today\'s programs: $e");
+        CustomSnackbar.show(context, 'Error fetching today\'s programs');
+        // throw ("Error fetching today\'s programs: $e");
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -110,7 +111,8 @@ class HomeViewModel with ChangeNotifier {
         // Handle error
         _isLoading = false;
         // // CustomSnackbar.show(context, 'Error fetching OnGoing\'s programs');
-        throw ('Error fetching OnGoing\'s programs: $e');
+        //
+        CustomSnackbar.show(context, 'Error fetching OnGoing\'s programs');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -129,8 +131,7 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         // Handle error
         _isLoading = false;
-        // // CustomSnackbar.show(context, 'Error fetching UpComing\'s programs');
-        throw ('Error fetching OnGoing\'s programs: $e');
+        CustomSnackbar.show(context, 'Error fetching UpComing\'s programs');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -149,8 +150,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         // Handle error
         _isLoading = false;
-        // CustomSnackbar.show(context, 'Error fetching Archived\'s programs');
-        throw ('Error fetching Archived\'s programs: $e');
+        CustomSnackbar.show(context, 'Error fetching Archived\'s programs');
+        // throw ('Error fetching Archived\'s programs: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -168,8 +169,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         _isLoading = false;
         // Handle error
-        // CustomSnackbar.show(context, 'Error fetching Slider images');
-        throw ('Error fetching Slider images: $e');
+        CustomSnackbar.show(context, 'Error fetching Slider images');
+        // throw ('Error fetching Slider images: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -187,8 +188,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         // Handle error
         _isLoading = false;
-        // CustomSnackbar.show(context, 'Error fetching Categories');
-        throw ('Error fetching Categories: $e');
+        CustomSnackbar.show(context, 'Error fetching Categories');
+        // throw ('Error fetching Categories: $e');
       } finally {
         Future.delayed(const Duration(seconds: 1), () {
           _isLoading = false;
@@ -209,8 +210,8 @@ class HomeViewModel with ChangeNotifier {
       } catch (e) {
         // Handle error
         _isLoading = false;
-        // CustomSnackbar.show(context, 'Error fetching academies');
-        throw ('Error fetching academies: $e');
+        CustomSnackbar.show(context, 'Error fetching academies');
+        // throw ('Error fetching academies: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -230,7 +231,7 @@ class HomeViewModel with ChangeNotifier {
     } catch (e) {
       // Handle error
       _isLoading = false;
-      // CustomSnackbar.show(context, 'Error fetching academies: $e');
+      CustomSnackbar.show(context, 'Error fetching academies');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -246,8 +247,8 @@ class HomeViewModel with ChangeNotifier {
     } catch (e) {
       // Handle error
       _isLoading = false;
-      // CustomSnackbar.show(context, 'Error fetching academies');
-      throw ('Error fetching academies: $e');
+      CustomSnackbar.show(context, 'Error fetching academies');
+      // throw ('Error fetching academies: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -265,8 +266,8 @@ class HomeViewModel with ChangeNotifier {
       _byCategoryPrograms = programs;
     } catch (e) {
       _isLoading = false;
-      // CustomSnackbar.show(context, 'Error fetching programs');
-      throw ('Error fetching programs: $e');
+      CustomSnackbar.show(context, 'Error fetching programs');
+      // throw ('Error fetching programs: $e');
     } finally {
       _isLoading = false;
       notifyListeners();
@@ -284,8 +285,8 @@ class HomeViewModel with ChangeNotifier {
         _byAcademiecPrograms = programs;
       } catch (e) {
         _isLoading = false;
-        // CustomSnackbar.show(context, 'Error fetching programs');
-        throw ('Error fetching programs: $e');
+        CustomSnackbar.show(context, 'Error fetching programs');
+        // throw ('Error fetching programs: $e');
       } finally {
         _isLoading = false;
         notifyListeners();
@@ -304,7 +305,7 @@ class HomeViewModel with ChangeNotifier {
       _byAcademiecPrograms = programs;
     } catch (e) {
       _isLoading = false;
-      // CustomSnackbar.show(context, 'Error fetching failed programs: $e');
+      CustomSnackbar.show(context, 'Error fetching failed programs');
     } finally {
       _isLoading = false;
       notifyListeners();

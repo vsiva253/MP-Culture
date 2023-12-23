@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/screens/event_information.dart';
 import 'package:mpc/widgets/animation_page_route.dart';
@@ -18,6 +21,48 @@ class EventCard extends StatefulWidget {
 }
 
 class _EventCardState extends State<EventCard> {
+  bool isLivegGoing = false;
+
+  String formatDateString(String dateString) {
+    DateTime dateTime = DateTime.parse(dateString);
+    final formatter = DateFormat('dd MMM yyyy');
+    return formatter.format(dateTime);
+  }
+
+  void updateDisplayText() {
+    DateTime startingDateTime = DateTime.parse(
+        "${widget.event.startingDate} ${widget.event.startingTime}");
+    DateTime endDateTime =
+        DateTime.parse("${widget.event.endDate} ${widget.event.endTime}");
+    DateTime currentDateTime = DateTime.now();
+
+    if (currentDateTime.isAfter(startingDateTime) &&
+        currentDateTime.isBefore(endDateTime)) {
+      setState(() {
+        isLivegGoing = true;
+      });
+    } else if (currentDateTime.isBefore(startingDateTime)) {
+      setState(() {
+        isLivegGoing = false;
+      });
+    } else {
+      setState(() {
+        isLivegGoing = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.isLive) {
+      updateDisplayText();
+      Timer.periodic(const Duration(seconds: 1), (timer) {
+        updateDisplayText();
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -65,81 +110,175 @@ class _EventCardState extends State<EventCard> {
                           fit: BoxFit.cover,
                           errorBuilder: (BuildContext context, Object error,
                               StackTrace? stackTrace) {
-                            return Image.asset(
-                              'assets/Event.jpg',
-                              height: 180,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            );
+                            // return Image.asset(
+                            //   'assets/Event.jpg',
+                            //   height: 180,
+                            //   width: double.infinity,
+                            //   fit: BoxFit.cover,
+                            // );
+                            return const SizedBox(
+                                height: 180, width: double.infinity);
                           },
                         )
-                      : Image.asset(
-                          'assets/Event.jpg',
-                          height: 180,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                  Positioned(
-                    top: 0,
-                    left: 90,
-                    right: 0,
-                    child: Container(
-                      padding: const EdgeInsets.only(left: 1, top: 1),
-                      height: 12,
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFFC33764),
-                            Color(0xFF1D2671),
-                          ],
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          '${widget.event.startingDate} - ${widget.event.endDate}',
-                          style: const TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontFamily: 'HIND',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 6,
+                      // : Image.asset(
+                      //     'assets/Event.jpg',
+                      //     height: 180,
+                      //     width: double.infinity,
+                      //     fit: BoxFit.cover,
+                      //   ),
+                      : const SizedBox(height: 180, width: double.infinity),
+                  widget.isLive
+                      ? isLivegGoing
+                          ? Positioned(
+                              top: 0,
+                              left: 90,
+                              right: 0,
+                              child: Container(
+                                padding: const EdgeInsets.only(left: 1, top: 1),
+                                height: 20,
+                                width: double.infinity,
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFFC33764),
+                                      Color(0xFF1D2671),
+                                    ],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                ),
+                                child: Lottie.asset(
+                                  'assets/live/live_txt.json', // Replace with the path to your Lottie animation file
+                                  width: 30,
+                                  height: 30,
+                                ),
+                              ),
+                            )
+                          : Positioned(
+                              top: 0,
+                              left: 90,
+                              right: 0,
+                              child: Container(
+                                padding: const EdgeInsets.only(left: 1, top: 1),
+                                height: 12,
+                                width: double.infinity,
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFFC33764),
+                                      Color(0xFF1D2671),
+                                    ],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${formatDateString(widget.event.startingDate ?? "NA")} - ${formatDateString(widget.event.endDate ?? "NA")}',
+                                    style: const TextStyle(
+                                      color: Color(0xFFFFFFFF),
+                                      fontFamily: 'HIND',
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 6,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                      : Positioned(
+                          top: 0,
+                          left: 90,
+                          right: 0,
+                          child: Container(
+                            padding: const EdgeInsets.only(left: 1, top: 1),
+                            height: 12,
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color(0xFFC33764),
+                                  Color(0xFF1D2671),
+                                ],
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${formatDateString(widget.event.startingDate ?? "NA")} - ${formatDateString(widget.event.endDate ?? "NA")}',
+                                style: const TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontFamily: 'HIND',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 6,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    top: 12.2,
-                    left: 90,
-                    right: 0,
-                    child: Container(
-                      height: 12,
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFFC33764),
-                            Color(0xFF714ACF),
-                          ],
-                          begin: Alignment.bottomLeft,
-                          end: Alignment.bottomRight,
-                        ),
-                      ),
-                      child: Center(
-                        child: Text(
-                          '${widget.event.startingTime} - ${widget.event.endTime}',
-                          style: const TextStyle(
-                            color: Color(0xFFFFFFFF),
-                            fontFamily: 'HIND',
-                            fontWeight: FontWeight.w500,
-                            fontSize: 6,
+                  widget.isLive
+                      ? isLivegGoing
+                          ? const SizedBox()
+                          : Positioned(
+                              top: 12.2,
+                              left: 90,
+                              right: 0,
+                              child: Container(
+                                height: 12,
+                                width: double.infinity,
+                                decoration: const BoxDecoration(
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Color(0xFFC33764),
+                                      Color(0xFF714ACF),
+                                    ],
+                                    begin: Alignment.bottomLeft,
+                                    end: Alignment.bottomRight,
+                                  ),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    '${widget.event.startingTime} - ${widget.event.endTime}',
+                                    style: const TextStyle(
+                                      color: Color(0xFFFFFFFF),
+                                      fontFamily: 'HIND',
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 6,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                      : Positioned(
+                          top: 12.2,
+                          left: 90,
+                          right: 0,
+                          child: Container(
+                            height: 12,
+                            width: double.infinity,
+                            decoration: const BoxDecoration(
+                              gradient: LinearGradient(
+                                colors: [
+                                  Color(0xFFC33764),
+                                  Color(0xFF714ACF),
+                                ],
+                                begin: Alignment.bottomLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                            ),
+                            child: Center(
+                              child: Text(
+                                '${widget.event.startingTime} - ${widget.event.endTime}',
+                                style: const TextStyle(
+                                  color: Color(0xFFFFFFFF),
+                                  fontFamily: 'HIND',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 6,
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
                 ],
               ),
               Expanded(
@@ -165,20 +304,34 @@ class _EventCardState extends State<EventCard> {
                                         .withOpacity(0.2)))),
                         child: Center(
                             child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 3, bottom: 3, right: 0),
-                          child: Text(
-                            widget.event.programName ?? "NA",
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontSize: 15,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: 'Hind',
-                                letterSpacing: 0),
-                          ),
-                        ))),
+                                padding: const EdgeInsets.only(
+                                    top: 3, bottom: 3, right: 5, left: 8),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Expanded(
+                                      child: Text(
+                                        widget.event.programName ?? "NA",
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(
+                                            color: Color(0xFFFFFFFF),
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: 'Hind',
+                                            letterSpacing: 0),
+                                      ),
+                                    ),
+                                    widget.event.programLink != null &&
+                                            widget.isLive
+                                        ? Lottie.asset(
+                                            'assets/live/live_dot.json', // Replace with the path to your Lottie animation file
+                                            width: 30,
+                                            height: 30,
+                                          )
+                                        : const SizedBox()
+                                  ],
+                                )))),
                     // const Divider(
                     //   color: Colors.grey,
                     //   thickness: 0.3,
