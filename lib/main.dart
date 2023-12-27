@@ -25,7 +25,8 @@ void main() async {
   await EasyLocalization.ensureInitialized();
 
   var api = ApiService(
-    baseUrl: 'https://service.codingbandar.com',
+    // baseUrl: 'https://service.codingbandar.com/admin',
+    baseUrl: 'https://jusmarktech.in/culturemp/admin',
     basicAuth: 'YWRtaW46YWRtaW4=',
   );
 

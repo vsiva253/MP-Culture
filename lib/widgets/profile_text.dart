@@ -6,6 +6,43 @@ import 'package:mpc/widgets/animation_page_route.dart';
 import 'package:provider/provider.dart';
 
 class WidgetsClass {
+  static TextStyle style = const TextStyle(
+      color: Color(0xFFFFFFFF),
+      fontSize: 16,
+      fontWeight: FontWeight.w500,
+      fontFamily: 'Hind',
+      letterSpacing: 0);
+
+  static Widget noImageAvalble() {
+    return Container(
+      color: Colors.grey,
+      height: 180,
+      width: double.infinity,
+    );
+  }
+
+  static Widget txt(String key, String value) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 5, bottom: 1),
+      child: Row(
+        children: [
+          Text("$key :\t",
+              maxLines: 1, overflow: TextOverflow.ellipsis, style: style),
+          Expanded(
+            flex: 2,
+            child: Text(
+              value,
+              maxLines: 1,
+              // textAlign: TextAlign.start,
+              overflow: TextOverflow.ellipsis,
+              style: style.copyWith(fontSize: 14),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   static Widget TextW(String title, String value) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

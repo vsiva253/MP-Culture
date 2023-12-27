@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mpc/components/event_card.dart';
+import 'package:mpc/components/card.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/screens/eventlist/event_list.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
@@ -44,14 +44,16 @@ class EventListCard extends StatelessWidget {
                       ? GestureDetector(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                FadePageRoute(
-                                    builder: (BuildContext context) =>
-                                        EventListView(
-                                          eventList: eventList,
-                                          program: program,
-                                          ShowProgram: true,
-                                        )));
+                              context,
+                              FadePageRoute(
+                                builder: (BuildContext context) =>
+                                    EventListView(
+                                  eventList: eventList,
+                                  program: program,
+                                  isLive: isLive,
+                                ),
+                              ),
+                            );
                           },
                           child: GradientText(
                             "View all", //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
@@ -79,7 +81,7 @@ class EventListCard extends StatelessWidget {
                 ? const Center(child: Text("Events are not availables"))
                 : Container(
                     padding: const EdgeInsets.only(left: 16),
-                    height: 368,
+                    height: 378,
                     // Set the height according to your needs
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,

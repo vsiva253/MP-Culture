@@ -1,13 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:mpc/components/card.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';
 import 'package:mpc/viewmodels/user_view_modal.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
 import 'package:mpc/widgets/darwer.dart';
-import 'package:mpc/widgets/homepage_widgets/peogram_list.dart';
 import 'package:provider/provider.dart';
 import 'package:mpc/screens/user/user_preferences.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class LivePage extends StatefulWidget {
   const LivePage({super.key});
@@ -39,7 +40,7 @@ class _LivePageState extends State<LivePage> {
 
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(65),
+        preferredSize: const Size.fromHeight(65),
         child: CustomAppBar(),
       ),
       drawer: const ClipRRect(
@@ -61,24 +62,79 @@ class _LivePageState extends State<LivePage> {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 16, right: 16, top: 20),
-                      child: SingleChildScrollView(
+                        padding:
+                            const EdgeInsets.only(left: 1, right: 1, top: 0),
                         child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: <Widget>[
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              EventListCard(
-                                eventList: homeViewModel.onGoingPrograms,
-                                program: "live_program".tr(),
-                                showProgram: false,
-                                isLive: true,
+                          children: [
+                            Column(children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 5),
+                                child: Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: GradientText(
+                                    "live_program".tr(),
+                                    //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
+                                    style: const TextStyle(
+                                      fontFamily: 'Hind',
+                                      fontSize: 18.0,
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.5,
+                                    ),
+                                    colors: const [
+                                      Color(0xFFC33764),
+                                      Color(0xFF1D2671)
+                                    ],
+                                  ),
+                                ),
                               ),
                             ]),
-                      ),
-                    )
+                            homeViewModel.onGoingPrograms.isNotEmpty
+                                ? Expanded(
+                                    child: ListView.builder(
+                                      itemCount: (homeViewModel
+                                                  .onGoingPrograms.length /
+                                              2)
+                                          .ceil(),
+                                      itemBuilder: (context, index) {
+                                        var firstEventIndex = index * 2;
+                                        var secondEventIndex = index * 2 + 1;
+
+                                        return SizedBox(
+                                          height: 395,
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: EventCard(
+                                                  event: homeViewModel
+                                                          .onGoingPrograms[
+                                                      firstEventIndex],
+                                                  isLive: true,
+                                                ),
+                                              ),
+                                              // Adjust the spacing between cards
+                                              Expanded(
+                                                child: secondEventIndex <
+                                                        homeViewModel
+                                                            .onGoingPrograms
+                                                            .length
+                                                    ? EventCard(
+                                                        event: homeViewModel
+                                                                .onGoingPrograms[
+                                                            secondEventIndex],
+                                                        isLive: true,
+                                                      )
+                                                    : const SizedBox(), // Check if the second item exists
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : const Text("Event data not available"),
+                          ],
+                        ))
                   ],
                 )
               : Center(
@@ -91,7 +147,8 @@ class _LivePageState extends State<LivePage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => UserPreferencesScreen()),
+                                builder: (context) =>
+                                    const UserPreferencesScreen()),
                           );
                         },
                         child: Text(StringValue.logIn),

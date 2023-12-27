@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mpc/components/card.dart';
 import 'package:mpc/components/event_card.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/viewmodels/homeviewmodel/home_view_model.dart';

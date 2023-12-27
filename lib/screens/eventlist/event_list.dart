@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mpc/components/event_card.dart';
+import 'package:mpc/components/card.dart';
 import 'package:mpc/data/models/event_model.dart';
 import 'package:mpc/values/string_values.dart';
 import 'package:mpc/widgets/custom_appbar.dart';
@@ -7,13 +7,13 @@ import 'package:simple_gradient_text/simple_gradient_text.dart';
 
 class EventListView extends StatelessWidget {
   final String program;
-  final bool ShowProgram;
   final List<EventData>? eventList;
+  final bool isLive;
   const EventListView(
       {super.key,
       required this.eventList,
       required this.program,
-      required this.ShowProgram});
+      required this.isLive});
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +42,7 @@ class EventListView extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.centerLeft,
                     child: GradientText(
-                      ShowProgram
-                          ? program
-                          : '', //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
+                      program, //"वर्तमान मैं संचालित हो रहे कार्यक्रम",
                       style: const TextStyle(
                         fontFamily: 'Hind',
                         fontSize: 18.0,
@@ -58,41 +56,34 @@ class EventListView extends StatelessWidget {
               ]),
               eventList != null
                   ? Expanded(
-                      child: Container(
-                        padding:
-                            const EdgeInsets.only(left: 16, right: 16, top: 5),
-                        child: ListView.builder(
-                          itemCount: (eventList!.length / 2).ceil(),
-                          itemBuilder: (context, index) {
-                            var firstEventIndex = index * 2;
-                            var secondEventIndex = index * 2 + 1;
+                      child: ListView.builder(
+                        itemCount: (eventList!.length / 2).ceil(),
+                        itemBuilder: (context, index) {
+                          var firstEventIndex = index * 2;
+                          var secondEventIndex = index * 2 + 1;
 
-                            return SizedBox(
-                              height: 375,
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                    child: EventCard(
-                                      event: eventList![firstEventIndex],
-                                      isLive: false,
-                                    ),
+                          return SizedBox(
+                            height: 395,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: EventCard(
+                                    event: eventList![firstEventIndex],
+                                    isLive: isLive,
                                   ),
-                                  const SizedBox(
-                                    width: 8.0,
-                                  ), // Adjust the spacing between cards
-                                  Expanded(
-                                    child: secondEventIndex < eventList!.length
-                                        ? EventCard(
-                                            event: eventList![secondEventIndex],
-                                            isLive: false,
-                                          )
-                                        : const SizedBox(), // Check if the second item exists
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
+                                ),
+                                Expanded(
+                                  child: secondEventIndex < eventList!.length
+                                      ? EventCard(
+                                          event: eventList![secondEventIndex],
+                                          isLive: isLive,
+                                        )
+                                      : const SizedBox(),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
                     )
                   : const Text("Event data not ablable"),

@@ -196,9 +196,10 @@ class ApiService {
   Future<Map<String, dynamic>> login(String mobile) async {
     try {
       final response = await http.post(
-        Uri.parse('https://service.codingbandar.com/Api/login'),
+        Uri.parse('$baseUrl/Api/login'),
         body: {'mobile': mobile},
       );
+      print(response.body);
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
@@ -220,6 +221,7 @@ class ApiService {
         'otp': otp,
       },
     );
+    print(response.body);
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> responseData = json.decode(response.body);
@@ -258,6 +260,7 @@ class ApiService {
           'cpassword': cpassword,
         },
       );
+      print(response.body);
       if (response.statusCode == 200) {
         final Map<String, dynamic> responseData = json.decode(response.body);
         final Map<String, dynamic> userData = responseData['user'];

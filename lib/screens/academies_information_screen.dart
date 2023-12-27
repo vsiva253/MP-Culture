@@ -27,14 +27,14 @@ class _AcademiesInformationScreenState
     super.initState();
     context
         .read<HomeViewModel>()
-        .fetchSingleAcademiec(context, widget.acd.id ?? "NA");
+        .fetchAcademiecPrograms(context, widget.acd.id ?? "NA");
   }
 
   @override
   Widget build(BuildContext context) {
     StringValue.updateValues();
     final homeViewModel = context.watch<HomeViewModel>();
-    var data = widget.acd;
+    // var widget.acd = widget.acd;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(65),
@@ -46,8 +46,8 @@ class _AcademiesInformationScreenState
             const SizedBox(height: 15),
             SizedBox(
                 width: MediaQuery.of(context).size.width,
-                height: data.academyBanner != null ? hightOfSlider : 0,
-                child: data.academyBanner != null
+                height: widget.acd.academyBanner != null ? hightOfSlider : 0,
+                child: widget.acd.academyBanner != null
                     ? Image.network(
                         widget.acd.deptImage ?? "NA",
                         fit: BoxFit.cover,
@@ -77,8 +77,10 @@ class _AcademiesInformationScreenState
               child: Align(
                 alignment: Alignment.center,
                 child: Marquee(
-                  text: data.academyNotice ??
-                      "MP Culture department presents an Audience Capturing Application",
+                  text: widget.acd.academyNotice == ''
+                      ? 'MP Culture department presents an Audience Capturing Application'
+                      : widget.acd.academyNotice ??
+                          "MP Culture department presents an Audience Capturing Application",
                   scrollAxis: Axis.horizontal,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   blankSpace: 20.0,
@@ -167,7 +169,7 @@ class _AcademiesInformationScreenState
                     width: 5,
                   ),
                   Text(
-                    data.deptAddress ?? "NA",
+                    widget.acd.deptAddress ?? "NA",
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(
@@ -222,7 +224,7 @@ class _AcademiesInformationScreenState
                     alignment: Alignment.centerLeft,
                     padding: const EdgeInsets.only(left: 5),
                     child: Text(
-                      data.deptAbout ?? "NA",
+                      widget.acd.deptAbout ?? "NA",
                       style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w400,
@@ -312,7 +314,7 @@ class _AcademiesInformationScreenState
                         width: 5,
                       ),
                       Text(
-                        data.deptContact ?? "NA",
+                        widget.acd.deptMobile ?? "NA",
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -334,7 +336,7 @@ class _AcademiesInformationScreenState
                         width: 5,
                       ),
                       Text(
-                        data.deptWebsite ?? "NA",
+                        widget.acd.deptWebsite ?? "NA",
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -356,7 +358,7 @@ class _AcademiesInformationScreenState
                         width: 5,
                       ),
                       Text(
-                        data.deptEmail ?? "NA",
+                        widget.acd.deptEmail ?? "NA",
                         style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
@@ -374,12 +376,16 @@ class _AcademiesInformationScreenState
               thickness: 1,
               color: Colors.grey.withOpacity(0.6),
             ),
-            EventListCard(
-              eventList: homeViewModel.byAcaedmiecProgramList,
-              program: "अकादमी के कार्यक्रम",
-              showProgram: false,
-              isLive: false,
-            ),
+            homeViewModel.isProgramoading
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : EventListCard(
+                    eventList: homeViewModel.byAcaedmiecProgramList,
+                    program: "अकादमी के कार्यक्रम",
+                    showProgram: false,
+                    isLive: false,
+                  ),
             const SizedBox(height: 20),
             // Align(
             //   alignment: Alignment.centerLeft,

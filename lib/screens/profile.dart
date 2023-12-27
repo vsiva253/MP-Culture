@@ -97,104 +97,101 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                         SingleChildScrollView(
-                          child: Container(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.only(top: 30),
-                                  child: Center(
-                                    child: GradientText(
-                                      'Account',
-                                      style: const TextStyle(
-                                          fontFamily: 'Hind',
-                                          fontSize: 22.0,
-                                          fontWeight: FontWeight.w600,
-                                          height: 1),
-                                      colors: const [
-                                        Color(0xFFC33764),
-                                        Color(0xFF1D2671),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(top: 25),
-                                  child: Center(
-                                    child: CircleAvatar(
-                                      radius: 50,
-                                      backgroundColor: Colors.grey[400],
-                                      backgroundImage: (userData.profileimage !=
-                                              null)
-                                          ? NetworkImage(userData.profileimage!)
-                                              as ImageProvider<Object>?
-                                          : (_avatarImage != null)
-                                              ? FileImage(_avatarImage)
-                                                  as ImageProvider<Object>?
-                                              : null,
-                                      child: _showCameraIcon
-                                          ? Positioned(
-                                              bottom: 0,
-                                              right: 0,
-                                              child: IconButton(
-                                                icon: const Icon(
-                                                    Icons.camera_alt),
-                                                onPressed: _getImage,
-                                              ),
-                                            )
-                                          : null,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 16, right: 16),
-                                  child: Column(
-                                    children: [
-                                      Align(
-                                          alignment: Alignment.centerRight,
-                                          child: TextButton(
-                                            onPressed: () {
-                                              Navigator.push(
-                                                context,
-                                                FadePageRoute(
-                                                    builder: (BuildContext
-                                                            context) =>
-                                                        ProfilUpdateView(
-                                                          user: userData,
-                                                          userViewModel:
-                                                              userViewModel,
-                                                        )),
-                                              );
-                                            },
-                                            child: Text("edit_profile".tr()),
-                                          )),
-                                      const SizedBox(height: 10),
-                                      WidgetsClass.TextW(StringValue.fullName,
-                                          userData.name ?? "NA"),
-                                      WidgetsClass.TextW(StringValue.mobileNo,
-                                          userData.mobile ?? "NA"),
-                                      WidgetsClass.TextW(StringValue.email,
-                                          userData.email ?? "NA"),
-                                      WidgetsClass.TextW(StringValue.address,
-                                          userData.address ?? "NA"),
-                                      WidgetsClass.TextW(StringValue.state,
-                                          userData.state ?? "NA"),
-                                      WidgetsClass.TextW(StringValue.dob,
-                                          userData.sex ?? "NA"),
-                                      WidgetsClass.TextW("date_of_birth".tr(),
-                                          userData.dob ?? "NA"),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 30),
+                                child: Center(
+                                  child: GradientText(
+                                    'Account',
+                                    style: const TextStyle(
+                                        fontFamily: 'Hind',
+                                        fontSize: 22.0,
+                                        fontWeight: FontWeight.w600,
+                                        height: 1),
+                                    colors: const [
+                                      Color(0xFFC33764),
+                                      Color(0xFF1D2671),
                                     ],
                                   ),
-                                )
-                              ],
-                            ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 25),
+                                child: Center(
+                                  child: CircleAvatar(
+                                    radius: 50,
+                                    backgroundColor: Colors.grey[400],
+                                    backgroundImage: (userData.profileimage !=
+                                            null)
+                                        ? NetworkImage(userData.profileimage!)
+                                        : (_avatarImage != null)
+                                            ? FileImage(_avatarImage)
+                                                as ImageProvider<Object>?
+                                            : null,
+                                    child: _showCameraIcon
+                                        ? Positioned(
+                                            bottom: 0,
+                                            right: 0,
+                                            child: IconButton(
+                                              icon:
+                                                  const Icon(Icons.camera_alt),
+                                              onPressed: _getImage,
+                                            ),
+                                          )
+                                        : null,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 16, right: 16),
+                                child: Column(
+                                  children: [
+                                    Align(
+                                        alignment: Alignment.centerRight,
+                                        child: TextButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              FadePageRoute(
+                                                  builder:
+                                                      (BuildContext context) =>
+                                                          ProfilUpdateView(
+                                                            user: userData,
+                                                            userViewModel:
+                                                                userViewModel,
+                                                          )),
+                                            );
+                                          },
+                                          child: Text("edit_profile".tr()),
+                                        )),
+                                    const SizedBox(height: 10),
+                                    WidgetsClass.TextW(StringValue.fullName,
+                                        userData.name ?? "NA"),
+                                    WidgetsClass.TextW(StringValue.mobileNo,
+                                        userData.mobile ?? "NA"),
+                                    WidgetsClass.TextW(StringValue.email,
+                                        userData.email ?? "NA"),
+                                    WidgetsClass.TextW(StringValue.address,
+                                        userData.address ?? "NA"),
+                                    WidgetsClass.TextW(StringValue.state,
+                                        userData.state ?? "NA"),
+                                    WidgetsClass.TextW(
+                                        StringValue.dob, userData.sex ?? "NA"),
+                                    WidgetsClass.TextW("date_of_birth".tr(),
+                                        userData.dob ?? "NA"),
+                                  ],
+                                ),
+                              )
+                            ],
                           ),
                         ),
                       ],
@@ -209,7 +206,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => UserPreferencesScreen(),
+                          builder: (context) => const UserPreferencesScreen(),
                         ),
                       );
                     },

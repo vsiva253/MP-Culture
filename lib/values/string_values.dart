@@ -58,7 +58,7 @@ class StringValue {
   static const String privicyUrl =
       "https://jusmarktech.in/Mp_culture_app_privacy_policy.html";
   static const String artistRegisterUrl =
-      "https://jusmarktech.in/mpculturedept/artistregistration.php";
+      "https://jusmarktech.in/culturemp/admin/home/login_detail";
   static const String contactEmail = "proculturemp@gmail.com";
 
   //----------.....----- Update function ------------.....-------------//

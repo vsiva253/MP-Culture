@@ -61,10 +61,11 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
     return Padding(
       padding: const EdgeInsets.only(left: 5),
       child: Column(children: [
-        textRow("${StringValue.artistName}:", value.name ?? "NA"),
-        textRow("${'art_forms'.tr()}:", value.category ?? "NA"),
-        textRow("${'artist_datetime'.tr()}:", value.artistDatetime ?? "NA"),
-        textRow("${'artist_description'.tr()}:", value.description ?? "NA"),
+        textRow("${StringValue.artistName}:", value.artistName ?? "NA"),
+        textRow("Email ID:", value.artistEmail ?? "NA"),
+        textRow("Mobile No:", value.artistMobile ?? "NA"),
+        textRow("Date:", value.artistDate ?? "NA"),
+        textRow("Time:", value.artistTime ?? "NA"),
         const SizedBox(height: 20)
       ]),
     );
@@ -162,13 +163,14 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                           ),
                           child: Center(
                             child: Text(
-                              data.programCategory ?? "NA",
+                              data.categoryHindi ?? "NA",
                               style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 14,
-                                  overflow: TextOverflow.ellipsis,
-                                  fontWeight: FontWeight.w500,
-                                  letterSpacing: 0.5),
+                                color: Colors.white,
+                                fontSize: 14,
+                                overflow: TextOverflow.ellipsis,
+                                fontWeight: FontWeight.w500,
+                                letterSpacing: 0.5,
+                              ),
                             ),
                           ),
                         ),
@@ -231,12 +233,14 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                       const SizedBox(
                                         width: 5,
                                       ),
-                                      Text(
-                                        "${data.city ?? "NA"},${data.district ?? "NA"}",
-                                        style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.grey[600]),
+                                      Expanded(
+                                        child: Text(
+                                          widget.eventData.address ?? "NA",
+                                          style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.w400,
+                                              color: Colors.grey[600]),
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -325,7 +329,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                                 width: 10,
                               ),
                               Text(
-                                widget.eventData.departmentBy ??
+                                widget.eventData.deptName ??
                                     "NA", // "भारत की लोकभारत की लोक.....",
                                 maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
@@ -414,8 +418,7 @@ class _EventInformationScreenState extends State<EventInformationScreen> {
                               ),
                               Flexible(
                                 child: Text(
-                                  // "शैव ज्ञान परंपरा से उद्भूत कलाओं पर एकाग्र साप्ताहित श्रंखला अनादि के अन्तर्गत इस रविवार शिव केन्द्रित भक्ति गायन की प्रस्तुति ।",
-                                  data.venue ?? "NA",
+                                  data.venueName ?? "NA",
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(

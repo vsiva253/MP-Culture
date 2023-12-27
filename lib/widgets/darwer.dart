@@ -133,7 +133,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                           eventList:
                                               homeViewModel.todayPrograms,
                                           program: StringValue.todayProgram,
-                                          ShowProgram: true,
+                                          isLive: false,
                                         )));
                           },
                         ),
@@ -151,7 +151,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                                           eventList:
                                               homeViewModel.upConingPrograms,
                                           program: StringValue.upcomingProgram,
-                                          ShowProgram: true,
+                                          isLive: false,
                                         )));
                           },
                         ),
@@ -162,15 +162,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
                           onTap: () {
                             setSelectedItem('विगत कार्यक्रम');
                             Navigator.push(
-                                context,
-                                FadePageRoute(
-                                    builder: (BuildContext context) =>
-                                        EventListView(
-                                          eventList:
-                                              homeViewModel.archivedPrograms,
-                                          program: StringValue.archivedProgram,
-                                          ShowProgram: true,
-                                        )));
+                              context,
+                              FadePageRoute(
+                                builder: (BuildContext context) =>
+                                    EventListView(
+                                  isLive: false,
+                                  eventList: homeViewModel.archivedPrograms,
+                                  program: StringValue.archivedProgram,
+                                ),
+                              ),
+                            );
                           },
                         ),
                         CustomDrawerItem(

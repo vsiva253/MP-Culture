@@ -231,16 +231,10 @@ class _CustomAppBarSecondaryState extends State<CustomAppBarSecondary> {
                           userViewModel.centerLogo ?? '',
                           errorBuilder: (BuildContext context, Object error,
                               StackTrace? stackTrace) {
-                            return Image.asset(
-                              height: 46,
-                              'assets/logo/appbar.png',
-                            );
+                            return const SizedBox();
                           },
                         )
-                      : Image.asset(
-                          'assets/logo/appbar.png',
-                          height: 46,
-                        ),
+                      : const SizedBox(),
                 ),
               ),
             ),

@@ -50,6 +50,20 @@ class HomeViewModel with ChangeNotifier {
     notifyListeners();
   }
 
+  Map<DateTime, List<EventData>> forTableEventsList = {};
+  void _convertEventsToMap(List<EventData> events) {
+    forTableEventsList = {};
+    for (EventData event in events) {
+      DateTime startDate = DateTime.parse(event.startingDate ?? '');
+      if (forTableEventsList.containsKey(startDate)) {
+        forTableEventsList[startDate]!.add(event);
+      } else {
+        forTableEventsList[startDate] = [event];
+      }
+    }
+    print(forTableEventsList);
+  }
+
   void showErrorSnackbar(BuildContext context, String errorMessage) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
@@ -199,6 +213,8 @@ class HomeViewModel with ChangeNotifier {
     }
   }
 
+  bool loadList = false;
+
   // Acadmiec data
   Future<void> fetchAllAcadmiec(BuildContext context) async {
     if (academiesList.isEmpty) {
@@ -206,6 +222,7 @@ class HomeViewModel with ChangeNotifier {
         _isLoading = true;
         final programs = await apiService.getAllAcadmiec();
         _academies = programs;
+        loadList = true;
       } catch (e) {
         // Handle error
         _isLoading = false;
@@ -219,23 +236,25 @@ class HomeViewModel with ChangeNotifier {
   }
 
   // Single Academiec data
-  Future<void> fetchSingleAcademiec(BuildContext context, String id) async {
-    try {
-      _isLoading = true;
-      _singleAcademic = SingleAacademies();
-      final programs = await apiService.getSingleAcademice(id);
-      _singleAcademic = programs;
-      _fetchAcademiecPrograms(context, _singleAcademic.deptName!);
-      throw ("acadmin name ${_singleAcademic.deptName} ");
-    } catch (e) {
-      // Handle error
-      _isLoading = false;
-      // CustomSnackbar.show(context, 'Error fetching academies: $e');
-    } finally {
-      _isLoading = false;
-      notifyListeners();
-    }
-  }
+  // Future<void> fetchSingleAcademiec(BuildContext context, String id) async {
+  //   _fetchAcademiecPrograms(context, id);
+  //   print("single acadmic program faching ");
+  //   try {
+  //     _isLoading = true;
+  //     _singleAcademic = SingleAacademies();
+  //     final programs = await apiService.getSingleAcademice(id);
+  //     _singleAcademic = programs;
+  //     _fetchAcademiecPrograms(context, _singleAcademic.deptName!);
+  //     throw ("acadmin name ${_singleAcademic.deptName} ");
+  //   } catch (e) {
+  //     // Handle error
+  //     _isLoading = false;
+  //     // CustomSnackbar.show(context, 'Error fetching academies: $e');
+  //   } finally {
+  //     _isLoading = false;
+  //     notifyListeners();
+  //   }
+  // }
 
   // Single Program data
   Future<void> fetchSingleProgram(BuildContext context, String id) async {
@@ -293,20 +312,27 @@ class HomeViewModel with ChangeNotifier {
     }
   }
 
+  bool isProgramoading = false;
+
   // academiec programes
-  Future<void> _fetchAcademiecPrograms(
+  Future<void> fetchAcademiecPrograms(
       BuildContext context, String depName) async {
     try {
       _byAcademiecPrograms = [];
-      _isLoading = true;
+      // _isLoading = true;
+      isProgramoading = true;
       final programs = await apiService.getTodayPrograms(
           "/Api/programs_by_academies?program_academies=$depName");
+
       _byAcademiecPrograms = programs;
+      _convertEventsToMap(programs);
     } catch (e) {
-      _isLoading = false;
+      // _isLoading = false;
+      isProgramoading = false;
       // CustomSnackbar.show(context, 'Error fetching failed programs: $e');
     } finally {
-      _isLoading = false;
+      // _isLoading = false;
+      isProgramoading = false;
       notifyListeners();
     }
   }
